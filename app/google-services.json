@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "1003335834894",
+    "firebase_url": "https://apka-kisan-beta-dev-default-rtdb.firebaseio.com",
+    "project_id": "apka-kisan-beta-dev",
+    "storage_bucket": "apka-kisan-beta-dev.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1003335834894:android:4210da8040d1ca88b9cb5f",
+        "android_client_info": {
+          "package_name": "com.apkakisan.myapplication"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1003335834894-i9guu8jup8eobmb6ndaf1nsvle3d6sgb.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.apkakisan.myapplication",
+            "certificate_hash": "64f93719d88640becdd2be4a4e99fdfa57690d7a"
+          }
+        },
+        {
+          "client_id": "1003335834894-avcbpp2n6tkv4auluba4nludtieo5fkj.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA7TMQfwKEuskwW41WqOEmw6b5zRrzoDkU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1003335834894-avcbpp2n6tkv4auluba4nludtieo5fkj.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

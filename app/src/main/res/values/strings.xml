@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">ApkaKisan</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="termsandconditions"> I accept the <u>Terms of Use</u> and <u>Privacy Policy </u> </string>
+    <string name="home">Home</string>
+    <string name="orders">Orders</string>
+    <string name="notifications">Notifications</string>
+    <string name="profile">Profile</string>
+    <string name="title_activity_main_container">MainContainer</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
+
+</resources>
