@@ -15,7 +15,7 @@ import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.apkakisan.myapplication.R;
+import com.apkakisan.myapplication.registration.Login;
 
 public class MainActivity extends AppCompatActivity {
 

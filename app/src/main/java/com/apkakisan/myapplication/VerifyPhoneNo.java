@@ -73,7 +73,7 @@ public class VerifyPhoneNo extends AppCompatActivity {
 //        phoneNumberFromPrevActivity = getIntent().getStringExtra("phoneNo");
         phoneNumberId = getIntent().getStringExtra("phoneNoId");
 //        Integer pc = valueOf(phoneNumberId);
-        pincodeFromSignupActivity = getIntent().getStringExtra("pincode");
+        pincodeFromSignupActivity = getIntent().getStringExtra("pinCode");
         locationFromSignupActivity = getIntent().getStringExtra("location");
         createdDateFromSignupActivity = getIntent().getStringExtra("createdDate");
         modifiedDateFromSignupActivity = getIntent().getStringExtra("modifiedDate");

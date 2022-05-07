@@ -6,36 +6,34 @@
     android:layout_height="wrap_content"
     android:background="#fff"
     android:orientation="vertical"
-    android:id="@+id/actvity_signup"
     android:padding="20dp"
-    tools:context="com.apkakisan.myapplication.SignUp">
+    android:scrollbars="none"
+    tools:context="com.apkakisan.myapplication.registration.SignUp">
 
-    <LinearLayout
+    <androidx.appcompat.widget.LinearLayoutCompat
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:background="#fff"
-        android:paddingBottom="20dp"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:paddingBottom="20dp">
 
-        <ImageView
+        <androidx.appcompat.widget.AppCompatImageView
             android:layout_width="wrap_content"
             android:layout_height="120dp"
             android:layout_marginTop="20sp"
             android:src="@drawable/nature_image"
             android:transitionName="logo_image" />
 
-
-
-        <TextView
+        <androidx.appcompat.widget.AppCompatTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="20sp"
+            android:fontFamily="@font/nunito_regular"
             android:text="Welcome to ApkaKisan. Please fill in the fields below to register an account."
             android:textSize="16sp"
-            android:fontFamily="@font/nunito_regular"
-            android:layout_marginTop="20sp"
             android:transitionName="logo_desc" />
 
-        <LinearLayout
+        <androidx.appcompat.widget.LinearLayoutCompat
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
@@ -71,6 +69,7 @@
                     android:inputType="phone" />
 
             </com.google.android.material.textfield.TextInputLayout>
+
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/reg_phoneNoConfirmation"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
@@ -85,6 +84,7 @@
                     android:inputType="phone" />
 
             </com.google.android.material.textfield.TextInputLayout>
+
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/reg_pincode"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
@@ -99,6 +99,7 @@
                     android:inputType="number" />
 
             </com.google.android.material.textfield.TextInputLayout>
+
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/reg_location"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
@@ -113,48 +114,49 @@
                     android:inputType="text" />
 
             </com.google.android.material.textfield.TextInputLayout>
-        </LinearLayout>
+        </androidx.appcompat.widget.LinearLayoutCompat>
 
-        <CheckBox
+        <androidx.appcompat.widget.AppCompatCheckBox
             android:id="@+id/checkBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/nunito_regular"
-            android:textColor="#171725"
-            android:buttonTint="#46AA42"
             android:layout_marginStart="10sp"
-            android:text="@string/termsandconditions" />
+            android:buttonTint="#46AA42"
+            android:fontFamily="@font/nunito_regular"
+            android:text="@string/termsandconditions"
+            android:textColor="#171725" />
 
-        <Button
+        <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/reg_btn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginStart="10sp"
             android:layout_marginTop="10dp"
             android:layout_marginEnd="10sp"
-            android:layout_marginStart="10sp"
             android:layout_marginBottom="5dp"
-            android:onClick="registerUser"
             android:background="@drawable/rounded_button"
-            android:fontFamily="@font/poppins_regular" android:text="Sign Up"
+            android:fontFamily="@font/poppins_regular"
+            android:onClick="registerUser"
+            android:text="Sign Up"
             android:textAllCaps="false"
             android:textColor="#fff"
             android:transitionName="button_tran"
             app:backgroundTint="#46AA42" />
 
-        <Button
+        <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/reg_login_btn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="10sp"
             android:layout_marginStart="10sp"
-            android:elevation="0dp"
+            android:layout_marginEnd="10sp"
             android:background="@drawable/rounded_button_outline"
+            android:elevation="0dp"
             android:fontFamily="@font/poppins_regular"
             android:text="Already have an account? Sign In"
             android:textAllCaps="false"
             android:textColor="#46AA42"
             app:backgroundTint="#FFFFFF" />
 
-    </LinearLayout>
+    </androidx.appcompat.widget.LinearLayoutCompat>
 
 </ScrollView>

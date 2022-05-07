@@ -33,8 +33,9 @@
             android:exported="false" />
         <activity android:name=".VerifyPhoneNo" />
         <activity android:name=".UserProfile" />
-        <activity android:name=".SignUp" />
-        <activity android:name=".Login" />
+        <activity android:name=".registration.SignUp" />
+        <activity android:name=".registration.SignUpActivity" />
+        <activity android:name=".registration.Login" />
         <activity
             android:name=".MainActivity"
             android:exported="true">
