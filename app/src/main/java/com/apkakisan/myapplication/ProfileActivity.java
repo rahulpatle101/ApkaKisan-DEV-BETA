@@ -11,7 +11,7 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.apkakisan.myapplication.registration.Login;
+import com.apkakisan.myapplication.registration.LoginActivity;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 import com.google.firebase.auth.FirebaseAuth;
@@ -37,8 +37,8 @@ public class ProfileActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
 
-        fullName = (TextView)findViewById(R.id.full_name);
-        phoneNumber = (TextView)findViewById(R.id.phone_number);
+        fullName = (TextView) findViewById(R.id.full_name);
+        phoneNumber = (TextView) findViewById(R.id.phone_number);
         signOutBtn = findViewById(R.id.sign_out_btn);
 
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
@@ -59,11 +59,10 @@ public class ProfileActivity extends AppCompatActivity {
 //            String fullname = database.getChildren;
 //            FirebaseDatabase.getChildren();
 
-              getUserData();
+            getUserData();
         } else {
             Toast.makeText(ProfileActivity.this, "user isnt logged in", Toast.LENGTH_SHORT).show();
         }
-
 
 
         signOutBtn.setOnClickListener(new View.OnClickListener() {
@@ -72,7 +71,7 @@ public class ProfileActivity extends AppCompatActivity {
                 FirebaseAuth user;
                 user = FirebaseAuth.getInstance();
                 user.signOut();
-                startActivity(new Intent(ProfileActivity.this, Login.class));
+                startActivity(new Intent(ProfileActivity.this, LoginActivity.class));
                 finish();
             }
         });
@@ -84,17 +83,17 @@ public class ProfileActivity extends AppCompatActivity {
                     case R.id.home:
 //                        Toast.makeText(MainContainer.this, "HOME SELECTED", Toast.LENGTH_SHORT).show();
                         startActivity(new Intent(getApplicationContext(), HomeActivity.class));
-                        overridePendingTransition(0,0);
+                        overridePendingTransition(0, 0);
                         return true;
                     case R.id.orders:
 //                        Toast.makeText(MainContainer.this, "ORDER SELECTED", Toast.LENGTH_SHORT).show();
                         startActivity(new Intent(getApplicationContext(), OrdersActivity.class));
-                        overridePendingTransition(0,0);
+                        overridePendingTransition(0, 0);
                         return true;
                     case R.id.notifications:
 //                        Toast.makeText(MainContainer.this, "NOTIFICATION SELECTED", Toast.LENGTH_SHORT).show();
                         startActivity(new Intent(getApplicationContext(), NotificationsActivity.class));
-                        overridePendingTransition(0,0);
+                        overridePendingTransition(0, 0);
                         return true;
                     case R.id.profile:
 //                        Toast.makeText(MainContainer.this, "PROFILE SELECTED", Toast.LENGTH_SHORT).show();
@@ -106,7 +105,7 @@ public class ProfileActivity extends AppCompatActivity {
     }
 
     private void getUserData() {
-        Toast.makeText(ProfileActivity.this, "getting to get userdaya"+ phoneNo.substring(2), Toast.LENGTH_SHORT).show();
+        Toast.makeText(ProfileActivity.this, "getting to get userdaya" + phoneNo.substring(2), Toast.LENGTH_SHORT).show();
 
         DatabaseReference reference = FirebaseDatabase.getInstance().getReference("USERS");
         String strippedPhoneNumber = phoneNo.substring(2);
@@ -132,7 +131,7 @@ public class ProfileActivity extends AppCompatActivity {
                     String modifiedDate = dataSnapshot.child(strippedPhoneNumber).child("modifiedDate").getValue(String.class);
                     String location = dataSnapshot.child(strippedPhoneNumber).child("location").getValue(String.class);
 
-                    Toast.makeText(ProfileActivity.this, "name- "+nameFromDB + "phone- "+phoneNoFromDB, Toast.LENGTH_SHORT).show();
+                    Toast.makeText(ProfileActivity.this, "name- " + nameFromDB + "phone- " + phoneNoFromDB, Toast.LENGTH_SHORT).show();
 
 //                    Intent intent = new Intent(getApplicationContext(), VerifyPhoneNo.class);
 

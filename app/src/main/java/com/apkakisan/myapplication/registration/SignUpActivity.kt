@@ -14,7 +14,7 @@ import android.content.Intent
 import android.graphics.Color
 import android.view.View
 import android.widget.Button
-import com.apkakisan.myapplication.VerifyPhoneNo
+import com.apkakisan.myapplication.helpers.hideKeyboard
 import com.google.firebase.database.DatabaseError
 import java.text.SimpleDateFormat
 import java.util.*
@@ -46,11 +46,10 @@ class SignUpActivity : AppCompatActivity() {
         regPinCode = findViewById(R.id.reg_pincode)
         regLocation = findViewById(R.id.reg_location)
         checkBox = findViewById(R.id.checkBox)
+
         regBtn = findViewById(R.id.reg_btn)
-        regToLoginBtn = findViewById(R.id.reg_login_btn)
-
         regBtn.setOnClickListener(View.OnClickListener {
-
+            hideKeyboard()
             val now = SimpleDateFormat("dd.MM.yyyy 'at' HH:mm:ss z", Locale.getDefault())
             val currentDateAndTime = now.format(Date())
 
@@ -86,9 +85,9 @@ class SignUpActivity : AppCompatActivity() {
                         val pinCode = regPinCode.editText?.text.toString()
                         val location = regLocation.editText?.text.toString()
 
-                        val intent = Intent(applicationContext, VerifyPhoneNo::class.java)
+                        val intent = Intent(applicationContext, VerifyPhoneNoActivity::class.java)
                         intent.putExtra("name", fullName)
-                        intent.putExtra("phoneNoId", phoneNo)
+                        intent.putExtra("phoneNo", phoneNo)
                         intent.putExtra("pinCode", pinCode)
                         intent.putExtra("location", location)
                         intent.putExtra("createdDate", currentDateAndTime)
@@ -107,9 +106,10 @@ class SignUpActivity : AppCompatActivity() {
             })
         })
 
+        regToLoginBtn = findViewById(R.id.reg_login_btn)
         regToLoginBtn.setOnClickListener {
-            val intent = Intent(applicationContext, Login::class.java)
-            startActivity(intent)
+            hideKeyboard()
+            finish()
         }
     }
 

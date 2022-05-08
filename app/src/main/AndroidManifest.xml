@@ -12,30 +12,7 @@
         android:roundIcon="@drawable/nature_image"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity
-            android:name=".CreateOrder"
-            android:exported="false" />
-        <activity
-            android:name=".MainContainer"
-            android:exported="false"
-            android:label="@string/title_activity_main_container" />
-        <activity
-            android:name=".ProfileActivity"
-            android:exported="false" />
-        <activity
-            android:name=".NotificationsActivity"
-            android:exported="false" />
-        <activity
-            android:name=".OrdersActivity"
-            android:exported="false" />
-        <activity
-            android:name=".HomeActivity"
-            android:exported="false" />
-        <activity android:name=".VerifyPhoneNo" />
-        <activity android:name=".UserProfile" />
-        <activity android:name=".registration.SignUp" />
-        <activity android:name=".registration.SignUpActivity" />
-        <activity android:name=".registration.Login" />
+
         <activity
             android:name=".MainActivity"
             android:exported="true">
@@ -45,6 +22,42 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <activity android:name=".registration.Login" />
+        <activity android:name=".registration.LoginActivity" />
+
+        <activity android:name=".registration.SignUp" />
+        <activity android:name=".registration.SignUpActivity" />
+
+        <activity android:name=".registration.VerifyPhoneNo" />
+        <activity android:name=".registration.VerifyPhoneNoActivity" />
+        
+        <activity
+            android:name=".CreateOrder"
+            android:exported="false" />
+
+        <activity
+            android:name=".MainContainer"
+            android:exported="false"
+            android:label="@string/title_activity_main_container" />
+
+        <activity
+            android:name=".ProfileActivity"
+            android:exported="false" />
+
+        <activity
+            android:name=".NotificationsActivity"
+            android:exported="false" />
+
+        <activity
+            android:name=".OrdersActivity"
+            android:exported="false" />
+
+        <activity
+            android:name=".HomeActivity"
+            android:exported="false" />
+
+        <activity android:name=".UserProfile" />
 
         <meta-data
             android:name="preloaded_fonts"

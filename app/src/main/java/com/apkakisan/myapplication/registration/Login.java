@@ -38,14 +38,12 @@ public class Login extends AppCompatActivity {
     FirebaseAuth mAuth;
     FirebaseUser user;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         //This Line will hide the status bar from the screen
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_login);
-
 
         //All elements Hooks
         progressBar = findViewById(R.id.progressBar);

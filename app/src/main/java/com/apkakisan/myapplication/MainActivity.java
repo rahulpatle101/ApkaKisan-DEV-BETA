@@ -15,7 +15,7 @@ import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.apkakisan.myapplication.registration.Login;
+import com.apkakisan.myapplication.registration.LoginActivity;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -54,18 +54,18 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
 
                 //Call next screen
-                Intent intent = new Intent(MainActivity.this, Login.class);
+                Intent intent = new Intent(MainActivity.this, LoginActivity.class);
 
                 //Attach all the elements those you want to animate in design
-                Pair[]  pairs = new Pair[1];
-                pairs[0] = new Pair<View,String>(image, "logo_image");
+                Pair[] pairs = new Pair[1];
+                pairs[0] = new Pair<View, String>(image, "logo_image");
 //                pairs[1] = new Pair<View,String>(logo, "logo_text");
 
                 //wrap the call in API level 21 or higher
                 if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
-                    ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(MainActivity.this,pairs);
-                    startActivity(intent,options.toBundle());
-                }else{
+                    ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(MainActivity.this, pairs);
+                    startActivity(intent, options.toBundle());
+                } else {
                     startActivity(intent);
                 }
             }
@@ -75,19 +75,18 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void run() {
                 //Call next screen
-                Intent intent = new Intent(MainActivity.this, Login.class);
+                Intent intent = new Intent(MainActivity.this, LoginActivity.class);
 
                 //Attach all the elements those you want to animate in design
-                Pair[]  pairs = new Pair[1];
-                pairs[0] = new Pair<View,String>(image, "logo_image");
+                Pair[] pairs = new Pair[1];
+                pairs[0] = new Pair<View, String>(image, "logo_image");
 //                pairs[1] = new Pair<View,String>(logo, "logo_text");
 
                 //wrap the call in API level 21 or higher
                 if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
-                    ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(MainActivity.this,pairs);
-                    startActivity(intent,options.toBundle());
-                }
-                else{
+                    ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(MainActivity.this, pairs);
+                    startActivity(intent, options.toBundle());
+                } else {
                     startActivity(intent);
                 }
 

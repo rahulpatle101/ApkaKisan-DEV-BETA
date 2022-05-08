@@ -69,7 +69,7 @@ public class SignUp extends AppCompatActivity {
                 String currentDateandTime = now.format(new Date());
 
 //                Performing Validation by calling validation functions
-                if(!validateName() | !validatePinCode() | !validateLocation() | !validatePhoneNo() | !validateTermsAndCondition()){
+                if (!validateName() | !validatePinCode() | !validateLocation() | !validatePhoneNo() | !validateTermsAndCondition()) {
 
                     return;
                 }
@@ -103,14 +103,14 @@ public class SignUp extends AppCompatActivity {
                             String modifiedDate = currentDateandTime;
 
 //                Toast.makeText(SignUp.this, "ph"+phone_number_id, Toast.LENGTH_LONG).show();
-                            Intent intent = new Intent (getApplicationContext(), VerifyPhoneNo.class);
+                            Intent intent = new Intent(getApplicationContext(), VerifyPhoneNo.class);
                             intent.putExtra("name", fullName);
 //                intent.putExtra("phoneNo", phoneNumber);
                             intent.putExtra("phoneNoId", phone_number_id);
-                            intent.putExtra("pincode",pinCode);
-                            intent.putExtra("location",location);
-                            intent.putExtra("createdDate",createdDate);
-                            intent.putExtra("modifiedDate",modifiedDate);
+                            intent.putExtra("pincode", pinCode);
+                            intent.putExtra("location", location);
+                            intent.putExtra("createdDate", createdDate);
+                            intent.putExtra("modifiedDate", modifiedDate);
                             startActivity(intent);
 
                         }
@@ -123,7 +123,6 @@ public class SignUp extends AppCompatActivity {
                 });
 
 
-
 //                UserHelperClass helperClass = new UserHelperClass(fullName, location, phoneNumber, pinCode, createdDate, modifiedDate);
 //                reference.child(phone_number_id).setValue(helperClass);
 
@@ -134,7 +133,7 @@ public class SignUp extends AppCompatActivity {
         regToLoginBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent (getApplicationContext(), Login.class);
+                Intent intent = new Intent(getApplicationContext(), Login.class);
                 startActivity(intent);
             }
         });
@@ -157,7 +156,7 @@ public class SignUp extends AppCompatActivity {
     private Boolean validatePinCode() {
         String temp = regPincode.getEditText().getText().toString();
         if (!temp.isEmpty()) {
-            if (temp.length() == 6 ) {
+            if (temp.length() == 6) {
                 regPincode.setError(null);
                 regPincode.setErrorEnabled(false);
                 return true;
@@ -191,7 +190,7 @@ public class SignUp extends AppCompatActivity {
 //        }
 //    }
 
-//    private Boolean validateEmail() {
+    //    private Boolean validateEmail() {
 //        String val = regEmail.getEditText().getText().toString();
 //        String emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
 //
@@ -225,10 +224,11 @@ public class SignUp extends AppCompatActivity {
         }
 
     }
+
     private Boolean confirmPhoneNo() {
         String temp = regPhoneNoConfirmation.getEditText().getText().toString();
         if (!temp.isEmpty()) {
-            if(matchPhoneNumber()) {
+            if (matchPhoneNumber()) {
                 regPhoneNoConfirmation.setError(null);
                 regPhoneNoConfirmation.setErrorEnabled(false);
                 regPhoneNo.setError(null);
@@ -275,12 +275,12 @@ public class SignUp extends AppCompatActivity {
         String temp = regPhoneNo.getEditText().getText().toString();
         String tempC = regPhoneNoConfirmation.getEditText().getText().toString();
 
-        Toast.makeText(this, "str len "+temp.length()+tempC.length(), Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "str len " + temp.length() + tempC.length(), Toast.LENGTH_SHORT).show();
         if (!temp.isEmpty()) {
             if (temp.length() == 10 && tempC.length() == 10) {
 //                Toast.makeText(this, "going in "+temp.length()+tempC.length(), Toast.LENGTH_SHORT).show();
 
-                if(matchPhoneNumber()) {
+                if (matchPhoneNumber()) {
                     regPhoneNoConfirmation.setError(null);
                     regPhoneNoConfirmation.setErrorEnabled(false);
                     regPhoneNo.setError(null);
@@ -360,12 +360,12 @@ public class SignUp extends AppCompatActivity {
 //
 //        Toast.makeText(getApplicationContext(),"Hello Javatpoint", Toast.LENGTH_SHORT).show();
 
-        //Performing Validation by calling validation functions
+    //Performing Validation by calling validation functions
 //        if(!validateName() | !validatePassword() | !validatePhoneNo() | !validateEmail() | !validateUsername()){
 //            return;
 //        }
 
-        //Get all the values in String
+    //Get all the values in String
 //        String name = regName.getEditText().getText().toString();
 //        String phoneNo = regPhoneNo.getEditText().getText().toString();
 //        String pinCode = regPhoneNo.getEditText().getText().toString();

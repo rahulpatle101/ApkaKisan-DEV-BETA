@@ -1,0 +1,147 @@
+package com.apkakisan.myapplication.registration
+
+import androidx.appcompat.app.AppCompatActivity
+import com.google.android.material.textfield.TextInputLayout
+import android.os.Bundle
+import android.view.WindowManager
+import com.apkakisan.myapplication.R
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
+import com.google.firebase.database.DataSnapshot
+import android.content.Intent
+import com.google.firebase.database.DatabaseError
+import android.app.ActivityOptions
+import android.os.Build
+import android.util.Pair
+import android.view.View
+import android.widget.*
+import com.apkakisan.myapplication.helpers.hideKeyboard
+
+class LoginActivity : AppCompatActivity() {
+
+    private lateinit var callSignUp: Button
+    private lateinit var loginBtn: Button
+    private lateinit var image: ImageView
+    private lateinit var welcomeText: TextView
+    private lateinit var sloganText: TextView
+    private lateinit var phoneNo: TextInputLayout
+    private lateinit var progressBar: ProgressBar
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_login)
+
+        //This Line will hide the status bar from the screen
+        window.setFlags(
+            WindowManager.LayoutParams.FLAG_FULLSCREEN,
+            WindowManager.LayoutParams.FLAG_FULLSCREEN
+        )
+
+        progressBar = findViewById(R.id.progressBar)
+        callSignUp = findViewById(R.id.signup_screen)
+        image = findViewById(R.id.logo_image)
+        welcomeText = findViewById(R.id.welcome_text)
+        sloganText = findViewById(R.id.slogan_name)
+        phoneNo = findViewById(R.id.login_phoneNo)
+        loginBtn = findViewById(R.id.login_btn)
+    }
+
+    private fun validatePhoneNo(): Boolean {
+        val temp = phoneNo.editText?.text.toString()
+        return if (temp.isNotEmpty()) {
+            if (temp.length < 10) {
+                phoneNo.error = "Please provide a valid phone number"
+                false
+            } else {
+                phoneNo.error = null
+                phoneNo.isErrorEnabled = false
+                true
+            }
+        } else {
+            phoneNo.error = "Field cannot be empty"
+            false
+        }
+    }
+
+    fun loginUser(view: View?) {
+        hideKeyboard()
+        if (validatePhoneNo()) {
+            isUser()
+        }
+    }
+
+    private fun isUser() {
+        progressBar.visibility = View.VISIBLE
+        val userEnteredPhoneNumber = phoneNo.editText?.text.toString().trim()
+
+        val reference = FirebaseDatabase.getInstance().getReference("USERS")
+        val checkUser = reference.orderByChild("phoneNumber").equalTo(userEnteredPhoneNumber)
+        checkUser.addListenerForSingleValueEvent(object : ValueEventListener {
+            override fun onDataChange(dataSnapshot: DataSnapshot) {
+                if (dataSnapshot.exists()) {
+                    phoneNo.error = null
+                    phoneNo.isErrorEnabled = false
+                    progressBar.visibility = View.GONE
+                    val nameFromDB =
+                        dataSnapshot.child(userEnteredPhoneNumber).child("fullName").getValue(
+                            String::class.java
+                        )
+                    val phoneNoFromDB =
+                        dataSnapshot.child(userEnteredPhoneNumber).child("phoneNumber").getValue(
+                            String::class.java
+                        )
+                    val pinCode =
+                        dataSnapshot.child(userEnteredPhoneNumber).child("pinCode").getValue(
+                            String::class.java
+                        )
+                    val createdDate =
+                        dataSnapshot.child(userEnteredPhoneNumber).child("createdDate").getValue(
+                            String::class.java
+                        )
+                    val modifiedDate =
+                        dataSnapshot.child(userEnteredPhoneNumber).child("modifiedDate").getValue(
+                            String::class.java
+                        )
+                    val location =
+                        dataSnapshot.child(userEnteredPhoneNumber).child("location").getValue(
+                            String::class.java
+                        )
+                    val intent = Intent(applicationContext, VerifyPhoneNoActivity::class.java)
+                    intent.putExtra("name", nameFromDB)
+                    intent.putExtra("phoneNo", phoneNoFromDB)
+                    intent.putExtra("pinCode", pinCode)
+                    intent.putExtra("location", location)
+                    intent.putExtra("createdDate", createdDate)
+                    intent.putExtra("modifiedDate", modifiedDate)
+                    startActivity(intent)
+                } else {
+                    progressBar.visibility = View.GONE
+                    phoneNo.error = "No such User exist. Please Sign up for a new account"
+                    phoneNo.requestFocus()
+                }
+            }
+
+            override fun onCancelled(databaseError: DatabaseError) {}
+        })
+    }
+
+    fun callSignUpScreen(view: View?) {
+        hideKeyboard()
+        val intent = Intent(this@LoginActivity, SignUpActivity::class.java)
+
+        //create pairs for animation
+        val pairs = arrayOfNulls<Pair<View, String>>(6)
+        pairs[0] = Pair<View, String>(image, "logo_image")
+        pairs[1] = Pair<View, String>(welcomeText, "logo_text")
+        pairs[2] = Pair<View, String>(sloganText, "logo_desc")
+        pairs[3] = Pair<View, String>(phoneNo, "username_tran")
+        pairs[4] = Pair<View, String>(loginBtn, "button_tran")
+        pairs[5] = Pair<View, String>(callSignUp, "login_signup_tran")
+
+        //Call next activity by attaching the animation with it.
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            val options = ActivityOptions.makeSceneTransitionAnimation(this@LoginActivity, *pairs)
+            startActivity(intent, options.toBundle())
+        }
+    }
+}
