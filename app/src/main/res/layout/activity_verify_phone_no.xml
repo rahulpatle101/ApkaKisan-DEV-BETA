@@ -5,120 +5,129 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.apkakisan.myapplication.VerifyPhoneNo">
+    android:scrollbars="none"
+    tools:context="com.apkakisan.myapplication.registration.VerifyPhoneNoActivity">
 
-    <LinearLayout
+    <androidx.appcompat.widget.LinearLayoutCompat
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         tools:context=".OTPVerificationFragment">
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/nunito_bold"
-        android:text="Enter Authorization Code"
-        android:layout_marginTop="200px"
-        android:textSize="20dp"
-        android:textColor="#171725"
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="80dp"
+            android:fontFamily="@font/nunito_bold"
+            android:text="Enter Authorization Code"
+            android:textAlignment="center"
+            android:textColor="#171725"
+            android:textSize="20sp" />
 
-        android:textAlignment="center" />
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="20dp"
+            android:fontFamily="@font/nunito_regular"
+            android:text="We have sent SMS to:"
+            android:textAlignment="center"
+            android:textColor="#92929D"
+            android:textSize="14sp" />
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/nunito_regular"
-        android:layout_marginTop="20dp"
-        android:text="We have sent SMS to:"
-        android:textColor="#92929D"
-        android:textSize="14dp"
-        android:textAlignment="center" />
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/phone_no_entered_by_user"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="10dp"
+            android:fontFamily="@font/nunito_regular"
+            android:text="+1 (XXX) XXX-X120"
+            android:textAlignment="center"
+            android:textColor="#171725"
+            android:textSize="14sp" />
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/phone_no_entered_by_user"
-        android:layout_marginTop="10dp"
-        android:textSize="14dp"
-        android:textColor="#171725"
-        android:fontFamily="@font/nunito_regular"
-        android:text="+1 (XXX) XXX-X120"
-        android:textAlignment="center" />
         <ProgressBar
             android:id="@+id/progress_bar"
             style="?android:attr/progressBarStyle"
-            android:layout_width="353dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1" />
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/login_otp_code"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/text_field"
-        android:fontFamily="@font/poppins_regular"
-        android:hint="6 Digit Code"
-        android:padding="20dp"
-        android:textColorHint="#92929D">
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="5dp"
+            android:visibility="gone" />
 
-        <com.google.android.material.textfield.TextInputEditText
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/login_otp_code"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="16dp"
+            android:background="@drawable/text_field"
             android:fontFamily="@font/poppins_regular"
-            android:inputType="number"
-            android:textColor="#92929D" />
+            android:hint="6 Digit Code"
+            android:textColorHint="#92929D">
 
-    </com.google.android.material.textfield.TextInputLayout>
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etOtp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/poppins_regular"
+                android:inputType="number"
+                android:maxLength="6"
+                android:textColor="#92929D" />
 
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:fontFamily="@font/nunito_regular"
-        android:text="Resend Code"
-        android:textColor="#46AA42"
-        android:gravity="end"
-        android:onClick="callResendCode"
-        android:paddingRight="20dp"
-        android:textSize="14dp"
-        tools:ignore="OnClick" />
+        </com.google.android.material.textfield.TextInputLayout>
 
-    <Button
-        android:id="@+id/verify_btn"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:layout_marginBottom="5dp"
-        android:background="@drawable/rounded_button"
-        android:fontFamily="@font/poppins_regular"
-        android:text="Verify"
-        android:layout_marginEnd="20dp"
-        android:layout_marginStart="20dp"
-        android:textAllCaps="false"
-        android:textColor="#fff"
-        android:transitionName="button_tran"
-        android:backgroundTint="#46AA42"
-         />
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvResendOtp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="16dp"
+            android:fontFamily="@font/nunito_regular"
+            android:gravity="end"
+            android:onClick="callResendCode"
+            android:text="Resend Code"
+            android:textColor="#46AA42"
+            android:textSize="14sp"
+            tools:ignore="OnClick" />
 
-    <Button
-        android:id="@+id/cancel_btn"
-        android:layout_width="match_parent"
-        android:background="@drawable/rounded_button_outline"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="20dp"
-        android:layout_marginBottom="5dp"
-        android:fontFamily="@font/poppins_regular"
-        android:onClick="cancelOTPAuth"
-        android:text="Cancel"
-        android:textAllCaps="false"
-        android:textColor="#46AA42"
-        android:transitionName="button_tran"
-        app:backgroundTint="#FFFFFF"
-        tools:ignore="OnClick" />
-    </LinearLayout>
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/verify_btn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="5dp"
+            android:background="@drawable/rounded_button"
+            android:backgroundTint="#46AA42"
+            android:fontFamily="@font/poppins_regular"
+            android:text="Verify"
+            android:textAllCaps="false"
+            android:textColor="#fff"
+            android:transitionName="button_tran" />
 
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btnCancel"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="5dp"
+            android:background="@drawable/rounded_button_outline"
+            android:fontFamily="@font/poppins_regular"
+            android:text="Cancel"
+            android:textAllCaps="false"
+            android:textColor="#46AA42"
+            android:transitionName="button_tran"
+            app:backgroundTint="#FFFFFF"
+            tools:ignore="OnClick" />
 
+    </androidx.appcompat.widget.LinearLayoutCompat>
 </ScrollView>

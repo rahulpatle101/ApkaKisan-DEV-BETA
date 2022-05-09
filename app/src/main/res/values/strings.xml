@@ -11,5 +11,7 @@
     <string name="title_home">Home</string>
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
+    <string name="ok">OK</string>
+    <string name="something_went_wrong">Something went wrong. Please try again later.</string>
 
 </resources>

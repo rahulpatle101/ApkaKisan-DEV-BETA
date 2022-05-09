@@ -49,7 +49,7 @@ class LoginActivity : AppCompatActivity() {
     private fun validatePhoneNo(): Boolean {
         val temp = phoneNo.editText?.text.toString()
         return if (temp.isNotEmpty()) {
-            if (temp.length < 10) {
+            if (temp.length != 10) {
                 phoneNo.error = "Please provide a valid phone number"
                 false
             } else {

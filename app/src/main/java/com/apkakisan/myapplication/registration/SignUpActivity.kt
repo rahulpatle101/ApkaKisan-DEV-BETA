@@ -189,8 +189,7 @@ class SignUpActivity : AppCompatActivity() {
         val phoneNo = regPhoneNo.editText?.text.toString()
         val confirmPhoneNo = regPhoneNoConfirmation.editText?.text.toString()
         return if (phoneNo.isNotEmpty()) {
-            //if (phoneNo.length == 10 && confirmPhoneNo.length == 10) {
-            if (phoneNo.length >= 10 && confirmPhoneNo.length >= 10) {
+            if (phoneNo.length == 10 && confirmPhoneNo.length == 10) {
                 if (matchPhoneNumber()) {
                     regPhoneNoConfirmation.error = null
                     regPhoneNoConfirmation.isErrorEnabled = false

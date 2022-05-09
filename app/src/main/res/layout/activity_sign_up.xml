@@ -8,7 +8,7 @@
     android:orientation="vertical"
     android:padding="20dp"
     android:scrollbars="none"
-    tools:context="com.apkakisan.myapplication.registration.SignUp">
+    tools:context="com.apkakisan.myapplication.registration.SignUpActivity">
 
     <androidx.appcompat.widget.LinearLayoutCompat
         android:layout_width="match_parent"
@@ -51,8 +51,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/poppins_regular"
-                    android:inputType="text"
-                    android:text="Baaz Saleem" />
+                    android:inputType="text" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -67,8 +66,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/poppins_regular"
-                    android:inputType="phone"
-                    android:text="+923234364949" />
+                    android:inputType="phone" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -83,8 +81,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/poppins_regular"
-                    android:inputType="phone"
-                    android:text="+923234364949" />
+                    android:inputType="phone" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -99,8 +96,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/poppins_regular"
-                    android:inputType="number"
-                    android:text="123456" />
+                    android:inputType="number" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -115,8 +111,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/poppins_regular"
-                    android:inputType="text"
-                    android:text="Test location" />
+                    android:inputType="text" />
 
             </com.google.android.material.textfield.TextInputLayout>
         </androidx.appcompat.widget.LinearLayoutCompat>
@@ -127,7 +122,6 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="10sp"
             android:buttonTint="#46AA42"
-            android:checked="true"
             android:fontFamily="@font/nunito_regular"
             android:text="@string/termsandconditions"
             android:textColor="#171725" />
@@ -139,7 +133,6 @@
             android:layout_marginStart="10sp"
             android:layout_marginTop="10dp"
             android:layout_marginEnd="10sp"
-            android:layout_marginBottom="5dp"
             android:background="@drawable/rounded_button"
             android:fontFamily="@font/poppins_regular"
             android:text="Sign Up"
@@ -152,8 +145,9 @@
             android:id="@+id/reg_login_btn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="10sp"
-            android:layout_marginEnd="10sp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="10dp"
             android:background="@drawable/rounded_button_outline"
             android:elevation="0dp"
             android:fontFamily="@font/poppins_regular"
