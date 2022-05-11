@@ -14,7 +14,7 @@
         android:theme="@style/AppTheme">
 
         <activity
-            android:name=".MainActivity"
+            android:name=".SplashActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -31,7 +31,7 @@
 
         <activity android:name=".registration.VerifyPhoneNo" />
         <activity android:name=".registration.VerifyPhoneNoActivity" />
-        
+
         <activity
             android:name=".CreateOrder"
             android:exported="false" />
