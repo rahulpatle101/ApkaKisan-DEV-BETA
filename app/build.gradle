@@ -14,6 +14,11 @@ android {
         multiDexEnabled true
     }
     buildTypes {
+
+        rahul {
+            initWith debug
+        }
+
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'

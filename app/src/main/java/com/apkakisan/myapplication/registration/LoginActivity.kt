@@ -15,6 +15,7 @@ import android.os.Build
 import android.util.Pair
 import android.view.View
 import android.widget.*
+import com.apkakisan.myapplication.helpers.BuildTypeUtil
 import com.apkakisan.myapplication.helpers.hideKeyboard
 
 class LoginActivity : AppCompatActivity() {
@@ -24,7 +25,7 @@ class LoginActivity : AppCompatActivity() {
     private lateinit var image: ImageView
     private lateinit var welcomeText: TextView
     private lateinit var sloganText: TextView
-    private lateinit var phoneNo: TextInputLayout
+    private lateinit var etPhoneNo: TextInputLayout
     private lateinit var progressBar: ProgressBar
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -42,23 +43,27 @@ class LoginActivity : AppCompatActivity() {
         image = findViewById(R.id.logo_image)
         welcomeText = findViewById(R.id.welcome_text)
         sloganText = findViewById(R.id.slogan_name)
-        phoneNo = findViewById(R.id.login_phoneNo)
+        etPhoneNo = findViewById(R.id.login_phoneNo)
         loginBtn = findViewById(R.id.login_btn)
     }
 
     private fun validatePhoneNo(): Boolean {
-        val temp = phoneNo.editText?.text.toString()
-        return if (temp.isNotEmpty()) {
-            if (temp.length != 10) {
-                phoneNo.error = "Please provide a valid phone number"
-                false
-            } else {
-                phoneNo.error = null
-                phoneNo.isErrorEnabled = false
-                true
+        val phoneNo = etPhoneNo.editText?.text.toString()
+        return if (phoneNo.isNotEmpty()) {
+            when {
+                BuildTypeUtil.isDebug() -> true
+                phoneNo.length != 10 -> {
+                    etPhoneNo.error = "Please provide a valid phone number"
+                    false
+                }
+                else -> {
+                    etPhoneNo.error = null
+                    etPhoneNo.isErrorEnabled = false
+                    true
+                }
             }
         } else {
-            phoneNo.error = "Field cannot be empty"
+            etPhoneNo.error = "Field cannot be empty"
             false
         }
     }
@@ -72,15 +77,15 @@ class LoginActivity : AppCompatActivity() {
 
     private fun isUser() {
         progressBar.visibility = View.VISIBLE
-        val userEnteredPhoneNumber = phoneNo.editText?.text.toString().trim()
+        val userEnteredPhoneNumber = etPhoneNo.editText?.text.toString().trim()
 
         val reference = FirebaseDatabase.getInstance().getReference("USERS")
         val checkUser = reference.orderByChild("phoneNumber").equalTo(userEnteredPhoneNumber)
         checkUser.addListenerForSingleValueEvent(object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
                 if (dataSnapshot.exists()) {
-                    phoneNo.error = null
-                    phoneNo.isErrorEnabled = false
+                    etPhoneNo.error = null
+                    etPhoneNo.isErrorEnabled = false
                     progressBar.visibility = View.GONE
                     val nameFromDB =
                         dataSnapshot.child(userEnteredPhoneNumber).child("fullName").getValue(
@@ -116,8 +121,8 @@ class LoginActivity : AppCompatActivity() {
                     startActivity(intent)
                 } else {
                     progressBar.visibility = View.GONE
-                    phoneNo.error = "No such User exist. Please Sign up for a new account"
-                    phoneNo.requestFocus()
+                    etPhoneNo.error = "No such User exist. Please Sign up for a new account"
+                    etPhoneNo.requestFocus()
                 }
             }
 
@@ -134,7 +139,7 @@ class LoginActivity : AppCompatActivity() {
         pairs[0] = Pair<View, String>(image, "logo_image")
         pairs[1] = Pair<View, String>(welcomeText, "logo_text")
         pairs[2] = Pair<View, String>(sloganText, "logo_desc")
-        pairs[3] = Pair<View, String>(phoneNo, "username_tran")
+        pairs[3] = Pair<View, String>(etPhoneNo, "username_tran")
         pairs[4] = Pair<View, String>(loginBtn, "button_tran")
         pairs[5] = Pair<View, String>(callSignUp, "login_signup_tran")
 

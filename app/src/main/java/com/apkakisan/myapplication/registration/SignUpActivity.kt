@@ -14,6 +14,7 @@ import android.content.Intent
 import android.graphics.Color
 import android.view.View
 import android.widget.Button
+import com.apkakisan.myapplication.helpers.BuildTypeUtil
 import com.apkakisan.myapplication.helpers.hideKeyboard
 import com.google.firebase.database.DatabaseError
 import java.text.SimpleDateFormat
@@ -189,7 +190,9 @@ class SignUpActivity : AppCompatActivity() {
         val phoneNo = regPhoneNo.editText?.text.toString()
         val confirmPhoneNo = regPhoneNoConfirmation.editText?.text.toString()
         return if (phoneNo.isNotEmpty()) {
-            if (phoneNo.length == 10 && confirmPhoneNo.length == 10) {
+            if (BuildTypeUtil.isDebug())
+                true
+            else if (phoneNo.length == 10 && confirmPhoneNo.length == 10) {
                 if (matchPhoneNumber()) {
                     regPhoneNoConfirmation.error = null
                     regPhoneNoConfirmation.isErrorEnabled = false

@@ -20,6 +20,7 @@ import android.widget.Button
 import com.apkakisan.myapplication.HomeActivity
 import android.widget.Toast
 import com.apkakisan.myapplication.UserHelperClass
+import com.apkakisan.myapplication.helpers.BuildTypeUtil
 import com.apkakisan.myapplication.helpers.DialogUtil
 import com.google.android.material.textfield.TextInputEditText
 import java.util.concurrent.TimeUnit
@@ -49,7 +50,10 @@ class VerifyPhoneNoActivity : AppCompatActivity() {
         modifiedDate = intent.getStringExtra("modifiedDate") ?: ""
 
         val phoneNoEnteredByTheUser: TextView = findViewById(R.id.phone_no_entered_by_user)
-        phoneNoEnteredByTheUser.text = "+1$phoneNo"
+        if (BuildTypeUtil.isDebug())
+            phoneNoEnteredByTheUser.text = phoneNo
+        else
+            phoneNoEnteredByTheUser.text = "+1$phoneNo"
 
         progressBar = findViewById(R.id.progress_bar)
         verificationCodeEntered = findViewById(R.id.etOtp)
@@ -77,7 +81,7 @@ class VerifyPhoneNoActivity : AppCompatActivity() {
     private fun sendVerificationCodeToUser(phoneNo: String) {
         val mAuth = FirebaseAuth.getInstance()
         val options = PhoneAuthOptions.newBuilder(mAuth)
-            .setPhoneNumber("+1$phoneNo") // Phone number to verify
+            .setPhoneNumber(if (BuildTypeUtil.isDebug()) phoneNo else "+1$phoneNo") // Phone number to verify
             .setTimeout(60L, TimeUnit.SECONDS) // Timeout and unit
             .setActivity(this) // Activity (for callback binding)
             .setCallbacks(mCallbacks) // OnVerificationStateChangedCallbacks
