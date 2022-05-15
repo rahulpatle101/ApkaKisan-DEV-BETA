@@ -50,16 +50,18 @@ class VerifyPhoneNoActivity : AppCompatActivity() {
         modifiedDate = intent.getStringExtra("modifiedDate") ?: ""
 
         val phoneNoEnteredByTheUser: TextView = findViewById(R.id.phone_no_entered_by_user)
-        if (BuildTypeUtil.isDebug())
-            phoneNoEnteredByTheUser.text = phoneNo
+        phoneNo = if (BuildTypeUtil.isDebug())
+            "+92$phoneNo"
         else
-            phoneNoEnteredByTheUser.text = "+1$phoneNo"
+            "+1$phoneNo"
+
+        phoneNoEnteredByTheUser.text = phoneNo
 
         progressBar = findViewById(R.id.progress_bar)
         verificationCodeEntered = findViewById(R.id.etOtp)
 
         val tvResendOtp = findViewById<TextView>(R.id.tvResendOtp)
-        tvResendOtp.setOnClickListener { sendVerificationCodeToUser(phoneNo) }
+        tvResendOtp.setOnClickListener { sendVerificationCodeToUser() }
 
         val verifyBtn = findViewById<Button>(R.id.verify_btn)
         verifyBtn.setOnClickListener(View.OnClickListener {
@@ -75,13 +77,13 @@ class VerifyPhoneNoActivity : AppCompatActivity() {
         val btnCancel = findViewById<Button>(R.id.btnCancel)
         btnCancel.setOnClickListener { finish() }
 
-        sendVerificationCodeToUser(phoneNo)
+        sendVerificationCodeToUser()
     }
 
-    private fun sendVerificationCodeToUser(phoneNo: String) {
+    private fun sendVerificationCodeToUser() {
         val mAuth = FirebaseAuth.getInstance()
         val options = PhoneAuthOptions.newBuilder(mAuth)
-            .setPhoneNumber(if (BuildTypeUtil.isDebug()) phoneNo else "+1$phoneNo") // Phone number to verify
+            .setPhoneNumber(phoneNo) // Phone number to verify
             .setTimeout(60L, TimeUnit.SECONDS) // Timeout and unit
             .setActivity(this) // Activity (for callback binding)
             .setCallbacks(mCallbacks) // OnVerificationStateChangedCallbacks

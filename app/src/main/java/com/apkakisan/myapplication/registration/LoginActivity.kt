@@ -15,7 +15,6 @@ import android.os.Build
 import android.util.Pair
 import android.view.View
 import android.widget.*
-import com.apkakisan.myapplication.BuildConfig
 import com.apkakisan.myapplication.helpers.BuildTypeUtil
 import com.apkakisan.myapplication.helpers.hideKeyboard
 import com.google.android.material.textfield.TextInputEditText
@@ -48,7 +47,7 @@ class LoginActivity : AppCompatActivity() {
         etPhoneNo = findViewById(R.id.login_phoneNo)
         val etPhoneNoNew = findViewById<TextInputEditText>(R.id.etPhoneNo)
         if (BuildTypeUtil.isDebug())
-            etPhoneNoNew.setText("+923234364949")
+            etPhoneNoNew.setText("3234364949")
         loginBtn = findViewById(R.id.login_btn)
     }
 
@@ -56,7 +55,6 @@ class LoginActivity : AppCompatActivity() {
         val phoneNo = etPhoneNo.editText?.text.toString()
         return if (phoneNo.isNotEmpty()) {
             when {
-                BuildTypeUtil.isDebug() -> true
                 phoneNo.length != 10 -> {
                     etPhoneNo.error = "Please provide a valid phone number"
                     false
