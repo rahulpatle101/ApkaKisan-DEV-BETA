@@ -1,20 +1,23 @@
-package com.apkakisan.myapplication;
+package com.apkakisan.myapplication.order;
+
+import android.content.Intent;
+import android.os.Bundle;
+import android.view.MenuItem;
+import android.view.View;
+import android.widget.ProgressBar;
+import android.widget.SearchView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.app.Activity;
-import android.content.Intent;
-import android.os.Bundle;
-import android.view.MenuItem;
-import android.view.View;
-import android.widget.LinearLayout;
-import android.widget.ProgressBar;
-import android.widget.SearchView;
-import android.widget.Toast;
-
+import com.apkakisan.myapplication.network.responses.Commodity;
+import com.apkakisan.myapplication.NotificationsActivity;
+import com.apkakisan.myapplication.ProfileActivity;
+import com.apkakisan.myapplication.R;
+import com.apkakisan.myapplication.network.RetrofitClient;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 
@@ -25,12 +28,12 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class HomeActivity extends AppCompatActivity implements CommoditiesAdapter.OnCommodityListener{
+public class HomeActivityOld extends AppCompatActivity {
     RecyclerView recyclerView;
     ProgressBar progressBar;
     LinearLayoutManager layoutManager;
     CommoditiesAdapter adapter;
-    List<CommodityItem> commodityItemList = new ArrayList<>();
+    List<Commodity> commodityItemList = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,7 +45,7 @@ public class HomeActivity extends AppCompatActivity implements CommoditiesAdapte
         progressBar = findViewById(R.id.progressBar);
         layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
-        adapter = new CommoditiesAdapter(commodityItemList, this);
+        adapter = new CommoditiesAdapter(commodityItemList, (commodity, view, integer) -> null);
         recyclerView.setAdapter(adapter);
 
         SearchView searchView = findViewById(R.id.searchView);
@@ -100,9 +103,9 @@ public class HomeActivity extends AppCompatActivity implements CommoditiesAdapte
     }
 
     public void filter(String s) {
-        List<CommodityItem> filteredList = new ArrayList<>();
-        for(CommodityItem item : commodityItemList) {
-            if(item.getCommodity_title().toLowerCase().contains(s.toLowerCase())) {
+        List<Commodity> filteredList = new ArrayList<>();
+        for(Commodity item : commodityItemList) {
+            if(item.getTitle().toLowerCase().contains(s.toLowerCase())) {
                 filteredList.add(item);
             }
         }
@@ -114,9 +117,9 @@ public class HomeActivity extends AppCompatActivity implements CommoditiesAdapte
 
         progressBar.setVisibility(View.VISIBLE);
 
-        RetrofitClient.getRetrofitClient().getCommodity_title().enqueue(new Callback<List<CommodityItem>>() {
+        RetrofitClient.getRetrofitClient().getCommodity_title().enqueue(new Callback<List<Commodity>>() {
             @Override
-            public void onResponse(Call<List<CommodityItem>> call, Response<List<CommodityItem>> response) {
+            public void onResponse(Call<List<Commodity>> call, Response<List<Commodity>> response) {
                 
                 if(response.isSuccessful() && response.body() != null) {
 //                    Toast.makeText(HomeActivity.this, "Response body: " + response.body(), Toast.LENGTH_SHORT).show();
@@ -128,20 +131,10 @@ public class HomeActivity extends AppCompatActivity implements CommoditiesAdapte
             }
 
             @Override
-            public void onFailure(Call<List<CommodityItem>> call, Throwable t) {
+            public void onFailure(Call<List<Commodity>> call, Throwable t) {
                 progressBar.setVisibility(View.GONE);
-                Toast.makeText(HomeActivity.this, "Error: " + t.getMessage(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(HomeActivityOld.this, "Error: " + t.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
-    }
-
-    @Override
-    public void onCommodityClick(int position) {
-        commodityItemList.get(position);
-        Intent intent = new Intent(HomeActivity.this, CreateOrder.class);
-        intent.putExtra("commodity_name", commodityItemList.get(position).getCommodity_title());
-        intent.putExtra("commodity_apka_kisan_price", commodityItemList.get(position).getCommodity_apkakisan_price());
-
-        startActivity(intent);
     }
 }

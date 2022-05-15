@@ -1,117 +1,114 @@
 <?xml version="1.0" encoding="utf-8"?>
 <com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_margin="8dp"
     app:cardCornerRadius="12dp"
     app:cardElevation="3dp">
 
-
-    <LinearLayout
+    <androidx.appcompat.widget.LinearLayoutCompat
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="14sp"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:padding="14sp">
 
-        <LinearLayout
+        <androidx.appcompat.widget.LinearLayoutCompat
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10sp"
             android:layout_marginBottom="10sp"
             android:orientation="horizontal">
 
-            <ImageView
+            <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/commodity_img"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginRight="12sp"
+                android:layout_marginEnd="12dp"
                 app:srcCompat="@drawable/ic_paprika" />
 
-            <LinearLayout
+            <androidx.appcompat.widget.LinearLayoutCompat
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
 
-                <TextView
+                <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/commodity_name"
                     android:layout_width="match_parent"
-                    android:fontFamily="@font/poppins_semibold"
-                    android:textSize="16sp"
-                    android:layout_marginBottom="16sp"
-                    android:textColor="@color/colorTextBlack"
                     android:layout_height="wrap_content"
-                    android:text="Long Carrot Listing Name" />
+                    android:layout_marginBottom="16sp"
+                    android:fontFamily="@font/poppins_semibold"
+                    android:text="Long Carrot Listing Name"
+                    android:textColor="@color/colorTextBlack"
+                    android:textSize="16sp" />
 
-                <LinearLayout
+                <androidx.appcompat.widget.LinearLayoutCompat
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
 
-                    <LinearLayout
+                    <androidx.appcompat.widget.LinearLayoutCompat
                         android:layout_width="120sp"
                         android:layout_height="wrap_content"
                         android:orientation="vertical">
 
-                        <TextView
+                        <androidx.appcompat.widget.AppCompatTextView
                             android:id="@+id/mandi_price_label"
                             android:layout_width="match_parent"
-                            android:fontFamily="@font/nunito_regular"
-                            android:textSize="14sp"
-                            android:textColor="@color/colorGrey"
                             android:layout_height="wrap_content"
-                            android:text="Mandi" />
+                            android:fontFamily="@font/nunito_regular"
+                            android:text="Mandi"
+                            android:textColor="@color/colorGrey"
+                            android:textSize="14sp" />
 
-                        <TextView
+                        <androidx.appcompat.widget.AppCompatTextView
                             android:id="@+id/mandi_price_value"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/poppins_semibold"
-                            android:textSize="16sp"
+                            android:text="Rs. 40.99/kg"
                             android:textColor="@color/colorTextBlack"
-                            android:text="Rs. 40.99/kg" />
-                    </LinearLayout>
+                            android:textSize="16sp" />
+                    </androidx.appcompat.widget.LinearLayoutCompat>
 
-                    <LinearLayout
+                    <androidx.appcompat.widget.LinearLayoutCompat
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:orientation="vertical">
 
-                        <TextView
+                        <androidx.appcompat.widget.AppCompatTextView
                             android:id="@+id/ak_price_label"
-                            android:fontFamily="@font/nunito_regular"
                             android:layout_width="match_parent"
-                            android:textSize="14sp"
-                            android:textColor="@color/colorGrey"
                             android:layout_height="wrap_content"
-                            android:text="ApkaKisan" />
+                            android:fontFamily="@font/nunito_regular"
+                            android:text="ApkaKisan"
+                            android:textColor="@color/colorGrey"
+                            android:textSize="14sp" />
 
-                        <TextView
+                        <androidx.appcompat.widget.AppCompatTextView
                             android:id="@+id/ak_price_value"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/poppins_semibold"
-                            android:textSize="16sp"
+                            android:text="Rs. 45.99/kg"
                             android:textColor="@color/colorPrimary"
-                            android:text="Rs. 45.99/kg" />
-                    </LinearLayout>
-                </LinearLayout>
-            </LinearLayout>
-        </LinearLayout>
+                            android:textSize="16sp" />
+                    </androidx.appcompat.widget.LinearLayoutCompat>
+                </androidx.appcompat.widget.LinearLayoutCompat>
+            </androidx.appcompat.widget.LinearLayoutCompat>
+        </androidx.appcompat.widget.LinearLayoutCompat>
 
-        <TextView
+        <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/sell_to_ak_btn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:fontFamily="@font/poppins_regular"
             android:gravity="center"
             android:paddingTop="10sp"
+
             android:paddingBottom="10sp"
+            android:text="+ Sell to ApkaKisan"
+            android:textSize="18sp" />
 
-            android:textSize="18sp"
-            android:fontFamily="@font/poppins_regular"
-            android:text="+ Sell to ApkaKisan" />
-
-    </LinearLayout>
+    </androidx.appcompat.widget.LinearLayoutCompat>
 
 </com.google.android.material.card.MaterialCardView>

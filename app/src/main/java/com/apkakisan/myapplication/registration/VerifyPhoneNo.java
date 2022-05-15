@@ -12,7 +12,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.apkakisan.myapplication.HomeActivity;
+import com.apkakisan.myapplication.order.HomeActivity;
 import com.apkakisan.myapplication.R;
 import com.apkakisan.myapplication.UserHelperClass;
 import com.google.android.gms.tasks.OnCompleteListener;

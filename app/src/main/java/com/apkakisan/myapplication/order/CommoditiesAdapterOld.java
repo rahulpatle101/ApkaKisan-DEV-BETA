@@ -1,47 +1,41 @@
-package com.apkakisan.myapplication;
+package com.apkakisan.myapplication.order;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Filter;
-import android.widget.Filterable;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import java.util.ArrayList;
-import java.util.Collection;
+import com.apkakisan.myapplication.network.responses.Commodity;
+import com.apkakisan.myapplication.R;
+
 import java.util.List;
-import java.util.Locale;
 
-public class CommoditiesAdapter extends RecyclerView.Adapter<CommoditiesAdapter.ViewHolder> {
+public class CommoditiesAdapterOld extends RecyclerView.Adapter<CommoditiesAdapterOld.ViewHolder> {
 
-    private List<CommodityItem> commodityItemList;
-    private OnCommodityListener mOnCommodityListener;
+    private List<Commodity> commodityItemList;
+    private final OnCommodityListener mOnCommodityListener;
 
-
-    public CommoditiesAdapter(List<CommodityItem> commodityItemList, OnCommodityListener onCommodityListener) {
+    public CommoditiesAdapterOld(List<Commodity> commodityItemList, OnCommodityListener onCommodityListener) {
         this.commodityItemList = commodityItemList;
         this.mOnCommodityListener = onCommodityListener;
-
     }
 
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.commodity_list_item, parent, false);
-
+                .inflate(R.layout.item_commodity, parent, false);
         return new ViewHolder(view, mOnCommodityListener);
     }
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        holder.commodityTitle.setText(commodityItemList.get(position).getCommodity_title());
-        holder.commodityMandiPrice.setText(commodityItemList.get(position).getCommodity_mandi_price());
-        holder.commodityApkaKisanPrice.setText(commodityItemList.get(position).getCommodity_apkakisan_price());
+        holder.commodityTitle.setText(commodityItemList.get(position).getTitle());
+        holder.commodityMandiPrice.setText(commodityItemList.get(position).getMandi_price());
+        holder.commodityApkaKisanPrice.setText(commodityItemList.get(position).getApkakisan_price());
     }
 
     @Override
@@ -49,31 +43,24 @@ public class CommoditiesAdapter extends RecyclerView.Adapter<CommoditiesAdapter.
         return commodityItemList.size();
     }
 
-    public void filterList(List<CommodityItem> filteredList) {
+    public void filterList(List<Commodity> filteredList) {
         commodityItemList = filteredList;
         notifyDataSetChanged();
     }
 
-
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-
         TextView commodityTitle;
         TextView commodityMandiPrice;
         TextView commodityApkaKisanPrice;
         OnCommodityListener onCommodityListener;
 
-
         public ViewHolder(@NonNull View itemView, OnCommodityListener onCommodityListener) {
             super(itemView);
-
             commodityTitle = itemView.findViewById(R.id.commodity_name);
             commodityMandiPrice = itemView.findViewById(R.id.mandi_price_value);
             commodityApkaKisanPrice = itemView.findViewById(R.id.ak_price_value);
             this.onCommodityListener = onCommodityListener;
-
             itemView.setOnClickListener(this);
-
-            System.out.println("title--->>>>"+commodityTitle);
         }
 
         @Override
@@ -82,7 +69,7 @@ public class CommoditiesAdapter extends RecyclerView.Adapter<CommoditiesAdapter.
         }
     }
 
-    public interface OnCommodityListener{
+    public interface OnCommodityListener {
         void onCommodityClick(int position);
     }
 }

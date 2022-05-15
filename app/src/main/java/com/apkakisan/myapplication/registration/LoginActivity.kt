@@ -15,8 +15,10 @@ import android.os.Build
 import android.util.Pair
 import android.view.View
 import android.widget.*
+import com.apkakisan.myapplication.BuildConfig
 import com.apkakisan.myapplication.helpers.BuildTypeUtil
 import com.apkakisan.myapplication.helpers.hideKeyboard
+import com.google.android.material.textfield.TextInputEditText
 
 class LoginActivity : AppCompatActivity() {
 
@@ -44,6 +46,9 @@ class LoginActivity : AppCompatActivity() {
         welcomeText = findViewById(R.id.welcome_text)
         sloganText = findViewById(R.id.slogan_name)
         etPhoneNo = findViewById(R.id.login_phoneNo)
+        val etPhoneNoNew = findViewById<TextInputEditText>(R.id.etPhoneNo)
+        if (BuildTypeUtil.isDebug())
+            etPhoneNoNew.setText("+923234364949")
         loginBtn = findViewById(R.id.login_btn)
     }
 

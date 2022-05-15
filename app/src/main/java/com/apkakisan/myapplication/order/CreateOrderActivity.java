@@ -1,15 +1,11 @@
-package com.apkakisan.myapplication;
-
-import androidx.appcompat.app.AppCompatActivity;
+package com.apkakisan.myapplication.order;
 
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.text.Editable;
 import android.text.InputType;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -18,6 +14,10 @@ import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
+
+import com.apkakisan.myapplication.R;
+import com.apkakisan.myapplication.SellOrderItem;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.auth.FirebaseAuth;
@@ -30,7 +30,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.UUID;
 
-public class CreateOrder extends AppCompatActivity {
+public class CreateOrderActivity extends AppCompatActivity {
     String commodity_name;
     String apka_kisan_price;
     Button sellOrderBtn;
@@ -87,7 +87,7 @@ public class CreateOrder extends AppCompatActivity {
         sellOrderBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(CreateOrder.this, "clicked sell now", Toast.LENGTH_SHORT).show();
+                Toast.makeText(CreateOrderActivity.this, "clicked sell now", Toast.LENGTH_SHORT).show();
 //                Validate all the inputs
                 if(!validateQuantity() | !validatePinCode() | !validateLocation() | !validateStreet() | !validateDateTime() |!validateUPIPhoneNo() | !validateTermsAndCondition()){
 
@@ -95,7 +95,7 @@ public class CreateOrder extends AppCompatActivity {
                 }
                 // update total earning based on user input of quantity
 
-                Toast.makeText(CreateOrder.this, "Ready to post", Toast.LENGTH_SHORT).show();
+                Toast.makeText(CreateOrderActivity.this, "Ready to post", Toast.LENGTH_SHORT).show();
 
                 rootNode = FirebaseDatabase.getInstance();
                 reference = rootNode.getReference("ORDERS");
@@ -116,7 +116,7 @@ public class CreateOrder extends AppCompatActivity {
                 reference.child(generateUUID).setValue(addNewOrder);
 //                reference.add(addNewOrder).addOnsucc
 
-                Toast.makeText(CreateOrder.this, "aaya- "+generateUUID, Toast.LENGTH_SHORT).show();
+                Toast.makeText(CreateOrderActivity.this, "aaya- "+generateUUID, Toast.LENGTH_SHORT).show();
 
 
                 Intent intent = new Intent(getApplicationContext(), OrdersActivity.class);
@@ -162,11 +162,11 @@ public class CreateOrder extends AppCompatActivity {
                     }
                 };
 
-                new TimePickerDialog(CreateOrder.this, timeSetListener, calendar.get(Calendar.HOUR_OF_DAY), calendar.get(Calendar.MINUTE), false).show();
+                new TimePickerDialog(CreateOrderActivity.this, timeSetListener, calendar.get(Calendar.HOUR_OF_DAY), calendar.get(Calendar.MINUTE), false).show();
             }
         };
 
-        DatePickerDialog datePickerDialog = new DatePickerDialog(CreateOrder.this, dateSetListener, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH));
+        DatePickerDialog datePickerDialog = new DatePickerDialog(CreateOrderActivity.this, dateSetListener, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH));
         datePickerDialog.getDatePicker().setMinDate(System.currentTimeMillis() - 1000);
         datePickerDialog.show();
     }

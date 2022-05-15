@@ -15,9 +15,8 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.apkakisan.myapplication.HomeActivity;
+import com.apkakisan.myapplication.order.HomeActivity;
 import com.apkakisan.myapplication.R;
-import com.apkakisan.myapplication.VerifyPhoneNo;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;

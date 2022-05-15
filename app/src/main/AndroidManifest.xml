@@ -14,8 +14,9 @@
         android:theme="@style/AppTheme">
 
         <activity
-            android:name=".SplashActivity"
-            android:exported="true">
+            android:name=".splash.SplashActivity"
+            android:exported="true"
+            android:screenOrientation="fullSensor">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -23,41 +24,70 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".registration.Login" />
-        <activity android:name=".registration.LoginActivity" />
-
-        <activity android:name=".registration.SignUp" />
-        <activity android:name=".registration.SignUpActivity" />
-
-        <activity android:name=".registration.VerifyPhoneNo" />
-        <activity android:name=".registration.VerifyPhoneNoActivity" />
-
         <activity
-            android:name=".CreateOrder"
-            android:exported="false" />
-
-        <activity
-            android:name=".MainContainer"
+            android:name=".registration.Login"
             android:exported="false"
-            android:label="@string/title_activity_main_container" />
+            android:screenOrientation="fullSensor" />
+
+        <activity
+            android:name=".registration.LoginActivity"
+            android:exported="false"
+            android:screenOrientation="fullSensor" />
+
+        <activity
+            android:name=".registration.SignUp"
+            android:exported="false"
+            android:screenOrientation="fullSensor" />
+
+        <activity
+            android:name=".registration.SignUpActivity"
+            android:exported="false"
+            android:screenOrientation="fullSensor" />
+
+        <activity
+            android:name=".registration.VerifyPhoneNo"
+            android:exported="false"
+            android:screenOrientation="fullSensor" />
+
+        <activity
+            android:name=".registration.VerifyPhoneNoActivity"
+            android:exported="false"
+            android:screenOrientation="fullSensor" />
+
+        <activity
+            android:name=".order.HomeActivity"
+            android:exported="false"
+            android:screenOrientation="fullSensor" />
+
+        <activity
+            android:name=".order.CreateOrderActivity"
+            android:exported="false"
+            android:screenOrientation="fullSensor" />
+
+        <activity
+            android:name=".order.CreateOrder"
+            android:exported="false"
+            android:screenOrientation="fullSensor" />
 
         <activity
             android:name=".ProfileActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:screenOrientation="fullSensor" />
 
         <activity
             android:name=".NotificationsActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:screenOrientation="fullSensor" />
 
         <activity
-            android:name=".OrdersActivity"
-            android:exported="false" />
+            android:name=".order.OrdersActivity"
+            android:exported="false"
+            android:screenOrientation="fullSensor" />
 
         <activity
-            android:name=".HomeActivity"
-            android:exported="false" />
-
-        <activity android:name=".UserProfile" />
+            android:name=".UserProfile"
+            android:exported="false"
+            android:screenOrientation="fullSensor" />
 
         <meta-data
             android:name="preloaded_fonts"
