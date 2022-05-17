@@ -13,5 +13,11 @@
     <string name="title_notifications">Notifications</string>
     <string name="ok">OK</string>
     <string name="something_went_wrong">Something went wrong. Please try again later.</string>
+    <string name="sell_order_created">Sell Order Created!</string>
+    <string name="sell_order_created_congrats">Congratulations! You sell order has been successfully been created.
+        We will notify you when the order status will be processed. Additionally you can check details under
+    My Order Page.</string>
+    <string name="create_another_sell_order">Create another sell order</string>
+    <string name="cancel">Cancel</string>
 
 </resources>

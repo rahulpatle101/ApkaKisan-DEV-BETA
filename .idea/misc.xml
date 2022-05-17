@@ -4,6 +4,12 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="../../../../../../../../layout/custom_preview.xml" value="0.23697916666666666" />
+        <entry key="..\:/Android/Fiverr/ApkaKisan/ApkaKisan/app/src/main/res/drawable/gradient_one.xml" value="0.2025" />
+        <entry key="..\:/Android/Fiverr/ApkaKisan/ApkaKisan/app/src/main/res/drawable/rounded_button.xml" value="0.2025" />
+        <entry key="..\:/Android/Fiverr/ApkaKisan/ApkaKisan/app/src/main/res/drawable/rounded_button_outline.xml" value="0.137" />
+        <entry key="..\:/Android/Fiverr/ApkaKisan/ApkaKisan/app/src/main/res/drawable/rounded_input_outline.xml" value="0.137" />
+        <entry key="..\:/Android/Fiverr/ApkaKisan/ApkaKisan/app/src/main/res/drawable/shape_bg_dialog.xml" value="0.137" />
+        <entry key="..\:/Android/Fiverr/ApkaKisan/ApkaKisan/app/src/main/res/layout/activity_create_order.xml" value="0.20416666666666666" />
         <entry key="..\:/Android/Fiverr/ApkaKisan/ApkaKisan/app/src/main/res/layout/activity_home.xml" value="0.20416666666666666" />
         <entry key="..\:/Android/Fiverr/ApkaKisan/ApkaKisan/app/src/main/res/layout/activity_login.xml" value="0.20416666666666666" />
         <entry key="..\:/Android/Fiverr/ApkaKisan/ApkaKisan/app/src/main/res/layout/activity_main.xml" value="0.20416666666666666" />
@@ -13,6 +19,7 @@
         <entry key="..\:/Android/Fiverr/ApkaKisan/ApkaKisan/app/src/main/res/layout/activity_splash.xml" value="0.20416666666666666" />
         <entry key="..\:/Android/Fiverr/ApkaKisan/ApkaKisan/app/src/main/res/layout/activity_verify_phone_no.xml" value="0.20416666666666666" />
         <entry key="..\:/Android/Fiverr/ApkaKisan/ApkaKisan/app/src/main/res/layout/commodity_list_item.xml" value="0.20416666666666666" />
+        <entry key="..\:/Android/Fiverr/ApkaKisan/ApkaKisan/app/src/main/res/layout/dialog_order_created.xml" value="0.20416666666666666" />
         <entry key="..\:/Android/Fiverr/ApkaKisan/ApkaKisan/app/src/main/res/layout/fragment_o_t_p_verification.xml" value="0.20416666666666666" />
         <entry key="..\:/Android/Fiverr/ApkaKisan/ApkaKisan/app/src/main/res/layout/item_commodity.xml" value="0.20416666666666666" />
         <entry key="..\:/Android/Fiverr/ApkaKisan/ApkaKisan/app/src/main/res/menu/menu_navigation.xml" value="0.20416666666666666" />

@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!--    common colors-->
+    <!--    general colors-->
     <color name="white">#FFFFFF</color>
+
+    <!--    app colors-->
+    <color name="green">#46AA42</color>
 
     <color name="colorPrimary">#46AA42</color>
     <color name="colorPrimaryDark">#006344</color>

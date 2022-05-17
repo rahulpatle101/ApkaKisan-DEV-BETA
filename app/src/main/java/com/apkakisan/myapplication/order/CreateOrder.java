@@ -17,7 +17,6 @@ import android.widget.TimePicker;
 import android.widget.Toast;
 
 import com.apkakisan.myapplication.R;
-import com.apkakisan.myapplication.SellOrderItem;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.auth.FirebaseAuth;
@@ -36,7 +35,13 @@ public class CreateOrder extends AppCompatActivity {
     Button sellOrderBtn;
     CheckBox orderCheckBox;
     TextView sellOrderHeading, totalEarningText;
-    TextInputLayout pickupDateTime, quantityKg, addressLocation, addressStreet, addressPincode, commodityDetail, orderUPIPhoneNo;
+    TextInputLayout pickupDateTime,
+            tiQuantity,
+            addressLocation,
+            addressStreet,
+            addressPincode,
+            commodityDetail,
+            orderUPIPhoneNo;
     TextInputEditText pickupDateTimeInput;
 
     FirebaseDatabase rootNode;
@@ -55,23 +60,22 @@ public class CreateOrder extends AppCompatActivity {
         sellOrderHeading = findViewById(R.id.sell_order_title);
         pickupDateTime = findViewById(R.id.pickup_date_time);
         pickupDateTimeInput = findViewById(R.id.pickup_date_time_input);
-        quantityKg = findViewById(R.id.quantity_kg);
+        tiQuantity = findViewById(R.id.tiQuantity);
         addressLocation = findViewById(R.id.address_location);
         addressStreet = findViewById(R.id.address_street);
         addressPincode = findViewById(R.id.address_pincode);
-        commodityDetail = findViewById(R.id.commodity_detail);
+        //commodityDetail = findViewById(R.id.commodity_detail);
         orderCheckBox = findViewById(R.id.order_check_box);
         orderUPIPhoneNo = findViewById(R.id.upi_phone_number);
         totalEarningText = findViewById(R.id.earning_price);
 
 
-        quantityKgInput = quantityKg.getEditText().getText().toString();
+        quantityKgInput = tiQuantity.getEditText().getText().toString();
 
 //        int totalEarning = Integer.parseInt(quantityKgInput);
 
 //        totalEarningText.setText(totalEarning);
 //        String totalEarningString = String.valueOf(totalEarning) ;
-
 
 
         pickupDateTimeInput.setInputType(InputType.TYPE_NULL);
@@ -82,14 +86,14 @@ public class CreateOrder extends AppCompatActivity {
 //        Sell Order details for Name of the Harvest Rs 100.00/kg" />
 //        sellOrderHeading.setText("Sell Order details for "+ commodity_name+" "+ apka_kisan_price);
 
-        Toast.makeText(this, "name is -" + commodity_name + "ak-price is - "+apka_kisan_price, Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "name is -" + commodity_name + "ak-price is - " + apka_kisan_price, Toast.LENGTH_SHORT).show();
 
         sellOrderBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Toast.makeText(CreateOrder.this, "clicked sell now", Toast.LENGTH_SHORT).show();
 //                Validate all the inputs
-                if(!validateQuantity() | !validatePinCode() | !validateLocation() | !validateStreet() | !validateDateTime() |!validateUPIPhoneNo() | !validateTermsAndCondition()){
+                if (!validateQuantity() | !validatePinCode() | !validateLocation() | !validateStreet() | !validateDateTime() | !validateUPIPhoneNo() | !validateTermsAndCondition()) {
 
                     return;
                 }
@@ -112,11 +116,11 @@ public class CreateOrder extends AppCompatActivity {
                 SimpleDateFormat now = new SimpleDateFormat("dd.MM.yyyy 'at' HH:mm:ss z");
                 String currentDateandTime = now.format(new Date());
 
-                SellOrderItem addNewOrder = new SellOrderItem(phoneNumber, generateUUID,"Order Ongoing", "Order Created", "Pending Order Review", currentDateandTime, currentDateandTime, "order_commodity_name", "order_commodity_quantity",  "order_commodity_apkakisan_rate", "order_commodity_mandi_rate", "order_commodity_total_sell_price", "order_commodity_pickup_date_time",  "order_commodity_detail", "order_upi_contact");
-                reference.child(generateUUID).setValue(addNewOrder);
+                //SellOrderItem addNewOrder = new SellOrderItem(phoneNumber, generateUUID,"Order Ongoing", "Order Created", "Pending Order Review", currentDateandTime, currentDateandTime, "order_commodity_name", "order_commodity_quantity",  "order_commodity_apkakisan_rate", "order_commodity_mandi_rate", "order_commodity_total_sell_price", "order_commodity_pickup_date_time",  "order_commodity_detail", "order_upi_contact");
+                //reference.child(generateUUID).setValue(addNewOrder);
 //                reference.add(addNewOrder).addOnsucc
 
-                Toast.makeText(CreateOrder.this, "aaya- "+generateUUID, Toast.LENGTH_SHORT).show();
+                Toast.makeText(CreateOrder.this, "aaya- " + generateUUID, Toast.LENGTH_SHORT).show();
 
 
                 Intent intent = new Intent(getApplicationContext(), OrdersActivity.class);
@@ -155,7 +159,7 @@ public class CreateOrder extends AppCompatActivity {
                         calendar.set(Calendar.HOUR_OF_DAY, hourOfDay);
                         calendar.set(Calendar.MINUTE, minute);
 
-                        SimpleDateFormat simpleDateFormat=new SimpleDateFormat("dd/MM/yyyy hh:mm aa");
+                        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy hh:mm aa");
                         String pickUpDateAndTime = simpleDateFormat.format(calendar.getTime()).toString();
 
                         pickupDateTimeInput.setText(pickUpDateAndTime);
@@ -173,14 +177,14 @@ public class CreateOrder extends AppCompatActivity {
 
 
     private Boolean validateQuantity() {
-        String val = quantityKg.getEditText().getText().toString();
+        String val = tiQuantity.getEditText().getText().toString();
 
         if (val.isEmpty()) {
-            quantityKg.setError("Quantity field cannot be empty");
+            tiQuantity.setError("Quantity field cannot be empty");
             return false;
         } else {
-            quantityKg.setError(null);
-            quantityKg.setErrorEnabled(false);
+            tiQuantity.setError(null);
+            tiQuantity.setErrorEnabled(false);
             return true;
         }
     }
@@ -225,7 +229,7 @@ public class CreateOrder extends AppCompatActivity {
     private Boolean validateUPIPhoneNo() {
         String temp = orderUPIPhoneNo.getEditText().getText().toString();
         if (!temp.isEmpty()) {
-            if (temp.length() == 10 ) {
+            if (temp.length() == 10) {
                 orderUPIPhoneNo.setError(null);
                 orderUPIPhoneNo.setErrorEnabled(false);
                 return true;
@@ -242,7 +246,7 @@ public class CreateOrder extends AppCompatActivity {
     private Boolean validatePinCode() {
         String temp = addressPincode.getEditText().getText().toString();
         if (!temp.isEmpty()) {
-            if (temp.length() == 6 ) {
+            if (temp.length() == 6) {
                 addressPincode.setError(null);
                 addressPincode.setErrorEnabled(false);
                 return true;
