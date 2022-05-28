@@ -1,4 +1,4 @@
-package com.apkakisan.myapplication.helpers
+package com.apkakisan.myapplication.utils
 
 import android.content.Context
 import androidx.appcompat.app.AlertDialog

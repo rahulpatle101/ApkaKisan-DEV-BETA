@@ -20,8 +20,8 @@ import android.widget.Button
 import com.apkakisan.myapplication.order.HomeActivity
 import android.widget.Toast
 import com.apkakisan.myapplication.UserHelperClass
-import com.apkakisan.myapplication.helpers.BuildTypeUtil
-import com.apkakisan.myapplication.helpers.DialogUtil
+import com.apkakisan.myapplication.utils.BuildTypeUtil
+import com.apkakisan.myapplication.utils.DialogUtil
 import com.google.android.material.textfield.TextInputEditText
 import java.util.concurrent.TimeUnit
 

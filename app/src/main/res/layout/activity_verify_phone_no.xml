@@ -104,7 +104,7 @@
             android:layout_marginTop="20dp"
             android:layout_marginEnd="16dp"
             android:layout_marginBottom="5dp"
-            android:background="@drawable/rounded_button"
+            android:background="@drawable/shape_bg_btn_green"
             android:backgroundTint="#46AA42"
             android:fontFamily="@font/poppins_regular"
             android:text="Verify"

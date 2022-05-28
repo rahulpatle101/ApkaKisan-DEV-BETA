@@ -17,7 +17,7 @@ import android.text.Editable
 import android.text.InputType
 import android.text.TextWatcher
 import android.widget.*
-import com.apkakisan.myapplication.Order
+import com.apkakisan.myapplication.network.responses.Order
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -37,9 +37,9 @@ class CreateOrderActivity : AppCompatActivity() {
     private lateinit var tvHarvestPrice: TextView
     private lateinit var tvTotalEarning: TextView
 
-    private var commodityNameArg: String = ""
-    private var mandiPrice: String = ""
-    private var apkaKisanPrice: String = ""
+    private var commodityName: String = ""
+    private var mandiPriceArg: Int = 0
+    private var apkaKisanPriceArg: Int = 0
 
     private var totalEarning = 0
 
@@ -47,9 +47,9 @@ class CreateOrderActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_create_order)
 
-        commodityNameArg = intent?.getStringExtra("commodity_name") ?: ""
-        mandiPrice = intent?.getStringExtra("mandiPrice") ?: ""
-        apkaKisanPrice = intent?.getStringExtra("commodity_apka_kisan_price") ?: ""
+        commodityName = intent?.getStringExtra("commodity_name") ?: ""
+        mandiPriceArg = intent?.getIntExtra("mandiPrice", 0) ?: 0
+        apkaKisanPriceArg = intent?.getIntExtra("commodity_apka_kisan_price", 0) ?: 0
 
         sellOrderHeading = findViewById(R.id.sell_order_title)
 
@@ -61,8 +61,7 @@ class CreateOrderActivity : AppCompatActivity() {
             override fun onTextChanged(char: CharSequence?, p1: Int, p2: Int, p3: Int) {
                 if (!char.isNullOrEmpty()) {
                     val quantity: Int = char.toString().trim().toInt()
-                    apkaKisanPrice = "105"
-                    totalEarning = apkaKisanPrice.toInt() * quantity
+                    totalEarning = apkaKisanPriceArg * quantity
                     tvHarvestPrice.text = "Rs. $totalEarning"
                     tvTotalEarning.text = "Rs. $totalEarning"
                 }
@@ -109,21 +108,20 @@ class CreateOrderActivity : AppCompatActivity() {
 
             val orderReference = FirebaseDatabase.getInstance().getReference("ORDERS")
             Order().apply {
-                phoneNo = user?.phoneNumber ?: ""
                 orderId = generateUUID
-                orderStatus = "Order Ongoing"
-                currentStep = "Order Created"
-                nextStep = "Pending Order Review"
-                createdDateTime = currentDateAndTime
-                modifiedDateTime = currentDateAndTime
-                commodityName = commodityNameArg
-                commodityQuantity = tiQuantity.editText?.text.toString().trim()
-                commodityApkakisaRate = apkaKisanPrice
-                commodityMandiRate = mandiPrice
-                commodityTotalSellPrice = totalEarning
-                commodityPickupDateTime = pickupDateTimeInput.text.toString()
-                commodityDetail = etCommoditydetail.editText?.text.toString()
-                upiContact = orderUPIPhoneNo.editText?.text.toString()
+                name = commodityName
+                quantity = tiQuantity.editText?.text.toString().trim().toInt()
+                apkakisanRate = apkaKisanPriceArg
+                mandiRate = mandiPriceArg
+                orderStatus = "Received"
+                totalSellPrice = totalEarning
+                inspectionDateTime = pickupDateTimeInput.text.toString().trim()
+                detail = etCommoditydetail.editText?.text.toString().trim()
+                phoneNo = user?.phoneNumber ?: ""
+                upiContact = orderUPIPhoneNo.editText?.text.toString().trim()
+                location = addressLocation.editText?.text.toString().trim()
+                street = addressStreet.editText?.text.toString().trim()
+                orderReceivedDateTime = currentDateAndTime
             }.let {
                 orderReference.child(generateUUID).setValue(it)
                 showSellOrderCreatedDialog()
@@ -157,8 +155,8 @@ class CreateOrderActivity : AppCompatActivity() {
         addressStreet.editText?.setText("")
         pinCode.editText?.setText("")
         etCommoditydetail.editText?.setText("")
-        tvHarvestPrice.setText("")
-        tvTotalEarning.setText("")
+        tvHarvestPrice.text = ""
+        tvTotalEarning.text = ""
         orderUPIPhoneNo.editText?.setText("")
         orderCheckBox.isChecked = false
     }

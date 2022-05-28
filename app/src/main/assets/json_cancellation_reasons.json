@@ -1,0 +1,14 @@
+[
+  {
+    "cancellation_reason": "Found a better price somewhere"
+  },
+  {
+    "cancellation_reason": "Want to change the payment method"
+  },
+  {
+    "cancellation_reason": "Wrongly placed sell order"
+  },
+  {
+    "cancellation_reason": "Etc"
+  }
+]

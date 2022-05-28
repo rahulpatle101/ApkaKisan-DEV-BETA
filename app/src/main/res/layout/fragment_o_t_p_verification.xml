@@ -79,7 +79,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:layout_marginBottom="5dp"
-        android:background="@drawable/rounded_button"
+        android:background="@drawable/shape_bg_btn_green"
         android:fontFamily="@font/poppins_regular"
         android:onClick="loginUser"
         android:text="Done"

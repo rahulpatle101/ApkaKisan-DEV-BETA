@@ -45,17 +45,17 @@ class HomeActivity : AppCompatActivity() {
             when (item.itemId) {
                 R.id.home -> return@OnItemSelectedListener true
                 R.id.orders -> {
-                    startActivity(Intent(applicationContext, OrdersActivity::class.java))
+                    startActivity(Intent(this, OrdersActivity::class.java))
                     overridePendingTransition(0, 0)
                     return@OnItemSelectedListener true
                 }
                 R.id.notifications -> {
-                    startActivity(Intent(applicationContext, NotificationsActivity::class.java))
+                    startActivity(Intent(this, NotificationsActivity::class.java))
                     overridePendingTransition(0, 0)
                     return@OnItemSelectedListener true
                 }
                 R.id.profile -> {
-                    startActivity(Intent(applicationContext, ProfileActivity::class.java))
+                    startActivity(Intent(this, ProfileActivity::class.java))
                     overridePendingTransition(0, 0)
                     return@OnItemSelectedListener true
                 }
@@ -99,24 +99,25 @@ class HomeActivity : AppCompatActivity() {
 
     private fun fetchCommodities() {
         progressBar.visibility = View.VISIBLE
-        RetrofitClient.getRetrofitClient().commodity_title.enqueue(object :
-            Callback<List<Commodity>?> {
-            override fun onResponse(
-                call: Call<List<Commodity>?>,
-                response: Response<List<Commodity>?>
-            ) {
-                if (response.isSuccessful && response.body() != null) {
-                    commodityItemList.addAll(response.body()!!)
-                    adapter.notifyDataSetChanged()
-                    progressBar.visibility = View.GONE
+        RetrofitClient.getRetrofitClient().commodity_title.enqueue(
+            object : Callback<List<Commodity>?> {
+                override fun onResponse(
+                    call: Call<List<Commodity>?>,
+                    response: Response<List<Commodity>?>
+                ) {
+                    if (response.isSuccessful && response.body() != null) {
+                        commodityItemList.addAll(response.body() ?: listOf())
+                        adapter.notifyDataSetChanged()
+                        progressBar.visibility = View.GONE
+                    }
                 }
-            }
 
-            override fun onFailure(call: Call<List<Commodity>?>, t: Throwable) {
-                progressBar.visibility = View.GONE
-                Toast.makeText(this@HomeActivity, "Error: " + t.message, Toast.LENGTH_SHORT).show()
-            }
-        })
+                override fun onFailure(call: Call<List<Commodity>?>, t: Throwable) {
+                    progressBar.visibility = View.GONE
+                    Toast.makeText(this@HomeActivity, "Error: " + t.message, Toast.LENGTH_SHORT)
+                        .show()
+                }
+            })
     }
 
     fun filter(s: String) {

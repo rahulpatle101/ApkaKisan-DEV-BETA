@@ -15,7 +15,7 @@ import android.os.Build
 import android.util.Pair
 import android.view.View
 import android.widget.*
-import com.apkakisan.myapplication.helpers.BuildTypeUtil
+import com.apkakisan.myapplication.utils.BuildTypeUtil
 import com.apkakisan.myapplication.helpers.hideKeyboard
 import com.google.android.material.textfield.TextInputEditText
 

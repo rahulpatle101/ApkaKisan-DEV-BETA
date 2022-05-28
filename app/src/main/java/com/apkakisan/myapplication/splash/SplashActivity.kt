@@ -13,7 +13,7 @@ import android.view.View
 import android.view.animation.AnimationUtils
 import android.widget.ImageView
 import com.apkakisan.myapplication.R
-import com.apkakisan.myapplication.helpers.BuildTypeUtil
+import com.apkakisan.myapplication.utils.BuildTypeUtil
 import com.apkakisan.myapplication.order.HomeActivity
 
 class SplashActivity : AppCompatActivity() {
