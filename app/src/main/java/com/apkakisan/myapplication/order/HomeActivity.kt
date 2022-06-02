@@ -85,12 +85,9 @@ class HomeActivity : AppCompatActivity() {
             commodityItemList,
             onClick = { commodity: Commodity, _: View, _: Int ->
                 val intent = Intent(this@HomeActivity, CreateOrderActivity::class.java)
-                intent.putExtra("commodity_name", commodity.title)
-                intent.putExtra("mandiPrice", commodity.mandi_price)
-                intent.putExtra(
-                    "commodity_apka_kisan_price",
-                    commodity.apkakisan_price
-                )
+                intent.putExtra("title", commodity.title)
+                intent.putExtra("mandi_price", commodity.mandiPrice)
+                intent.putExtra("apkakisan_price", commodity.apkakisanPrice)
                 startActivity(intent)
             }
         )

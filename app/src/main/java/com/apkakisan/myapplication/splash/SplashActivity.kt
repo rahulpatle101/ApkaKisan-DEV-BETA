@@ -33,9 +33,8 @@ class SplashActivity : AppCompatActivity() {
         image.animation = topAnim
         tvAppName.animation = topAnim
 
-        Handler().postDelayed({ //Call next screen
+        Handler().postDelayed({
             if (BuildTypeUtil.isDebug()) {
-//                openLoginActivity(image)
                 openHomeActivity()
             } else
                 openLoginActivity(image)

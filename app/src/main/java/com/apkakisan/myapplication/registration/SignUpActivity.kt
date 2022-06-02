@@ -15,6 +15,7 @@ import android.graphics.Color
 import android.view.View
 import android.widget.Button
 import com.apkakisan.myapplication.helpers.hideKeyboard
+import com.apkakisan.myapplication.utils.BuildTypeUtil
 import com.google.firebase.database.DatabaseError
 import java.text.SimpleDateFormat
 import java.util.*
@@ -63,12 +64,14 @@ class SignUpActivity : AppCompatActivity() {
             }
 
             //Get users Field values
-            val userEnteredPhoneNumber = regPhoneNo.editText?.text.toString().trim()
+            val userEnteredPhoneNumber = if (BuildTypeUtil.isDebugWithRegistration())
+                "+92${regPhoneNo.editText?.text.toString().trim()}"
+            else
+                "+1${regPhoneNo.editText?.text.toString().trim()}"
 
             //Set Firebase Root reference
             val reference = FirebaseDatabase.getInstance().getReference("USERS")
             val checkUser = reference.orderByChild("phoneNumber").equalTo(userEnteredPhoneNumber)
-
             checkUser.addListenerForSingleValueEvent(object : ValueEventListener {
                 override fun onDataChange(dataSnapshot: DataSnapshot) {
                     if (dataSnapshot.exists()) {
@@ -81,13 +84,12 @@ class SignUpActivity : AppCompatActivity() {
                         regPhoneNo.requestFocus()
                     } else {
                         val fullName = regName.editText?.text.toString()
-                        val phoneNo = regPhoneNo.editText?.text.toString()
                         val pinCode = regPinCode.editText?.text.toString()
                         val location = regLocation.editText?.text.toString()
 
                         val intent = Intent(applicationContext, VerifyPhoneNoActivity::class.java)
                         intent.putExtra("name", fullName)
-                        intent.putExtra("phoneNo", phoneNo)
+                        intent.putExtra("phoneNo", userEnteredPhoneNumber)
                         intent.putExtra("pinCode", pinCode)
                         intent.putExtra("location", location)
                         intent.putExtra("createdDate", currentDateAndTime)

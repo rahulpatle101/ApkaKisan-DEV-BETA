@@ -30,7 +30,7 @@ class CreateOrderActivity : AppCompatActivity() {
     private lateinit var tiQuantity: TextInputLayout
     private lateinit var addressLocation: TextInputLayout
     private lateinit var addressStreet: TextInputLayout
-    private lateinit var pinCode: TextInputLayout
+    private lateinit var etPinCode: TextInputLayout
     private lateinit var etCommoditydetail: TextInputLayout
     private lateinit var orderUPIPhoneNo: TextInputLayout
     private lateinit var pickupDateTimeInput: TextInputEditText
@@ -47,9 +47,9 @@ class CreateOrderActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_create_order)
 
-        commodityName = intent?.getStringExtra("commodity_name") ?: ""
-        mandiPriceArg = intent?.getIntExtra("mandiPrice", 0) ?: 0
-        apkaKisanPriceArg = intent?.getIntExtra("commodity_apka_kisan_price", 0) ?: 0
+        commodityName = intent?.getStringExtra("title") ?: ""
+        mandiPriceArg = intent?.getIntExtra("mandi_price", 0) ?: 0
+        apkaKisanPriceArg = intent?.getIntExtra("apkakisan_price", 0) ?: 0
 
         sellOrderHeading = findViewById(R.id.sell_order_title)
 
@@ -77,7 +77,7 @@ class CreateOrderActivity : AppCompatActivity() {
 
         addressLocation = findViewById(R.id.address_location)
         addressStreet = findViewById(R.id.address_street)
-        pinCode = findViewById(R.id.address_pincode)
+        etPinCode = findViewById(R.id.address_pincode)
         etCommoditydetail = findViewById(R.id.etCommoditydetail)
         tvHarvestPrice = findViewById(R.id.harvest_price)
         tvTotalEarning = findViewById(R.id.earning_price)
@@ -122,6 +122,7 @@ class CreateOrderActivity : AppCompatActivity() {
                 location = addressLocation.editText?.text.toString().trim()
                 street = addressStreet.editText?.text.toString().trim()
                 orderReceivedDateTime = currentDateAndTime
+                pincode = etPinCode.editText?.text.toString().trim()
             }.let {
                 orderReference.child(generateUUID).setValue(it)
                 showSellOrderCreatedDialog()
@@ -153,7 +154,7 @@ class CreateOrderActivity : AppCompatActivity() {
         pickupDateTime.editText?.setText("")
         addressLocation.editText?.setText("")
         addressStreet.editText?.setText("")
-        pinCode.editText?.setText("")
+        etPinCode.editText?.setText("")
         etCommoditydetail.editText?.setText("")
         tvHarvestPrice.text = ""
         tvTotalEarning.text = ""
@@ -262,18 +263,18 @@ class CreateOrderActivity : AppCompatActivity() {
     }
 
     private fun validatePinCode(): Boolean {
-        val temp = pinCode.editText?.text.toString()
+        val temp = etPinCode.editText?.text.toString()
         return if (temp.isNotEmpty()) {
             if (temp.length == 6) {
-                pinCode.error = null
-                pinCode.isErrorEnabled = false
+                etPinCode.error = null
+                etPinCode.isErrorEnabled = false
                 true
             } else {
-                pinCode.error = "Please provide a valid Pin Code."
+                etPinCode.error = "Please provide a valid Pin Code."
                 false
             }
         } else {
-            pinCode.error = "Pincode field cannot be empty"
+            etPinCode.error = "Pincode field cannot be empty"
             false
         }
     }

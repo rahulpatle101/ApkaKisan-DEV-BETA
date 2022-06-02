@@ -46,7 +46,7 @@ class LoginActivity : AppCompatActivity() {
         sloganText = findViewById(R.id.slogan_name)
         etPhoneNo = findViewById(R.id.login_phoneNo)
         val etPhoneNoNew = findViewById<TextInputEditText>(R.id.etPhoneNo)
-        if (BuildTypeUtil.isDebug())
+        if (BuildTypeUtil.isDebugWithRegistration())
             etPhoneNoNew.setText("3234364949")
         loginBtn = findViewById(R.id.login_btn)
     }
@@ -80,7 +80,10 @@ class LoginActivity : AppCompatActivity() {
 
     private fun isUser() {
         progressBar.visibility = View.VISIBLE
-        val userEnteredPhoneNumber = etPhoneNo.editText?.text.toString().trim()
+        val userEnteredPhoneNumber = if (BuildTypeUtil.isDebugWithRegistration())
+            "+92${etPhoneNo.editText?.text.toString().trim()}"
+        else
+            "+1${etPhoneNo.editText?.text.toString().trim()}"
 
         val reference = FirebaseDatabase.getInstance().getReference("USERS")
         val checkUser = reference.orderByChild("phoneNumber").equalTo(userEnteredPhoneNumber)

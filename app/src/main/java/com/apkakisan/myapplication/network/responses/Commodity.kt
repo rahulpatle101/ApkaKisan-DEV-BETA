@@ -1,7 +1,14 @@
 package com.apkakisan.myapplication.network.responses
 
+import com.google.gson.annotations.SerializedName
+
 class Commodity(
-    val title: String,
-    val mandi_price: String,
-    val apkakisan_price: String
+    @SerializedName("title")
+    val title: String = "",
+
+    @SerializedName("mandi_price")
+    val mandiPrice: Int = 0,
+
+    @SerializedName("apkakisan_price")
+    val apkakisanPrice: Int = 0
 )

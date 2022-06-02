@@ -44,8 +44,8 @@ class CommoditiesAdapter(
 
         fun bind(commodity: Commodity) {
             commodityTitle.text = commodity.title
-            commodityMandiPrice.text = commodity.mandi_price
-            commodityApkaKisanPrice.text = commodity.apkakisan_price
+            commodityMandiPrice.text = "Rs. ${commodity.mandiPrice.toString()}"
+            commodityApkaKisanPrice.text = "Rs. ${commodity.apkakisanPrice.toString()}"
 
             itemView.setOnClickListener {
                 onClick(commodity, it, adapterPosition)

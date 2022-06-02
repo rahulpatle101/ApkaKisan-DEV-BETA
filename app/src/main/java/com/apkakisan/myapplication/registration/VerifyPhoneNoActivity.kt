@@ -20,7 +20,6 @@ import android.widget.Button
 import com.apkakisan.myapplication.order.HomeActivity
 import android.widget.Toast
 import com.apkakisan.myapplication.UserHelperClass
-import com.apkakisan.myapplication.utils.BuildTypeUtil
 import com.apkakisan.myapplication.utils.DialogUtil
 import com.google.android.material.textfield.TextInputEditText
 import java.util.concurrent.TimeUnit
@@ -49,13 +48,8 @@ class VerifyPhoneNoActivity : AppCompatActivity() {
         createdDate = intent.getStringExtra("createdDate") ?: ""
         modifiedDate = intent.getStringExtra("modifiedDate") ?: ""
 
-        val phoneNoEnteredByTheUser: TextView = findViewById(R.id.phone_no_entered_by_user)
-        phoneNo = if (BuildTypeUtil.isDebug())
-            "+92$phoneNo"
-        else
-            "+1$phoneNo"
-
-        phoneNoEnteredByTheUser.text = phoneNo
+        val tvPhoneNoEnteredByTheUser: TextView = findViewById(R.id.phone_no_entered_by_user)
+        tvPhoneNoEnteredByTheUser.text = phoneNo
 
         progressBar = findViewById(R.id.progress_bar)
         verificationCodeEntered = findViewById(R.id.etOtp)

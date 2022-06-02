@@ -34,8 +34,8 @@ public class CommoditiesAdapterOld extends RecyclerView.Adapter<CommoditiesAdapt
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         holder.commodityTitle.setText(commodityItemList.get(position).getTitle());
-        holder.commodityMandiPrice.setText(commodityItemList.get(position).getMandi_price());
-        holder.commodityApkaKisanPrice.setText(commodityItemList.get(position).getApkakisan_price());
+        holder.commodityMandiPrice.setText(commodityItemList.get(position).getMandiPrice());
+        holder.commodityApkaKisanPrice.setText(commodityItemList.get(position).getApkakisanPrice());
     }
 
     @Override
