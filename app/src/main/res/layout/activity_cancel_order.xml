@@ -6,11 +6,15 @@
     android:layout_height="match_parent"
     tools:context=".order.CancelOrderActivity">
 
+    <include
+        android:id="@+id/toolbar"
+        layout="@layout/layout_toolbar" />
+
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="0dp"
         app:layout_constraintBottom_toTopOf="@+id/btnSubmit"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toBottomOf="@+id/toolbar">
 
         <androidx.appcompat.widget.LinearLayoutCompat
             android:layout_width="match_parent"
@@ -22,18 +26,6 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="16dp"
-                android:fontFamily="@font/poppins_regular"
-                android:text="@string/cancellation_reason"
-                android:textColor="@color/colorTextBlack"
-                android:textSize="16sp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <androidx.appcompat.widget.AppCompatTextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="30dp"
                 android:fontFamily="@font/poppins_regular"
                 android:text="@string/select_cancellation_reason"
                 android:textColor="@color/colorTextBlack"

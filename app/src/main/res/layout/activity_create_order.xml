@@ -5,13 +5,16 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:padding="20sp"
-    tools:context=".order.CreateOrder">
+    tools:context=".order.CreateOrderActivity">
+
+    <include layout="@layout/layout_toolbar" />
 
     <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/sell_order_title"
+        android:id="@+id/tvCommodityName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
         android:fontFamily="@font/poppins_semibold"
         android:text="Sell Order details for Name of the Harvest Rs 100.00/kg"
         android:textColor="@color/colorTextBlack"
@@ -25,14 +28,14 @@
         <androidx.appcompat.widget.LinearLayoutCompat
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:padding="16sp">
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/tiQuantity"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
                 android:hint="Quantity / kg">
 
                 <com.google.android.material.textfield.TextInputEditText

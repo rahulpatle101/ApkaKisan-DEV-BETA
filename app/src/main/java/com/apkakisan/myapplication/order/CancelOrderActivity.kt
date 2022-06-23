@@ -4,6 +4,7 @@ import android.app.Activity
 import android.os.Bundle
 import android.view.View
 import com.apkakisan.myapplication.BaseActivity
+import com.apkakisan.myapplication.R
 import com.apkakisan.myapplication.databinding.ActivityCancelOrderBinding
 import com.apkakisan.myapplication.helpers.DefaultItemDecorator
 import com.apkakisan.myapplication.helpers.JSONReaderHelper
@@ -26,6 +27,12 @@ class CancelOrderActivity : BaseActivity() {
         setContentView(binding.root)
 
         order = intent.getParcelableExtra(OBJ_ORDER) ?: Order()
+
+        binding.toolbar.ibBack.setOnClickListener {
+            finish()
+        }
+
+        binding.toolbar.tvTitle.text = getString(R.string.cancellation_reason)
 
         binding.btnSubmit.setOnClickListener {
             if (cancellationReason.isEmpty()) {

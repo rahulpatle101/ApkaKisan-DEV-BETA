@@ -34,7 +34,7 @@ public class CreateOrder extends AppCompatActivity {
     String apka_kisan_price;
     Button sellOrderBtn;
     CheckBox orderCheckBox;
-    TextView sellOrderHeading, totalEarningText;
+    TextView tvCommodityName, totalEarningText;
     TextInputLayout pickupDateTime,
             tiQuantity,
             addressLocation,
@@ -57,7 +57,7 @@ public class CreateOrder extends AppCompatActivity {
         setContentView(R.layout.activity_create_order);
 
         sellOrderBtn = findViewById(R.id.sell_order_btn);
-        sellOrderHeading = findViewById(R.id.sell_order_title);
+        tvCommodityName = findViewById(R.id.tvCommodityName);
         pickupDateTime = findViewById(R.id.pickup_date_time);
         pickupDateTimeInput = findViewById(R.id.pickup_date_time_input);
         tiQuantity = findViewById(R.id.tiQuantity);

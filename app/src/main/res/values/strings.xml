@@ -13,17 +13,20 @@
     <string name="title_notifications">Notifications</string>
     <string name="ok">OK</string>
     <string name="something_went_wrong">Something went wrong. Please try again later.</string>
-    <string name="sell_order_created">Sell Order Created!</string>
-    <string name="sell_order_created_congrats">Congratulations! You sell order has been successfully been created.
-        We will notify you when the order status will be processed. Additionally you can check details under
-    My Order Page.</string>
     <string name="create_another_sell_order">Create another sell order</string>
-    <string name="cancel">Cancel</string>
     <string name="my_orders">My Orders</string>
     <string name="active">Active</string>
     <string name="history">History</string>
     <string name="details">Details</string>
+
+    <!--    create order screen-->
+    <string name="selling_commodity">Sell Order details for %s Rs %s/kg</string>
+    <string name="sell_order_created">Sell Order Created!</string>
+    <string name="sell_order_created_congrats">Congratulations! You sell order has been successfully been created.
+        We will notify you when the order status will be processed. Additionally you can check details under My Order Page.</string>
     <string name="sell_again">Sell again</string>
+    <string name="cancel">Cancel</string>
+    <string name="done">Done</string>
 
     <!--    order details screen-->
     <string name="order_status">Order Status</string>
@@ -53,5 +56,4 @@
     <string name="wrongly_placed_sell_order">Wrongly placed sell order</string>
     <string name="etc">Etc</string>
     <string name="submit">Submit</string>
-
 </resources>

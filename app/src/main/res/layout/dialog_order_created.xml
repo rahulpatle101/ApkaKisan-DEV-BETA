@@ -41,10 +41,11 @@
             android:text="@string/create_another_sell_order"
             android:textAllCaps="false"
             android:textColor="@color/white"
+            android:visibility="gone"
             app:backgroundTint="@color/green" />
 
         <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/tvCancel"
+            android:id="@+id/tvDone"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
@@ -53,7 +54,7 @@
             android:layout_marginBottom="20dp"
             android:background="@drawable/rounded_button_outline"
             android:fontFamily="@font/poppins_regular"
-            android:text="@string/cancel"
+            android:text="@string/done"
             android:textAllCaps="false"
             android:textColor="@color/green" />
     </androidx.appcompat.widget.LinearLayoutCompat>
