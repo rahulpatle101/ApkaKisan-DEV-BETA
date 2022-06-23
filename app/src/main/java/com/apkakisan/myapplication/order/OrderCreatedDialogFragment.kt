@@ -11,7 +11,7 @@ import com.apkakisan.myapplication.R
 class OrderCreatedDialogFragment : DialogFragment() {
 
     private lateinit var onCreateAnotherOrderPressed: () -> Unit
-    private lateinit var onCancelPressed: () -> Unit
+    private lateinit var onDonePressed: () -> Unit
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -24,16 +24,13 @@ class OrderCreatedDialogFragment : DialogFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val tvCreateAnotherSellOrder =
-            view.findViewById<AppCompatButton>(R.id.tvCreateAnotherSellOrder)
-        tvCreateAnotherSellOrder.setOnClickListener {
+        view.findViewById<AppCompatButton>(R.id.tvCreateAnotherSellOrder).setOnClickListener {
             onCreateAnotherOrderPressed()
             dismiss()
         }
 
-        val tvCancel = view.findViewById<AppCompatButton>(R.id.tvCancel)
-        tvCancel.setOnClickListener {
-            onCancelPressed()
+        view.findViewById<AppCompatButton>(R.id.tvDone).setOnClickListener {
+            onDonePressed()
             dismiss()
         }
     }
@@ -42,8 +39,8 @@ class OrderCreatedDialogFragment : DialogFragment() {
         this.onCreateAnotherOrderPressed = onCreateAnotherOrderPressed
     }
 
-    fun onCancelPressed(onCancelPressed: () -> Unit) {
-        this.onCancelPressed = onCancelPressed
+    fun onCancelPressed(onDonePressed: () -> Unit) {
+        this.onDonePressed = onDonePressed
     }
 
     companion object {

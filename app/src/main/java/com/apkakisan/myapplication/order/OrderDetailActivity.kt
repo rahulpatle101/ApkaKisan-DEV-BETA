@@ -26,6 +26,12 @@ class OrderDetailActivity : BaseActivity() {
 
         order = intent.getParcelableExtra(OBJ_ORDER) ?: Order()
 
+        binding.toolbar.ibBack.setOnClickListener {
+            finish()
+        }
+
+        binding.toolbar.tvTitle.text = order.name
+
         binding.btnCancel.setOnClickListener {
             val intent = Intent(this, CancelOrderActivity::class.java)
             intent.putExtra(OBJ_ORDER, order)

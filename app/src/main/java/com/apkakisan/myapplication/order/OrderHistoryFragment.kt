@@ -99,9 +99,9 @@ class OrderHistoryFragment : BaseFragment() {
                 onDetailsBtnClick = { _: Order, _: View, _: Int -> },
                 onSellAgainBtnClick = { order: Order, _: View, _: Int ->
                     startActivity(Intent(activity, CreateOrderActivity::class.java).apply {
-                        putExtra("commodity_name", order.name)
-                        putExtra("mandiPrice", order.mandiRate)
-                        putExtra("commodity_apka_kisan_price", order.apkakisanRate)
+                        putExtra(CreateOrderActivity.TITLE, order.name)
+                        putExtra(CreateOrderActivity.MANDI_PRICE, order.mandiRate)
+                        putExtra(CreateOrderActivity.APKAKISAN_PRICE, order.apkakisanRate)
                     })
                 }
             )

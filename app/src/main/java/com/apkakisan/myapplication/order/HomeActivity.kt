@@ -16,13 +16,14 @@ import com.apkakisan.myapplication.ProfileActivity
 import com.apkakisan.myapplication.network.RetrofitClient
 import android.widget.Toast
 import androidx.appcompat.widget.SearchView
+import com.apkakisan.myapplication.BaseActivity
 import com.apkakisan.myapplication.helpers.DefaultItemDecorator
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import java.util.ArrayList
 
-class HomeActivity : AppCompatActivity() {
+class HomeActivity : BaseActivity() {
     private lateinit var recyclerView: RecyclerView
     private lateinit var progressBar: ProgressBar
 
@@ -84,11 +85,11 @@ class HomeActivity : AppCompatActivity() {
         adapter = CommoditiesAdapter(
             commodityItemList,
             onClick = { commodity: Commodity, _: View, _: Int ->
-                val intent = Intent(this@HomeActivity, CreateOrderActivity::class.java)
-                intent.putExtra("title", commodity.title)
-                intent.putExtra("mandi_price", commodity.mandiPrice)
-                intent.putExtra("apkakisan_price", commodity.apkakisanPrice)
-                startActivity(intent)
+                startActivity(Intent(this, CreateOrderActivity::class.java).apply {
+                    putExtra(CreateOrderActivity.TITLE, commodity.title)
+                    putExtra(CreateOrderActivity.MANDI_PRICE, commodity.mandiPrice)
+                    putExtra(CreateOrderActivity.APKAKISAN_PRICE, commodity.apkakisanPrice)
+                })
             }
         )
         recyclerView.adapter = adapter

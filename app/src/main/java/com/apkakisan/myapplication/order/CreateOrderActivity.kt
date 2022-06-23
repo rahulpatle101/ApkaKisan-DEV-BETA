@@ -1,13 +1,11 @@
 package com.apkakisan.myapplication.order
 
-import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.textfield.TextInputLayout
 import com.google.android.material.textfield.TextInputEditText
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.auth.FirebaseAuth
 import android.os.Bundle
 import com.apkakisan.myapplication.R
-import android.content.Intent
 import android.app.DatePickerDialog.OnDateSetListener
 import android.app.TimePickerDialog.OnTimeSetListener
 import android.app.TimePickerDialog
@@ -17,15 +15,16 @@ import android.text.Editable
 import android.text.InputType
 import android.text.TextWatcher
 import android.widget.*
+import com.apkakisan.myapplication.BaseActivity
 import com.apkakisan.myapplication.network.responses.Order
 import java.text.SimpleDateFormat
 import java.util.*
 
-class CreateOrderActivity : AppCompatActivity() {
+class CreateOrderActivity : BaseActivity() {
 
     private lateinit var sellOrderBtn: Button
     private lateinit var orderCheckBox: CheckBox
-    private lateinit var sellOrderHeading: TextView
+    private lateinit var tvCommodityName: TextView
     private lateinit var pickupDateTime: TextInputLayout
     private lateinit var tiQuantity: TextInputLayout
     private lateinit var addressLocation: TextInputLayout
@@ -51,7 +50,15 @@ class CreateOrderActivity : AppCompatActivity() {
         mandiPriceArg = intent?.getIntExtra("mandi_price", 0) ?: 0
         apkaKisanPriceArg = intent?.getIntExtra("apkakisan_price", 0) ?: 0
 
-        sellOrderHeading = findViewById(R.id.sell_order_title)
+        findViewById<ImageButton>(R.id.ibBack).setOnClickListener {
+            finish()
+        }
+
+        findViewById<TextView>(R.id.tvTitle).text = getString(R.string.home)
+
+        tvCommodityName = findViewById(R.id.tvCommodityName)
+        tvCommodityName.text =
+            String.format(getString(R.string.selling_commodity), commodityName, mandiPriceArg)
 
         tiQuantity = findViewById(R.id.tiQuantity)
         tiQuantity.editText?.addTextChangedListener(object : TextWatcher {
@@ -123,7 +130,7 @@ class CreateOrderActivity : AppCompatActivity() {
                 street = addressStreet.editText?.text.toString().trim()
                 orderReceivedDateTime = currentDateAndTime
                 pincode = etPinCode.editText?.text.toString().trim()
-            }.let {
+            }.also {
                 orderReference.child(generateUUID).setValue(it)
                 showSellOrderCreatedDialog()
             }
@@ -141,9 +148,9 @@ class CreateOrderActivity : AppCompatActivity() {
         orderCreatedDialogFragment.onCreateAnotherOrderPressed(onCreateAnotherOrderPressed = {
             resetForm()
         })
-        orderCreatedDialogFragment.onCancelPressed(onCancelPressed = {
-            val intent = Intent(this, OrdersActivity::class.java)
-            startActivity(intent)
+        orderCreatedDialogFragment.onCancelPressed(onDonePressed = {
+//            val intent = Intent(this, OrdersActivity::class.java)
+//            startActivity(intent)
             finish()
         })
         orderCreatedDialogFragment.show(supportFragmentManager, OrderCreatedDialogFragment.TAG)
@@ -289,5 +296,13 @@ class CreateOrderActivity : AppCompatActivity() {
             orderCheckBox.error = null
             true
         }
+    }
+
+    companion object {
+        const val TAG = "CreateOrderActivity"
+
+        const val TITLE = "title"
+        const val MANDI_PRICE = "mandi_price"
+        const val APKAKISAN_PRICE = "apkakisan_price"
     }
 }
