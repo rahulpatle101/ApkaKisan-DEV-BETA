@@ -128,7 +128,7 @@ public class Login extends AppCompatActivity {
         final String userEnteredPhoneNumber = login_phoneNo.getEditText().getText().toString().trim();
 //        final String userEnteredPassword = password.getEditText().getText().toString().trim();
         //Set Firebase Root reference
-        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("USERS");
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("User");
         Query checkUser = reference.orderByChild("phoneNumber").equalTo(userEnteredPhoneNumber);
         checkUser.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override

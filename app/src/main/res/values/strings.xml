@@ -5,14 +5,13 @@
     <string name="termsandconditions"> I accept the <u>Terms of Use</u> and <u>Privacy Policy </u> </string>
     <string name="home">Home</string>
     <string name="orders">Orders</string>
-    <string name="notifications">Notifications</string>
-    <string name="profile">Profile</string>
     <string name="title_activity_main_container">MainContainer</string>
     <string name="title_home">Home</string>
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
     <string name="ok">OK</string>
     <string name="something_went_wrong">Something went wrong. Please try again later.</string>
+    <string name="coming_soon">Coming soon!</string>
     <string name="create_another_sell_order">Create another sell order</string>
     <string name="my_orders">My Orders</string>
     <string name="active">Active</string>
@@ -56,4 +55,34 @@
     <string name="wrongly_placed_sell_order">Wrongly placed sell order</string>
     <string name="etc">Etc</string>
     <string name="submit">Submit</string>
+    <string name="no_result_found">No result found.</string>
+
+    <!--    notifications screen-->
+    <string name="notification">Notification</string>
+    <string name="notification_settings">Notification Settings</string>
+
+    <!--    profile screen-->
+    <string name="profile">Profile</string>
+    <string name="name">Name</string>
+    <string name="phone">Phone </string>
+    <string name="edit_profile">Edit Profile</string>
+    <string name="customer_service">Customer Service</string>
+    <string name="logout">Logout</string>
+    <string name="address">Address</string>
+    <string name="save">Save</string>
+    <string name="profile_updated">Profile Updated!</string>
+    <string name="profile_updated_successfully">You have successfully updated your profile.</string>
+    <string name="empty_name">Name must not be empty</string>
+    <string name="invalid_phone">Invalid phone number</string>
+    <string name="empty_phone">Phone number must not be empty</string>
+    <string name="empty_address">Address must not be empty</string>
+    <string name="image_upload_failed">Image upload failed.</string>
+
+    <!--    customer service strings-->
+    <string name="have_question">If you have any questions or queries a member of staff will always be happy to help.
+    Provide the details about your query in the form below.</string>
+    <string name="message">Message</string>
+    <string name="empty_message">Message must not be empty</string>
+    <string name="case_created">Customer Service\ncase created!</string>
+    <string name="case_received">We have received your case. A member from our staff will be in touch with you shortly.</string>
 </resources>

@@ -69,7 +69,8 @@
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/poppins_regular"
                     android:inputType="phone"
-                    android:textColor="#92929D" />
+                    android:maxLength="10"
+                    android:textColor="@color/colorTextBlack" />
 
             </com.google.android.material.textfield.TextInputLayout>
 

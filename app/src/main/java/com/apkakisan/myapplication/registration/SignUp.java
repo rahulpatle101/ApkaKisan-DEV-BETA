@@ -45,7 +45,7 @@ public class SignUp extends AppCompatActivity {
 
         //Firebase Instantiation
 //        rootNode = FirebaseDatabase.getInstance();
-//        reference = rootNode.getReference("users");
+//        reference = rootNode.getReference("User");
 
         //Hooks to all xml elements in activity_sign_up.xml
         regName = findViewById(R.id.reg_name);
@@ -62,7 +62,7 @@ public class SignUp extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 rootNode = FirebaseDatabase.getInstance();
-                reference = rootNode.getReference("USERS");
+                reference = rootNode.getReference("User");
 
                 SimpleDateFormat now = new SimpleDateFormat("dd.MM.yyyy 'at' HH:mm:ss z");
                 String currentDateandTime = now.format(new Date());
@@ -77,7 +77,7 @@ public class SignUp extends AppCompatActivity {
                 //Get users Field values
                 final String userEnteredPhoneNumber = regPhoneNo.getEditText().getText().toString().trim();
                 //Set Firebase Root reference
-                DatabaseReference reference = FirebaseDatabase.getInstance().getReference("USERS");
+                DatabaseReference reference = FirebaseDatabase.getInstance().getReference("User");
                 Query checkUser = reference.orderByChild("phoneNumber").equalTo(userEnteredPhoneNumber);
                 checkUser.addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override

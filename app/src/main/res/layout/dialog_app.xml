@@ -12,14 +12,18 @@
         android:orientation="vertical">
 
         <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
-            android:fontFamily="@font/poppins_semibold"
-            android:text="@string/sell_order_created" />
+            android:fontFamily="@font/poppins_regular"
+            android:gravity="center_horizontal"
+            android:text="@string/profile_updated"
+            android:textColor="@color/colorTextBlack"
+            android:textSize="@dimen/_18sp" />
 
         <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/sell"
+            android:id="@+id/tvMessage"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
@@ -27,29 +31,16 @@
             android:layout_marginEnd="16dp"
             android:fontFamily="@font/poppins_regular"
             android:gravity="center"
-            android:text="@string/sell_order_created_congrats" />
-
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/tvCreateAnotherSellOrder"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="20dp"
-            android:layout_marginEnd="16dp"
-            android:background="@drawable/shape_bg_btn_green"
-            android:fontFamily="@font/poppins_regular"
-            android:text="@string/create_another_sell_order"
-            android:textAllCaps="false"
-            android:textColor="@color/white"
-            android:visibility="gone"
-            app:backgroundTint="@color/green" />
+            android:text="@string/profile_updated_successfully"
+            android:textColor="@color/colorGrey"
+            android:textSize="@dimen/_12sp" />
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/tvDone"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="@dimen/_25dp"
             android:layout_marginEnd="16dp"
             android:layout_marginBottom="20dp"
             android:background="@drawable/rounded_button_outline"

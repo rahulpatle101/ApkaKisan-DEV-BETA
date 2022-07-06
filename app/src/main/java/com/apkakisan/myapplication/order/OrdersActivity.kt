@@ -7,10 +7,9 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.navigation.NavigationBarView
 import android.content.Intent
 import android.widget.TextView
-import androidx.appcompat.widget.AppCompatTextView
 import androidx.core.content.ContextCompat
 import com.apkakisan.myapplication.NotificationsActivity
-import com.apkakisan.myapplication.ProfileActivity
+import com.apkakisan.myapplication.profile.ProfileActivity
 import com.apkakisan.myapplication.databinding.ActivityOrdersBinding
 import com.apkakisan.myapplication.helpers.replaceFragment
 import com.google.android.material.tabs.TabLayout

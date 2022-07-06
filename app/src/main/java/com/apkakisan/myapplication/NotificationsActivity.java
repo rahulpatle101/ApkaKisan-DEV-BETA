@@ -9,6 +9,7 @@ import android.view.MenuItem;
 
 import com.apkakisan.myapplication.order.HomeActivity;
 import com.apkakisan.myapplication.order.OrdersActivity;
+import com.apkakisan.myapplication.profile.ProfileActivity;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 

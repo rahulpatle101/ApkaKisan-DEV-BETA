@@ -6,11 +6,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.apkakisan.myapplication.BaseFragment
-import com.apkakisan.myapplication.R
 import com.apkakisan.myapplication.databinding.FragmentOrderBinding
 import com.apkakisan.myapplication.helpers.DefaultItemDecorator
-import com.apkakisan.myapplication.helpers.OBJ_ORDER
-import com.apkakisan.myapplication.helpers.showShortToast
 import com.apkakisan.myapplication.network.responses.Order
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
@@ -23,7 +20,7 @@ class OrderHistoryFragment : BaseFragment() {
 
     private val orderList = mutableListOf<Order>()
 
-    val reference = FirebaseDatabase.getInstance().getReference("ORDERS")
+    val reference = FirebaseDatabase.getInstance().getReference("Orders")
     private var adapter: OrderAdapter? = null
 
     override fun onCreateView(
@@ -68,7 +65,7 @@ class OrderHistoryFragment : BaseFragment() {
 
         override fun onCancelled(error: DatabaseError) {
             binding.layoutLoader.loader.visibility = View.GONE
-            somethingWentWrong()
+            showErrorView()
         }
     }
 
@@ -86,7 +83,7 @@ class OrderHistoryFragment : BaseFragment() {
 
         override fun onCancelled(error: DatabaseError) {
             binding.layoutLoader.loader.visibility = View.GONE
-            somethingWentWrong()
+            showErrorView()
         }
     }
 

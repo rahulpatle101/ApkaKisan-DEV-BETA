@@ -15,8 +15,11 @@ import android.os.Build
 import android.util.Pair
 import android.view.View
 import android.widget.*
+import com.apkakisan.myapplication.User
+import com.apkakisan.myapplication.helpers.USER
 import com.apkakisan.myapplication.utils.BuildTypeUtil
 import com.apkakisan.myapplication.helpers.hideKeyboard
+import com.apkakisan.myapplication.network.responses.Order
 import com.google.android.material.textfield.TextInputEditText
 
 class LoginActivity : AppCompatActivity() {
@@ -85,49 +88,24 @@ class LoginActivity : AppCompatActivity() {
         else
             "+1${etPhoneNo.editText?.text.toString().trim()}"
 
-        val reference = FirebaseDatabase.getInstance().getReference("USERS")
+        val reference = FirebaseDatabase.getInstance().getReference("User")
         val checkUser = reference.orderByChild("phoneNumber").equalTo(userEnteredPhoneNumber)
         checkUser.addListenerForSingleValueEvent(object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
+                progressBar.visibility = View.GONE
                 if (dataSnapshot.exists()) {
                     etPhoneNo.error = null
                     etPhoneNo.isErrorEnabled = false
-                    progressBar.visibility = View.GONE
-                    val nameFromDB =
-                        dataSnapshot.child(userEnteredPhoneNumber).child("fullName").getValue(
-                            String::class.java
-                        )
-                    val phoneNoFromDB =
-                        dataSnapshot.child(userEnteredPhoneNumber).child("phoneNumber").getValue(
-                            String::class.java
-                        )
-                    val pinCode =
-                        dataSnapshot.child(userEnteredPhoneNumber).child("pinCode").getValue(
-                            String::class.java
-                        )
-                    val createdDate =
-                        dataSnapshot.child(userEnteredPhoneNumber).child("createdDate").getValue(
-                            String::class.java
-                        )
-                    val modifiedDate =
-                        dataSnapshot.child(userEnteredPhoneNumber).child("modifiedDate").getValue(
-                            String::class.java
-                        )
-                    val location =
-                        dataSnapshot.child(userEnteredPhoneNumber).child("location").getValue(
-                            String::class.java
-                        )
-                    val intent = Intent(applicationContext, VerifyPhoneNoActivity::class.java)
-                    intent.putExtra("name", nameFromDB)
-                    intent.putExtra("phoneNo", phoneNoFromDB)
-                    intent.putExtra("pinCode", pinCode)
-                    intent.putExtra("location", location)
-                    intent.putExtra("createdDate", createdDate)
-                    intent.putExtra("modifiedDate", modifiedDate)
+
+                    var user: User? = null
+                    for (userSnapshot in dataSnapshot.children)
+                        user = userSnapshot.getValue(User::class.java)
+
+                    val intent = Intent(this@LoginActivity, VerifyPhoneNoActivity::class.java)
+                    intent.putExtra(USER, user)
                     startActivity(intent)
                 } else {
-                    progressBar.visibility = View.GONE
-                    etPhoneNo.error = "No such User exist. Please Sign up for a new account"
+                    etPhoneNo.error = "No such user exist. Please Sign up for a new account"
                     etPhoneNo.requestFocus()
                 }
             }

@@ -13,6 +13,9 @@ object DateTimeUtil {
     const val DF_ORDER_NEW = "dd MMM yyyy"
     const val DF_ORDER_DETAIL_STATUS_NEW = "hh:mm a"
 
+    const val DF_NOTIFICATION_OLD = "dd.MM.yyyy 'at' HH:mm:ss"
+    const val DF_NOTIFICATION_NEW = "dd MMM yyyy hh:mm a"
+
     fun convertUtcToDate(utcTimeStamp: String, oldFormat: String, newFormat: String): String? {
         val oldFormatter = SimpleDateFormat(oldFormat, Locale.getDefault())
         oldFormatter.timeZone = TimeZone.getTimeZone("UTC")

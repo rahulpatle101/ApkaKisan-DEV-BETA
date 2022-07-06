@@ -1,6 +1,5 @@
 package com.apkakisan.myapplication.order
 
-import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
 import android.widget.ProgressBar
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -11,13 +10,13 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.navigation.NavigationBarView
 import android.content.Intent
 import android.view.View
-import com.apkakisan.myapplication.NotificationsActivity
-import com.apkakisan.myapplication.ProfileActivity
+import com.apkakisan.myapplication.profile.ProfileActivity
 import com.apkakisan.myapplication.network.RetrofitClient
 import android.widget.Toast
 import androidx.appcompat.widget.SearchView
 import com.apkakisan.myapplication.BaseActivity
 import com.apkakisan.myapplication.helpers.DefaultItemDecorator
+import com.apkakisan.myapplication.notifications.NotificationActivity
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -51,7 +50,7 @@ class HomeActivity : BaseActivity() {
                     return@OnItemSelectedListener true
                 }
                 R.id.notifications -> {
-                    startActivity(Intent(this, NotificationsActivity::class.java))
+                    startActivity(Intent(this, NotificationActivity::class.java))
                     overridePendingTransition(0, 0)
                     return@OnItemSelectedListener true
                 }

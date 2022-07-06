@@ -15,7 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.apkakisan.myapplication.network.responses.Commodity;
 import com.apkakisan.myapplication.NotificationsActivity;
-import com.apkakisan.myapplication.ProfileActivity;
+import com.apkakisan.myapplication.profile.ProfileActivity;
 import com.apkakisan.myapplication.R;
 import com.apkakisan.myapplication.network.RetrofitClient;
 import com.google.android.material.bottomnavigation.BottomNavigationView;

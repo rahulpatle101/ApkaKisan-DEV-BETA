@@ -14,7 +14,10 @@ import android.content.Intent
 import android.graphics.Color
 import android.view.View
 import android.widget.Button
+import com.apkakisan.myapplication.User
+import com.apkakisan.myapplication.helpers.USER
 import com.apkakisan.myapplication.helpers.hideKeyboard
+import com.apkakisan.myapplication.helpers.showShortToast
 import com.apkakisan.myapplication.utils.BuildTypeUtil
 import com.google.firebase.database.DatabaseError
 import java.text.SimpleDateFormat
@@ -48,6 +51,15 @@ class SignUpActivity : AppCompatActivity() {
         regLocation = findViewById(R.id.reg_location)
         checkBox = findViewById(R.id.checkBox)
 
+        if (BuildTypeUtil.isDebugWithRegistration()) {
+            regName.editText?.setText("Muhammad Omer Saleem")
+            regPhoneNo.editText?.setText("3234364949")
+            regPhoneNoConfirmation.editText?.setText("3234364949")
+            regPinCode.editText?.setText("123456")
+            regLocation.editText?.setText("Lahore, Pakistan")
+            checkBox.isChecked = true
+        }
+
         regBtn = findViewById(R.id.reg_btn)
         regBtn.setOnClickListener(View.OnClickListener {
             hideKeyboard()
@@ -63,47 +75,43 @@ class SignUpActivity : AppCompatActivity() {
                 return@OnClickListener
             }
 
-            //Get users Field values
-            val userEnteredPhoneNumber = if (BuildTypeUtil.isDebugWithRegistration())
-                "+92${regPhoneNo.editText?.text.toString().trim()}"
-            else
-                "+1${regPhoneNo.editText?.text.toString().trim()}"
+            val userEnteredPhoneNumber =
+                if (BuildTypeUtil.isDebug() || BuildTypeUtil.isDebugWithRegistration())
+                    "+92${regPhoneNo.editText?.text.toString().trim()}"
+                else
+                    "+91${regPhoneNo.editText?.text.toString().trim()}"
 
             //Set Firebase Root reference
-            val reference = FirebaseDatabase.getInstance().getReference("USERS")
-            val checkUser = reference.orderByChild("phoneNumber").equalTo(userEnteredPhoneNumber)
+            val reference = FirebaseDatabase.getInstance().getReference("User")
+            val checkUser = reference.child("phoneNumber").equalTo(userEnteredPhoneNumber)
             checkUser.addListenerForSingleValueEvent(object : ValueEventListener {
                 override fun onDataChange(dataSnapshot: DataSnapshot) {
                     if (dataSnapshot.exists()) {
-                        Toast.makeText(
-                            this@SignUpActivity,
-                            "User exist. Please Sign in.",
-                            Toast.LENGTH_SHORT
-                        ).show()
-                        regPhoneNo.error = "User exist. Please Sign in."
+                        regPhoneNo.error = "User already exists. Please Sign in."
                         regPhoneNo.requestFocus()
                     } else {
-                        val fullName = regName.editText?.text.toString()
-                        val pinCode = regPinCode.editText?.text.toString()
-                        val location = regLocation.editText?.text.toString()
+                        val fullNameValue = regName.editText?.text.toString()
+                        val pinCodeValue = regPinCode.editText?.text.toString()
+                        val locationValue = regLocation.editText?.text.toString()
 
-                        val intent = Intent(applicationContext, VerifyPhoneNoActivity::class.java)
-                        intent.putExtra("name", fullName)
-                        intent.putExtra("phoneNo", userEnteredPhoneNumber)
-                        intent.putExtra("pinCode", pinCode)
-                        intent.putExtra("location", location)
-                        intent.putExtra("createdDate", currentDateAndTime)
-                        intent.putExtra("modifiedDate", currentDateAndTime)
+                        val user = User().apply {
+                            userId = UUID.randomUUID().toString()
+                            fullName = fullNameValue
+                            phoneNumber = userEnteredPhoneNumber
+                            pinCode = pinCodeValue
+                            location = locationValue
+                            createdDate = currentDateAndTime
+                            modifiedDate = currentDateAndTime
+                        }
+
+                        val intent = Intent(this@SignUpActivity, VerifyPhoneNoActivity::class.java)
+                        intent.putExtra(USER, user)
                         startActivity(intent)
                     }
                 }
 
                 override fun onCancelled(databaseError: DatabaseError) {
-                    Toast.makeText(
-                        this@SignUpActivity,
-                        "------->>> Database Error: Line 120 in SignupJava, on data changed else condition",
-                        Toast.LENGTH_SHORT
-                    ).show()
+                    showShortToast("------->>> Database Error: Line 120 in SignupJava, on data changed else condition")
                 }
             })
         })

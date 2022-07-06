@@ -4,7 +4,6 @@ import androidx.appcompat.app.AppCompatActivity
 import android.widget.TextView
 import android.widget.ProgressBar
 import com.google.firebase.database.FirebaseDatabase
-import com.google.firebase.database.DatabaseReference
 import android.os.Bundle
 import com.apkakisan.myapplication.R
 import com.google.firebase.auth.FirebaseAuth
@@ -17,42 +16,45 @@ import com.google.firebase.FirebaseException
 import android.content.Intent
 import android.view.View
 import android.widget.Button
+import androidx.lifecycle.lifecycleScope
 import com.apkakisan.myapplication.order.HomeActivity
-import android.widget.Toast
-import com.apkakisan.myapplication.UserHelperClass
+import com.apkakisan.myapplication.User
+import com.apkakisan.myapplication.helpers.LocalStore
+import com.apkakisan.myapplication.helpers.USER
+import com.apkakisan.myapplication.helpers.showShortToast
+import com.apkakisan.myapplication.network.FirebaseDataSource
+import com.apkakisan.myapplication.utils.BuildTypeUtil
 import com.apkakisan.myapplication.utils.DialogUtil
 import com.google.android.material.textfield.TextInputEditText
+import kotlinx.coroutines.launch
+import org.koin.android.ext.android.inject
+import org.koin.androidx.viewmodel.ext.android.viewModel
+import java.lang.Exception
 import java.util.concurrent.TimeUnit
 
 class VerifyPhoneNoActivity : AppCompatActivity() {
 
     private lateinit var verificationCodeEntered: TextInputEditText
+
+    private val verifyPhoneNoViewModel: VerifyPhoneNoViewModel by viewModel()
+    private lateinit var user: User
     private lateinit var progressBar: ProgressBar
 
-    private var phoneNo: String = ""
-    private var name: String = ""
-    private var pinCode: String = ""
-    private var location: String = ""
-    private var createdDate: String = ""
-    private var modifiedDate: String = ""
     private var verificationCodeBySystem: String = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_verify_phone_no)
 
-        name = intent.getStringExtra("name") ?: ""
-        phoneNo = intent.getStringExtra("phoneNo") ?: ""
-        pinCode = intent.getStringExtra("pinCode") ?: ""
-        location = intent.getStringExtra("location") ?: ""
-        createdDate = intent.getStringExtra("createdDate") ?: ""
-        modifiedDate = intent.getStringExtra("modifiedDate") ?: ""
+        user = intent?.getParcelableExtra(USER)!!
 
         val tvPhoneNoEnteredByTheUser: TextView = findViewById(R.id.phone_no_entered_by_user)
-        tvPhoneNoEnteredByTheUser.text = phoneNo
+        tvPhoneNoEnteredByTheUser.text = user.phoneNumber
 
         progressBar = findViewById(R.id.progress_bar)
         verificationCodeEntered = findViewById(R.id.etOtp)
+        if (BuildTypeUtil.isDebug() || BuildTypeUtil.isDebugWithRegistration())
+            verificationCodeEntered.setText("123456")
 
         val tvResendOtp = findViewById<TextView>(R.id.tvResendOtp)
         tvResendOtp.setOnClickListener { sendVerificationCodeToUser() }
@@ -75,9 +77,8 @@ class VerifyPhoneNoActivity : AppCompatActivity() {
     }
 
     private fun sendVerificationCodeToUser() {
-        val mAuth = FirebaseAuth.getInstance()
-        val options = PhoneAuthOptions.newBuilder(mAuth)
-            .setPhoneNumber(phoneNo) // Phone number to verify
+        val options = PhoneAuthOptions.newBuilder(FirebaseAuth.getInstance())
+            .setPhoneNumber(user.phoneNumber!!) // Phone number to verify
             .setTimeout(60L, TimeUnit.SECONDS) // Timeout and unit
             .setActivity(this) // Activity (for callback binding)
             .setCallbacks(mCallbacks) // OnVerificationStateChangedCallbacks
@@ -109,39 +110,25 @@ class VerifyPhoneNoActivity : AppCompatActivity() {
     private fun verifyCode(codeByUser: String) {
         if (verificationCodeBySystem.isNotEmpty()) {
             progressBar.visibility = View.VISIBLE
-            val credential = PhoneAuthProvider.getCredential(verificationCodeBySystem, codeByUser)
+            val credential = PhoneAuthProvider.getCredential(
+                verificationCodeBySystem,
+                codeByUser
+            )
             signInTheUserByCredentials(credential)
         } else
             DialogUtil.alert(this, getString(R.string.something_went_wrong))
     }
 
     private fun signInTheUserByCredentials(credential: PhoneAuthCredential) {
-        val firebaseAuth = FirebaseAuth.getInstance()
-        firebaseAuth.signInWithCredential(credential)
+        FirebaseAuth.getInstance().signInWithCredential(credential)
             .addOnCompleteListener(this@VerifyPhoneNoActivity) { task ->
                 if (task.isSuccessful) {
-                    //Perform Your required action here to either let the user sign In
-                    // or Create a User Account as created below
-                    val rootNode: FirebaseDatabase = FirebaseDatabase.getInstance()
-                    val reference: DatabaseReference = rootNode.getReference("USERS")
-                    val addNewUser = UserHelperClass(
-                        name,
-                        location,
-                        phoneNo,
-                        pinCode,
-                        createdDate,
-                        modifiedDate
-                    )
-                    reference.child(phoneNo).setValue(addNewUser)
-                    val intent = Intent(applicationContext, HomeActivity::class.java)
+                    LocalStore.user = user
+                    val intent = Intent(this@VerifyPhoneNoActivity, HomeActivity::class.java)
                     intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
                     startActivity(intent)
                 } else {
-                    Toast.makeText(
-                        this@VerifyPhoneNoActivity,
-                        "------>>>ERROR- Failing in adding user to the db VerifyPhone.java" + task.exception?.message,
-                        Toast.LENGTH_SHORT
-                    ).show()
+                    showShortToast("------>>>ERROR- Failing in adding user to the db VerifyPhone.java" + task.exception?.message)
                 }
             }
     }
