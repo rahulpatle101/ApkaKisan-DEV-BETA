@@ -12,24 +12,25 @@ class EditProfileRepository(
     suspend fun uploadPhoto(
         userId: String,
         photoUri: Uri
-    ): String {
+    ): Boolean {
         val photoUrl = firebaseDataSource.uploadPhoto(userId, photoUri)
-        if (photoUrl.isNotEmpty())
-            LocalStore.user?.photo = photoUrl
-        return photoUrl
+        var isPhotoUpdated = false
+        if (photoUrl.isNotEmpty()) {
+            isPhotoUpdated = firebaseDataSource.updateUserPhoto(userId, photoUrl)
+            if (isPhotoUpdated) LocalStore.user?.photo = photoUrl
+        }
+        return isPhotoUpdated
     }
 
     suspend fun updateUser(
         userId: String,
-        photo: String,
         name: String,
         phoneNo: String,
         address: String
     ): Boolean {
-        val isUpdated = firebaseDataSource.updateUser(userId, photo, name, phoneNo, address)
+        val isUpdated = firebaseDataSource.updateUser(userId, name, phoneNo, address)
         if (isUpdated)
             LocalStore.user?.let {
-                it.photo = photo
                 it.fullName = name
                 it.phoneNumber = phoneNo
                 it.location = address

@@ -51,12 +51,12 @@ class EditProfileViewModel(
 
     fun uploadPhoto(photoUri: Uri) = viewModelScope.launch {
         _uiState.emit(EditProfileUiState.PhotoUploading)
-        val photoUrl = repository.uploadPhoto(user.userId, photoUri)
-        if (photoUrl.isEmpty())
-            _uiState.emit(EditProfileUiState.PhotoUploadFailed)
-        else {
-            photo = photoUrl
+        val isPhotoUpdated = repository.uploadPhoto(user.userId, photoUri)
+        if (isPhotoUpdated) {
+            photo = LocalStore.user?.photo!!
             _uiState.emit(EditProfileUiState.PhotoUploadSuccess)
+        } else {
+            _uiState.emit(EditProfileUiState.PhotoUploadFailed)
         }
     }
 
@@ -70,12 +70,14 @@ class EditProfileViewModel(
 
         val isUpdated = repository.updateUser(
             user.userId,
-            photo,
             name,
             phone,
             address
         )
-        if (isUpdated) _uiState.emit(EditProfileUiState.ProfileUpdated)
+        if (isUpdated)
+            _uiState.emit(EditProfileUiState.ProfileUpdateSuccess)
+        else
+            _uiState.emit(EditProfileUiState.ProfileUpdateFailed)
     }
 }
 
@@ -89,5 +91,6 @@ sealed class EditProfileUiState {
     object EmptyAddress : EditProfileUiState()
     object DataValidated : EditProfileUiState()
     object ProfileUpdating : EditProfileUiState()
-    object ProfileUpdated : EditProfileUiState()
+    object ProfileUpdateSuccess : EditProfileUiState()
+    object ProfileUpdateFailed : EditProfileUiState()
 }

@@ -26,6 +26,7 @@ import com.apkakisan.myapplication.network.FirebaseDataSource
 import com.apkakisan.myapplication.utils.BuildTypeUtil
 import com.apkakisan.myapplication.utils.DialogUtil
 import com.google.android.material.textfield.TextInputEditText
+import com.google.firebase.database.DatabaseReference
 import kotlinx.coroutines.launch
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -123,6 +124,8 @@ class VerifyPhoneNoActivity : AppCompatActivity() {
         FirebaseAuth.getInstance().signInWithCredential(credential)
             .addOnCompleteListener(this@VerifyPhoneNoActivity) { task ->
                 if (task.isSuccessful) {
+                    FirebaseDatabase.getInstance().getReference("User").child(user.userId)
+                        .setValue(user)
                     LocalStore.user = user
                     val intent = Intent(this@VerifyPhoneNoActivity, HomeActivity::class.java)
                     intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK

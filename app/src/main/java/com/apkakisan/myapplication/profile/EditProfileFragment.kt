@@ -17,6 +17,7 @@ import com.apkakisan.myapplication.common.AppDialogFragment
 import com.apkakisan.myapplication.databinding.FragmentEditProfileBinding
 import com.apkakisan.myapplication.helpers.popFragment
 import com.apkakisan.myapplication.helpers.showShortToast
+import com.apkakisan.myapplication.utils.BuildTypeUtil
 import com.apkakisan.myapplication.utils.KeyBoardUtil
 import com.bumptech.glide.Glide
 import com.github.drjacky.imagepicker.ImagePicker
@@ -53,6 +54,9 @@ class EditProfileFragment : BaseFragment() {
                 .provider(ImageProvider.BOTH)
                 .createIntentFromDialog { launcher.launch(it) }
         }
+
+        if (BuildTypeUtil.isDebug() || BuildTypeUtil.isDebugWithRegistration())
+            binding.tvCountryCode.text = "+92"
 
         binding.btnSave.setOnClickListener {
             editProfileViewModel.validate()
@@ -135,9 +139,13 @@ class EditProfileFragment : BaseFragment() {
                             KeyBoardUtil.hideKeyboard(requireContext(), binding.btnSave)
                             binding.loader.loader.visibility = View.VISIBLE
                         }
-                        is EditProfileUiState.ProfileUpdated -> {
+                        is EditProfileUiState.ProfileUpdateSuccess -> {
                             binding.loader.loader.visibility = View.GONE
                             showAppDialog()
+                        }
+                        is EditProfileUiState.ProfileUpdateFailed -> {
+                            binding.loader.loader.visibility = View.GONE
+                            showErrorView()
                         }
                     }
                 }

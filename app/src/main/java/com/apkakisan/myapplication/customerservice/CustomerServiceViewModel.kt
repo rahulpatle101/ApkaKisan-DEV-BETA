@@ -49,7 +49,10 @@ class CustomerServiceViewModel(
     fun sendMessage() = viewModelScope.launch {
         _uiState.emit(CustomerServiceUiState.MessageSending)
         val isSent = repository.sendMessage(prepareCustomerQueryRequest())
-        if (isSent) _uiState.emit(CustomerServiceUiState.MessageSent)
+        if (isSent)
+            _uiState.emit(CustomerServiceUiState.MessageSendSuccess)
+        else
+            _uiState.emit(CustomerServiceUiState.MessageSendFailed)
     }
 
     private fun prepareCustomerQueryRequest() = CustomerQuery().apply {
@@ -71,5 +74,6 @@ sealed class CustomerServiceUiState {
     object EmptyMessage : CustomerServiceUiState()
     object DataValidated : CustomerServiceUiState()
     object MessageSending : CustomerServiceUiState()
-    object MessageSent : CustomerServiceUiState()
+    object MessageSendSuccess : CustomerServiceUiState()
+    object MessageSendFailed : CustomerServiceUiState()
 }

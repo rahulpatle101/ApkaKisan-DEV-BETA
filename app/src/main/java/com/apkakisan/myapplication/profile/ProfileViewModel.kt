@@ -20,7 +20,7 @@ class ProfileViewModel(
             if (BuildTypeUtil.isDebug() || BuildTypeUtil.isDebugWithRegistration())
                 phone = "+92 $phone"
             if (BuildTypeUtil.isRahul())
-                phone = "$91$phone"
+                phone = "+91 $phone"
         }
         return phone
     }

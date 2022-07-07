@@ -50,10 +50,14 @@ class NotificationFragment : BaseFragment() {
         getNotifications()
 
         notificationViewModel.notificationList.observe(viewLifecycleOwner) {
+            binding.layoutLoader.loader.visibility = View.GONE
             it?.let {
                 notificationList.clear()
                 notificationList.addAll(it)
                 adapter?.notifyDataSetChanged()
+
+                if (notificationList.isEmpty())
+                    showEmptyView()
             } ?: showErrorView()
         }
     }
@@ -69,6 +73,7 @@ class NotificationFragment : BaseFragment() {
     }
 
     private fun getNotifications() {
+        binding.layoutLoader.loader.visibility = View.VISIBLE
         notificationViewModel.getNotifications()
     }
 

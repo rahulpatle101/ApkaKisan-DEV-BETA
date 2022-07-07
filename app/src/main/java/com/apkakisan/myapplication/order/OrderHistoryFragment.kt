@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import com.apkakisan.myapplication.BaseFragment
 import com.apkakisan.myapplication.databinding.FragmentOrderBinding
 import com.apkakisan.myapplication.helpers.DefaultItemDecorator
+import com.apkakisan.myapplication.helpers.LocalStore
 import com.apkakisan.myapplication.network.responses.Order
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
@@ -20,7 +21,6 @@ class OrderHistoryFragment : BaseFragment() {
 
     private val orderList = mutableListOf<Order>()
 
-    val reference = FirebaseDatabase.getInstance().getReference("Orders")
     private var adapter: OrderAdapter? = null
 
     override fun onCreateView(
@@ -45,28 +45,31 @@ class OrderHistoryFragment : BaseFragment() {
 
     private fun getOrderFromFirebase() {
         binding.layoutLoader.loader.visibility = View.VISIBLE
-        val orderCancelledListQuery = reference.orderByChild("orderStatus").equalTo("Completed")
-        orderCancelledListQuery.addListenerForSingleValueEvent(orderCompletedListener)
-    }
-
-    private val orderCompletedListener = object : ValueEventListener {
-        override fun onDataChange(snapshot: DataSnapshot) {
-            if (orderList.isNotEmpty())
-                orderList.clear()
-            for (postSnapshot in snapshot.children) {
-                val order: Order? = postSnapshot.getValue(Order::class.java)
-                order?.let {
-                    orderList.add(it)
+        FirebaseDatabase.getInstance().getReference("Orders")
+            .orderByChild("userId").equalTo(LocalStore.user?.userId)
+            .addListenerForSingleValueEvent(object : ValueEventListener {
+                override fun onDataChange(snapshot: DataSnapshot) {
+                    binding.layoutLoader.loader.visibility = View.GONE
+                    orderList.clear()
+                    for (postSnapshot in snapshot.children) {
+                        val order: Order? = postSnapshot.getValue(Order::class.java)
+                        order?.let {
+                            if (it.orderStatus == "Completed"
+                                || it.orderStatus == "Cancelled"
+                            )
+                                orderList.add(it)
+                        }
+                    }
+                    adapter?.notifyDataSetChanged()
+                    if (orderList.isEmpty() && isVisible)
+                        showEmptyView()
                 }
-            }
-            val orderCancelledListQuery = reference.orderByChild("orderStatus").equalTo("Cancelled")
-            orderCancelledListQuery.addListenerForSingleValueEvent(orderCancelledListener)
-        }
 
-        override fun onCancelled(error: DatabaseError) {
-            binding.layoutLoader.loader.visibility = View.GONE
-            showErrorView()
-        }
+                override fun onCancelled(error: DatabaseError) {
+                    binding.layoutLoader.loader.visibility = View.GONE
+                    showErrorView()
+                }
+            })
     }
 
     private val orderCancelledListener = object : ValueEventListener {

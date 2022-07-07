@@ -15,6 +15,7 @@ import com.apkakisan.myapplication.databinding.FragmentCustomerServiceBinding
 import com.apkakisan.myapplication.helpers.popFragment
 import com.apkakisan.myapplication.profile.ProfileActivity
 import com.apkakisan.myapplication.common.AppDialogFragment
+import com.apkakisan.myapplication.utils.BuildTypeUtil
 import com.apkakisan.myapplication.utils.KeyBoardUtil
 import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -39,6 +40,9 @@ class CustomerServiceFragment : BaseFragment() {
             popFragment()
         }
         binding.toolbar.tvTitle.text = getString(R.string.customer_service)
+
+        if (BuildTypeUtil.isDebug() || BuildTypeUtil.isDebugWithRegistration())
+            binding.tvCountryCode.text = "+92"
 
         binding.btnSave.setOnClickListener {
             customerServiceViewModel.validate()
@@ -99,9 +103,13 @@ class CustomerServiceFragment : BaseFragment() {
                             KeyBoardUtil.hideKeyboard(requireContext(), binding.btnSave)
                             binding.loader.loader.visibility = View.VISIBLE
                         }
-                        is CustomerServiceUiState.MessageSent -> {
+                        is CustomerServiceUiState.MessageSendSuccess -> {
                             binding.loader.loader.visibility = View.GONE
                             showAppDialog()
+                        }
+                        is CustomerServiceUiState.MessageSendFailed -> {
+                            binding.loader.loader.visibility = View.GONE
+                            showErrorView()
                         }
                     }
                 }

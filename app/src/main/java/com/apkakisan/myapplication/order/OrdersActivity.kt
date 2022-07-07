@@ -1,20 +1,16 @@
 package com.apkakisan.myapplication.order
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import com.apkakisan.myapplication.R
-import com.google.android.material.bottomnavigation.BottomNavigationView
-import com.google.android.material.navigation.NavigationBarView
-import android.content.Intent
 import android.widget.TextView
 import androidx.core.content.ContextCompat
-import com.apkakisan.myapplication.NotificationsActivity
-import com.apkakisan.myapplication.profile.ProfileActivity
+import com.apkakisan.myapplication.BaseActivity
 import com.apkakisan.myapplication.databinding.ActivityOrdersBinding
 import com.apkakisan.myapplication.helpers.replaceFragment
 import com.google.android.material.tabs.TabLayout
 
-class OrdersActivity : AppCompatActivity() {
+class OrdersActivity : BaseActivity() {
 
     private lateinit var binding: ActivityOrdersBinding
     private val activeOrderFragment = ActiveOrderFragment.newInstance()
@@ -25,40 +21,23 @@ class OrdersActivity : AppCompatActivity() {
         binding = ActivityOrdersBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        binding.toolbar.ibBack.visibility = View.GONE
+        binding.toolbar.tvTitle.text = getString(R.string.orders)
+
+        bottomNavigation = findViewById(R.id.layoutBottom)
+        bottomNavigation.selectedItemId = R.id.orders
+        setupBottomNavigation()
+
         binding.tlTabs.getTabAt(0)?.customView?.findViewById<TextView>(R.id.tvTabName)
             ?.setTextColor(ContextCompat.getColor(this@OrdersActivity, R.color.green))
+
+        tabLayoutProcess()
 
         replaceFragment(
             activeOrderFragment,
             false,
             ActiveOrderFragment.TAG
         )
-
-        tabLayoutProcess()
-
-        val bottomNavigationView = findViewById<BottomNavigationView>(R.id.layoutBottom)
-        bottomNavigationView.selectedItemId = R.id.orders
-        bottomNavigationView.setOnItemSelectedListener(NavigationBarView.OnItemSelectedListener { item ->
-            when (item.itemId) {
-                R.id.home -> {
-                    startActivity(Intent(applicationContext, HomeActivity::class.java))
-                    overridePendingTransition(0, 0)
-                    return@OnItemSelectedListener true
-                }
-                R.id.orders -> return@OnItemSelectedListener true
-                R.id.notifications -> {
-                    startActivity(Intent(applicationContext, NotificationsActivity::class.java))
-                    overridePendingTransition(0, 0)
-                    return@OnItemSelectedListener true
-                }
-                R.id.profile -> {
-                    startActivity(Intent(applicationContext, ProfileActivity::class.java))
-                    overridePendingTransition(0, 0)
-                    return@OnItemSelectedListener true
-                }
-            }
-            false
-        })
     }
 
     private fun tabLayoutProcess() {

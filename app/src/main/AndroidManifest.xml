@@ -88,12 +88,6 @@
             tools:ignore="LockedOrientationActivity" />
 
         <activity
-            android:name=".NotificationsActivity"
-            android:exported="false"
-            android:screenOrientation="portrait"
-            tools:ignore="LockedOrientationActivity" />
-
-        <activity
             android:name=".order.OrdersActivity"
             android:exported="false"
             android:screenOrientation="portrait"

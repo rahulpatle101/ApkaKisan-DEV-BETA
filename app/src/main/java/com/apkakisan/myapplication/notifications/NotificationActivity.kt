@@ -10,6 +10,11 @@ class NotificationActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_notification)
+
+        bottomNavigation = findViewById(R.id.layoutBottom)
+        bottomNavigation.selectedItemId = R.id.notifications
+        setupBottomNavigation()
+
         addFragment(
             NotificationFragment.newInstance(),
             false,

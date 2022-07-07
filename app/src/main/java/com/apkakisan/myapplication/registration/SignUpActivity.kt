@@ -102,6 +102,7 @@ class SignUpActivity : AppCompatActivity() {
                             location = locationValue
                             createdDate = currentDateAndTime
                             modifiedDate = currentDateAndTime
+                            photo = ""
                         }
 
                         val intent = Intent(this@SignUpActivity, VerifyPhoneNoActivity::class.java)

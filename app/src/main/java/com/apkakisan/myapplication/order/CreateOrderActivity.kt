@@ -129,6 +129,7 @@ class CreateOrderActivity : BaseActivity() {
                 street = addressStreet.editText?.text.toString().trim()
                 orderReceivedDateTime = currentDateAndTime
                 pincode = etPinCode.editText?.text.toString().trim()
+                userId = LocalStore.user?.userId!!
             }.also { order ->
                 val orderReference = FirebaseDatabase.getInstance().getReference("Orders")
                 orderReference.child(generateUUID).setValue(order)

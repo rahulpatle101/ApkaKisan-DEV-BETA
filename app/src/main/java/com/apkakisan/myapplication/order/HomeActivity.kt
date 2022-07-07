@@ -39,29 +39,9 @@ class HomeActivity : BaseActivity() {
 
         val searchView = findViewById<SearchView>(R.id.searchView)
 
-        val bottomNavigationView = findViewById<BottomNavigationView>(R.id.bottom_navigation)
-        bottomNavigationView.selectedItemId = R.id.home
-        bottomNavigationView.setOnItemSelectedListener(NavigationBarView.OnItemSelectedListener { item ->
-            when (item.itemId) {
-                R.id.home -> return@OnItemSelectedListener true
-                R.id.orders -> {
-                    startActivity(Intent(this, OrdersActivity::class.java))
-                    overridePendingTransition(0, 0)
-                    return@OnItemSelectedListener true
-                }
-                R.id.notifications -> {
-                    startActivity(Intent(this, NotificationActivity::class.java))
-                    overridePendingTransition(0, 0)
-                    return@OnItemSelectedListener true
-                }
-                R.id.profile -> {
-                    startActivity(Intent(this, ProfileActivity::class.java))
-                    overridePendingTransition(0, 0)
-                    return@OnItemSelectedListener true
-                }
-            }
-            false
-        })
+        bottomNavigation = findViewById(R.id.layoutBottom)
+        bottomNavigation.selectedItemId = R.id.home
+        setupBottomNavigation()
 
         searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(s: String): Boolean {

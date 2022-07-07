@@ -82,14 +82,12 @@ class FirebaseDataSource {
 
     suspend fun updateUser(
         userId: String,
-        photo: String,
         name: String,
         phoneNo: String,
         address: String
     ): Boolean {
         return try {
             val reference = FirebaseDatabase.getInstance().getReference("User")
-            reference.child(userId).child("photo").setValue(photo).await()
             reference.child(userId).child("fullName").setValue(name).await()
             reference.child(userId).child("phoneNumber").setValue(phoneNo).await()
             reference.child(userId).child("location").setValue(address).await()
@@ -121,6 +119,19 @@ class FirebaseDataSource {
                 continuation.resume("")
             }
         }
+
+    suspend fun updateUserPhoto(
+        userId: String,
+        photo: String
+    ): Boolean {
+        return try {
+            val reference = FirebaseDatabase.getInstance().getReference("User")
+            reference.child(userId).child("photo").setValue(photo).await()
+            true
+        } catch (ex: Exception) {
+            false
+        }
+    }
 
     suspend fun sendMessage(
         customerQuery: CustomerQuery

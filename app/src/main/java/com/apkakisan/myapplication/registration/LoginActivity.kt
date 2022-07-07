@@ -19,7 +19,6 @@ import com.apkakisan.myapplication.User
 import com.apkakisan.myapplication.helpers.USER
 import com.apkakisan.myapplication.utils.BuildTypeUtil
 import com.apkakisan.myapplication.helpers.hideKeyboard
-import com.apkakisan.myapplication.network.responses.Order
 import com.google.android.material.textfield.TextInputEditText
 
 class LoginActivity : AppCompatActivity() {
@@ -86,7 +85,7 @@ class LoginActivity : AppCompatActivity() {
         val userEnteredPhoneNumber = if (BuildTypeUtil.isDebugWithRegistration())
             "+92${etPhoneNo.editText?.text.toString().trim()}"
         else
-            "+1${etPhoneNo.editText?.text.toString().trim()}"
+            "+91${etPhoneNo.editText?.text.toString().trim()}"
 
         val reference = FirebaseDatabase.getInstance().getReference("User")
         val checkUser = reference.orderByChild("phoneNumber").equalTo(userEnteredPhoneNumber)
