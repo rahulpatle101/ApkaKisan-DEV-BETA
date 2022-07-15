@@ -14,7 +14,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.apkakisan.myapplication.order.HomeActivity;
 import com.apkakisan.myapplication.R;
-import com.apkakisan.myapplication.UserHelperClass;
+import com.apkakisan.myapplication.User;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputLayout;
@@ -82,7 +82,7 @@ public class VerifyPhoneNo extends AppCompatActivity {
 
         //Firebase Instantiation
 //        rootNode = FirebaseDatabase.getInstance();
-//        reference = rootNode.getReference("users");
+//        reference = rootNode.getReference("User");
 
         // Initialize Firebase Auth
 //        mAuth = FirebaseAuth.getInstance();
@@ -190,10 +190,10 @@ public class VerifyPhoneNo extends AppCompatActivity {
 
                             //Create helperclass reference and store data using firebase
                             rootNode = FirebaseDatabase.getInstance();
-                            reference = rootNode.getReference("USERS");
+                            reference = rootNode.getReference("User");
 
-                            UserHelperClass addNewUser = new UserHelperClass(nameFromSignupActivity, locationFromSignupActivity, phoneNumberId, pincodeFromSignupActivity, createdDateFromSignupActivity, modifiedDateFromSignupActivity);
-                            reference.child(phoneNumberId).setValue(addNewUser);
+//                            User addNewUser = new User(nameFromSignupActivity, locationFromSignupActivity, phoneNumberId, pincodeFromSignupActivity, createdDateFromSignupActivity, modifiedDateFromSignupActivity);
+//                            reference.child(phoneNumberId).setValue(addNewUser);
 
                             Intent intent = new Intent(getApplicationContext(), HomeActivity.class);
                             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);

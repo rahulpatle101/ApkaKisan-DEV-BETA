@@ -76,7 +76,7 @@ class CancelOrderActivity : BaseActivity() {
     }
 
     private fun cancelOrderProcess() {
-        val reference = FirebaseDatabase.getInstance().getReference("ORDERS")
+        val reference = FirebaseDatabase.getInstance().getReference("Orders")
         reference.child(order.orderId)
             .child("orderStatus")
             .setValue("Cancelled")

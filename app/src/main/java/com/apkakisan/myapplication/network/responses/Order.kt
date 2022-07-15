@@ -63,5 +63,8 @@ class Order(
     var upiContact: String = "",
 
     @SerializedName("cancellationReason")
-    var cancellationReason: String = ""
+    var cancellationReason: String = "",
+
+    @SerializedName("userId")
+    var userId: String = ""
 ) : Parcelable

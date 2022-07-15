@@ -102,7 +102,7 @@ public class CreateOrder extends AppCompatActivity {
                 Toast.makeText(CreateOrder.this, "Ready to post", Toast.LENGTH_SHORT).show();
 
                 rootNode = FirebaseDatabase.getInstance();
-                reference = rootNode.getReference("ORDERS");
+                reference = rootNode.getReference("Orders");
 
                 user = auth.getCurrentUser();
                 String phoneNumber = user.getPhoneNumber();

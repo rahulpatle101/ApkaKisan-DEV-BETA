@@ -50,9 +50,6 @@ class SplashActivity : AppCompatActivity() {
 
         //wrap the call in API level 21 or higher
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            //                val options =
-            //                    ActivityOptions.makeSceneTransitionAnimation(this@SplashActivity, *pairs)
-            //                startActivity(intent, options.toBundle())
             startActivity(intent)
         } else {
             startActivity(intent)
@@ -67,6 +64,6 @@ class SplashActivity : AppCompatActivity() {
     }
 
     companion object {
-        private const val DELAY_SPLASH_SCREEN = 3000L
+        private const val DELAY_SPLASH_SCREEN = 1000L
     }
 }

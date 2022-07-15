@@ -39,6 +39,22 @@ fun Fragment.showLongToast(msg: String) {
     Toast.makeText(requireContext(), msg, Toast.LENGTH_LONG).show()
 }
 
+fun Activity.somethingWentWrong() {
+    showShortToast(getString(R.string.something_went_wrong))
+}
+
+fun Fragment.somethingWentWrong() {
+    showShortToast(getString(R.string.something_went_wrong))
+}
+
+fun Activity.comingSoon() {
+    showShortToast(getString(R.string.coming_soon))
+}
+
+fun Fragment.comingSoon() {
+    showShortToast(getString(R.string.coming_soon))
+}
+
 fun AppCompatActivity.replaceFragment(
     fragment: Fragment,
     isAddBackToStack: Boolean,
@@ -63,6 +79,30 @@ fun AppCompatActivity.addFragment(
     transaction.commit()
 }
 
+fun Fragment.replaceFragment(
+    fragment: Fragment,
+    isAddBackToStack: Boolean,
+    TAG: String
+) {
+    val transaction = activity?.supportFragmentManager?.beginTransaction()
+    transaction?.replace(R.id.container_fragment, fragment, TAG)
+    if (isAddBackToStack)
+        transaction?.addToBackStack(TAG)
+    transaction?.commit()
+}
+
+fun Fragment.addFragment(
+    fragment: Fragment,
+    isAddBackToStack: Boolean,
+    TAG: String
+) {
+    val transaction = activity?.supportFragmentManager?.beginTransaction()
+    transaction?.add(R.id.container_fragment, fragment, TAG)
+    if (isAddBackToStack)
+        transaction?.addToBackStack(TAG)
+    transaction?.commit()
+}
+
 fun Fragment.replaceChildFragment(
     fragment: Fragment,
     isAddBackToStack: Boolean,
@@ -85,4 +125,8 @@ fun Fragment.addChildFragment(
     if (isAddBackToStack)
         transaction.addToBackStack(TAG)
     transaction.commit()
+}
+
+fun Fragment.popFragment() {
+    activity?.supportFragmentManager?.popBackStack()
 }

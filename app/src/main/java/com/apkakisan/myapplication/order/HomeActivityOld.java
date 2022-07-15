@@ -14,8 +14,8 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.apkakisan.myapplication.network.responses.Commodity;
-import com.apkakisan.myapplication.NotificationsActivity;
-import com.apkakisan.myapplication.ProfileActivity;
+import com.apkakisan.myapplication.notifications.NotificationActivity;
+import com.apkakisan.myapplication.profile.ProfileActivity;
 import com.apkakisan.myapplication.R;
 import com.apkakisan.myapplication.network.RetrofitClient;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -71,7 +71,7 @@ public class HomeActivityOld extends AppCompatActivity {
                         return true;
                     case R.id.notifications:
 //                        Toast.makeText(MainContainer.this, "NOTIFICATION SELECTED", Toast.LENGTH_SHORT).show();
-                        startActivity(new Intent(getApplicationContext(), NotificationsActivity.class));
+                        startActivity(new Intent(getApplicationContext(), NotificationActivity.class));
                         overridePendingTransition(0,0);
                         return true;
                     case R.id.profile:

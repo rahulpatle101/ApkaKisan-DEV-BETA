@@ -16,6 +16,10 @@ import android.text.InputType
 import android.text.TextWatcher
 import android.widget.*
 import com.apkakisan.myapplication.BaseActivity
+import com.apkakisan.myapplication.common.AppDialogFragment
+import com.apkakisan.myapplication.helpers.LocalStore
+import com.apkakisan.myapplication.helpers.popFragment
+import com.apkakisan.myapplication.network.responses.Notification
 import com.apkakisan.myapplication.network.responses.Order
 import java.text.SimpleDateFormat
 import java.util.*
@@ -105,15 +109,10 @@ class CreateOrderActivity : BaseActivity() {
             }
 
             val user = FirebaseAuth.getInstance().currentUser
-
-            val idOne = UUID.randomUUID()
-            val idTwo = UUID.randomUUID()
-            val generateUUID = idOne.toString() + idTwo.toString()
-
+            val generateUUID = UUID.randomUUID().toString()
             val now = SimpleDateFormat("dd.MM.yyyy 'at' HH:mm:ss z", Locale.getDefault())
             val currentDateAndTime = now.format(Date())
 
-            val orderReference = FirebaseDatabase.getInstance().getReference("ORDERS")
             Order().apply {
                 orderId = generateUUID
                 name = commodityName
@@ -130,9 +129,26 @@ class CreateOrderActivity : BaseActivity() {
                 street = addressStreet.editText?.text.toString().trim()
                 orderReceivedDateTime = currentDateAndTime
                 pincode = etPinCode.editText?.text.toString().trim()
-            }.also {
-                orderReference.child(generateUUID).setValue(it)
-                showSellOrderCreatedDialog()
+                userId = LocalStore.user?.userId!!
+            }.also { order ->
+                val orderReference = FirebaseDatabase.getInstance().getReference("Orders")
+                orderReference.child(generateUUID).setValue(order)
+
+                val notificationId = UUID.randomUUID().toString()
+                Notification().apply {
+                    id = notificationId
+                    type = "In App Notification"
+                    title = "Order Received!"
+                    description = "You order has received. Thanks."
+                    createdDate = currentDateAndTime
+                    userId = LocalStore.user?.userId!!
+                    orderId = order.orderId
+                }.also { notification ->
+                    val reference = FirebaseDatabase.getInstance().getReference("Notification")
+                    reference.child(notificationId).setValue(notification)
+                }
+
+                showAppDialog()
             }
         }
 
@@ -143,17 +159,13 @@ class CreateOrderActivity : BaseActivity() {
         }
     }
 
-    private fun showSellOrderCreatedDialog() {
-        val orderCreatedDialogFragment = OrderCreatedDialogFragment.newInstance()
-        orderCreatedDialogFragment.onCreateAnotherOrderPressed(onCreateAnotherOrderPressed = {
-            resetForm()
-        })
-        orderCreatedDialogFragment.onCancelPressed(onDonePressed = {
-//            val intent = Intent(this, OrdersActivity::class.java)
-//            startActivity(intent)
-            finish()
-        })
-        orderCreatedDialogFragment.show(supportFragmentManager, OrderCreatedDialogFragment.TAG)
+    private fun showAppDialog() {
+        val dialog = AppDialogFragment.newInstance(
+            getString(R.string.sell_order_created),
+            getString(R.string.sell_order_created_congrats)
+        )
+        dialog.onDonePressed { finish() }
+        dialog.show(supportFragmentManager, AppDialogFragment.TAG)
     }
 
     private fun resetForm() {

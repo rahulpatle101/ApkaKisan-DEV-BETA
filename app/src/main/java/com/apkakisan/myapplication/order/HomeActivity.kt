@@ -1,6 +1,5 @@
 package com.apkakisan.myapplication.order
 
-import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
 import android.widget.ProgressBar
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -11,13 +10,13 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.navigation.NavigationBarView
 import android.content.Intent
 import android.view.View
-import com.apkakisan.myapplication.NotificationsActivity
-import com.apkakisan.myapplication.ProfileActivity
+import com.apkakisan.myapplication.profile.ProfileActivity
 import com.apkakisan.myapplication.network.RetrofitClient
 import android.widget.Toast
 import androidx.appcompat.widget.SearchView
 import com.apkakisan.myapplication.BaseActivity
 import com.apkakisan.myapplication.helpers.DefaultItemDecorator
+import com.apkakisan.myapplication.notifications.NotificationActivity
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -40,29 +39,9 @@ class HomeActivity : BaseActivity() {
 
         val searchView = findViewById<SearchView>(R.id.searchView)
 
-        val bottomNavigationView = findViewById<BottomNavigationView>(R.id.bottom_navigation)
-        bottomNavigationView.selectedItemId = R.id.home
-        bottomNavigationView.setOnItemSelectedListener(NavigationBarView.OnItemSelectedListener { item ->
-            when (item.itemId) {
-                R.id.home -> return@OnItemSelectedListener true
-                R.id.orders -> {
-                    startActivity(Intent(this, OrdersActivity::class.java))
-                    overridePendingTransition(0, 0)
-                    return@OnItemSelectedListener true
-                }
-                R.id.notifications -> {
-                    startActivity(Intent(this, NotificationsActivity::class.java))
-                    overridePendingTransition(0, 0)
-                    return@OnItemSelectedListener true
-                }
-                R.id.profile -> {
-                    startActivity(Intent(this, ProfileActivity::class.java))
-                    overridePendingTransition(0, 0)
-                    return@OnItemSelectedListener true
-                }
-            }
-            false
-        })
+        bottomNavigation = findViewById(R.id.layoutBottom)
+        bottomNavigation.selectedItemId = R.id.home
+        setupBottomNavigation()
 
         searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(s: String): Boolean {
