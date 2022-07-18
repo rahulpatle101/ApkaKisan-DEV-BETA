@@ -72,6 +72,9 @@ class OrderHistoryFragment : BaseFragment() {
             })
     }
 
+    override fun showEmptyView() {
+    }
+
     private val orderCancelledListener = object : ValueEventListener {
         override fun onDataChange(snapshot: DataSnapshot) {
             binding.layoutLoader.loader.visibility = View.GONE

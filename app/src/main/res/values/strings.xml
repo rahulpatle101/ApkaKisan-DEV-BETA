@@ -60,6 +60,7 @@
     <!--    notifications screen-->
     <string name="notification">Notification</string>
     <string name="notification_settings">Notification Settings</string>
+    <string name="empty_notifications">There are no notifications.</string>
 
     <!--    profile screen-->
     <string name="profile">Profile</string>
