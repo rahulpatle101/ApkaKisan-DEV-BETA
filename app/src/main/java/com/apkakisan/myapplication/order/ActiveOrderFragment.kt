@@ -74,6 +74,9 @@ class ActiveOrderFragment : BaseFragment() {
             })
     }
 
+    override fun showEmptyView() {
+    }
+
     private fun adapterProcess() {
         if (adapter == null)
             adapter = OrderAdapter(

@@ -50,16 +50,23 @@ class NotificationFragment : BaseFragment() {
         getNotifications()
 
         notificationViewModel.notificationList.observe(viewLifecycleOwner) {
-            binding.layoutLoader.loader.visibility = View.GONE
             it?.let {
                 notificationList.clear()
                 notificationList.addAll(it)
                 adapter?.notifyDataSetChanged()
-
-                if (notificationList.isEmpty())
-                    showEmptyView()
+                if (notificationList.isEmpty()) showEmptyView() else showContentView()
             } ?: showErrorView()
         }
+    }
+
+    override fun showContentView() {
+        binding.loader.loader.visibility = View.GONE
+        binding.tvEmptyNotifications.visibility = View.GONE
+    }
+
+    override fun showEmptyView() {
+        binding.loader.loader.visibility = View.GONE
+        binding.tvEmptyNotifications.visibility = View.VISIBLE
     }
 
     private fun adapterProcess() {
@@ -73,7 +80,7 @@ class NotificationFragment : BaseFragment() {
     }
 
     private fun getNotifications() {
-        binding.layoutLoader.loader.visibility = View.VISIBLE
+        binding.loader.loader.visibility = View.VISIBLE
         notificationViewModel.getNotifications()
     }
 
