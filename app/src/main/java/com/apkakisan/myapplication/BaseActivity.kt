@@ -14,8 +14,9 @@ import com.apkakisan.myapplication.order.OrdersActivity
 import com.apkakisan.myapplication.profile.ProfileActivity
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.navigation.NavigationBarView
+import com.zeugmasolutions.localehelper.LocaleAwareCompatActivity
 
-abstract class BaseActivity : AppCompatActivity(), UIInterface {
+abstract class BaseActivity : LocaleAwareCompatActivity(), UIInterface {
 
     lateinit var bottomNavigation: BottomNavigationView
 

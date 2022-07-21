@@ -9,13 +9,16 @@ import com.apkakisan.myapplication.BaseFragment
 import com.apkakisan.myapplication.customerservice.CustomerServiceFragment
 import com.apkakisan.myapplication.databinding.FragmentProfileBinding
 import com.apkakisan.myapplication.helpers.*
+import com.apkakisan.myapplication.order.HomeActivity
 import com.bumptech.glide.Glide
 import com.google.firebase.auth.FirebaseAuth
+import com.zeugmasolutions.localehelper.LocaleHelper
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import org.koin.androidx.viewmodel.ext.android.viewModel
+import java.util.*
 
 class ProfileFragment : BaseFragment() {
 
@@ -55,6 +58,20 @@ class ProfileFragment : BaseFragment() {
         binding.clLogout.setOnClickListener {
             FirebaseAuth.getInstance().signOut()
             it.visibility = View.GONE
+        }
+
+        binding.btnEnglish.setOnClickListener {
+            // (activity as HomeActivity).updateLocale(Locale("ar"))
+            LocaleHelper.setLocale(requireContext(), Locale("en"))
+            // LocalStore.isLanguageChanged = true
+            (activity as ProfileActivity).restartHomeActivity()
+        }
+
+        binding.btnHindi.setOnClickListener {
+            // (activity as HomeActivity).updateLocale(Locale("en"))
+            LocaleHelper.setLocale(requireContext(), Locale("hi"))
+            // LocalStore.isLanguageChanged = true
+            (activity as ProfileActivity).restartHomeActivity()
         }
 
         updateUI()

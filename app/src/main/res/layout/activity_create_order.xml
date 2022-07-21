@@ -16,7 +16,7 @@
         android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"
         android:fontFamily="@font/poppins_semibold"
-        android:text="Sell Order details for Name of the Harvest Rs 100.00/kg"
+        android:hint="@string/selling_commodity"
         android:textColor="@color/colorTextBlack"
         android:textSize="18sp" />
 
@@ -36,7 +36,7 @@
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Quantity / kg">
+                android:hint="@string/quantity">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/etQuantity"
@@ -53,7 +53,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
-                android:hint="Commodity Pickup Date and Time">
+                android:hint="@string/commodity_pickup">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/pickup_date_time_input"
@@ -71,7 +71,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
-                android:hint="Address Location">
+                android:hint="@string/address_location">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
@@ -87,7 +87,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
-                android:hint="Address - Street">
+                android:hint="@string/address_street">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
@@ -103,7 +103,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
-                android:hint="Pincode">
+                android:hint="@string/pincode">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
@@ -120,7 +120,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
-                android:hint="Details about the Commodity (Optional)">
+                android:hint="@string/details_about_commodity">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
@@ -137,7 +137,7 @@
                 android:layout_marginTop="20dp"
                 android:layout_marginBottom="10dp"
                 android:fontFamily="@font/nunito_regular"
-                android:text="Earning Overview"
+                android:text="@string/earning_overview"
                 android:textColor="@color/colorTextBlack"
                 android:textSize="18sp" />
 
@@ -151,7 +151,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/nunito_regular"
-                    android:text="Harvest name Quantity x kg"
+                    android:text="@string/harvest_name_quantity_x_kg"
                     android:textColor="@color/colorGrey"
                     android:textSize="18sp" />
 
@@ -179,7 +179,7 @@
                     android:layout_marginTop="20dp"
                     android:layout_marginBottom="10dp"
                     android:fontFamily="@font/nunito_regular"
-                    android:text="Total Earning"
+                    android:text="@string/total_earning"
                     android:textColor="@color/colorTextBlack"
                     android:textSize="18sp" />
 
@@ -202,7 +202,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
                 android:fontFamily="@font/nunito_regular"
-                android:text="Payment Method Info" />
+                android:text="@string/payment_method_info" />
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/upi_phone_number"
@@ -210,7 +210,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
-                android:hint="UPI Phone Number ">
+                android:hint="@string/upi_phone">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
@@ -228,7 +228,7 @@
                 android:layout_marginStart="10dp"
                 android:buttonTint="#46AA42"
                 android:fontFamily="@font/nunito_regular"
-                android:text="@string/termsandconditions"
+                android:text="@string/accept_term_policy"
                 android:textColor="#171725" />
 
             <androidx.appcompat.widget.AppCompatButton
@@ -241,7 +241,7 @@
                 android:layout_marginBottom="5dp"
                 android:background="@drawable/shape_bg_btn_green"
                 android:fontFamily="@font/poppins_regular"
-                android:text="Sell Now"
+                android:text="@string/sell_now"
                 android:textAllCaps="false"
                 android:textColor="#fff"
                 app:backgroundTint="#46AA42" />

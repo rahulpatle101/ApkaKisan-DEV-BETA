@@ -32,7 +32,7 @@
             android:layout_marginTop="20sp"
             android:layout_marginBottom="20sp"
             android:fontFamily="@font/nunito_bold"
-            android:text="Welcome to ApkaKisan!"
+            android:text="@string/welcome_to_apkakisan"
             android:textColor="#000"
             android:textSize="20sp"
             android:transitionName="logo_text" />
@@ -42,7 +42,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/nunito_regular"
-            android:text="Please sign in with your phone number."
+            android:text="@string/sign_in_with_phone_no"
             android:textColor="#92929D"
             android:textSize="16sp"
             android:transitionName="logo_desc" />
@@ -60,7 +60,7 @@
                 android:layout_height="wrap_content"
                 android:background="@drawable/text_field"
                 android:fontFamily="@font/poppins_regular"
-                android:hint="Your Phone Number"
+                android:hint="@string/your_phone_no"
                 android:textColorHint="#92929D">
 
                 <com.google.android.material.textfield.TextInputEditText
@@ -82,7 +82,7 @@
                 android:background="@drawable/shape_bg_btn_green"
                 android:fontFamily="@font/poppins_regular"
                 android:onClick="loginUser"
-                android:text="Sign In with OTP"
+                android:text="@string/sign_in_with_otp"
                 android:textAllCaps="false"
                 android:textColor="#fff"
                 android:transitionName="button_tran"
@@ -99,7 +99,7 @@
                 android:fontFamily="@font/poppins_regular"
                 android:gravity="center"
                 android:onClick="callSignUpScreen"
-                android:text="New User? Sign Up"
+                android:text="@string/new_user"
                 android:textAllCaps="false"
                 android:textColor="#46AA42"
                 android:transitionName="login_signup_tran"

@@ -29,7 +29,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="20sp"
             android:fontFamily="@font/nunito_regular"
-            android:text="Welcome to ApkaKisan. Please fill in the fields below to register an account."
+            android:text="@string/register_an_account"
             android:textSize="16sp"
             android:transitionName="logo_desc" />
 
@@ -45,7 +45,7 @@
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Full Name">
+                android:hint="@string/full_name">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
@@ -60,7 +60,7 @@
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Phone Number">
+                android:hint="@string/phone_no">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
@@ -76,7 +76,7 @@
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Confirm Phone Number">
+                android:hint="@string/confirm_phone_no">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
@@ -92,7 +92,7 @@
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Pin Code">
+                android:hint="@string/pin_code">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
@@ -108,7 +108,7 @@
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Location">
+                android:hint="@string/location">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
@@ -126,7 +126,7 @@
             android:layout_marginStart="10sp"
             android:buttonTint="#46AA42"
             android:fontFamily="@font/nunito_regular"
-            android:text="@string/termsandconditions"
+            android:text="@string/accept_term_policy"
             android:textColor="#171725" />
 
         <androidx.appcompat.widget.AppCompatButton
@@ -138,7 +138,7 @@
             android:layout_marginEnd="10sp"
             android:background="@drawable/shape_bg_btn_green"
             android:fontFamily="@font/poppins_regular"
-            android:text="Sign Up"
+            android:text="@string/sign_up"
             android:textAllCaps="false"
             android:textColor="#fff"
             android:transitionName="button_tran"
@@ -154,7 +154,7 @@
             android:background="@drawable/rounded_button_outline"
             android:elevation="0dp"
             android:fontFamily="@font/poppins_regular"
-            android:text="Already have an account? Sign In"
+            android:text="@string/already_have_account"
             android:textAllCaps="false"
             android:textColor="#46AA42"
             app:backgroundTint="#FFFFFF" />
