@@ -39,29 +39,29 @@ class EditProfileViewModel(
         phone = phone.filter { it.isLetterOrDigit() || it.isWhitespace() }
         phone = phone.replace(" ", "")
         when {
-            name.isEmpty() -> _uiState.emit(EditProfileUiState.EmptyName)
+            name.isEmpty() -> _uiState.emit(EditProfileUiState.EMPTY_NAME)
             phone.length < 10 -> {
-                _uiState.emit(EditProfileUiState.InvalidPhone)
-                if (phone.isEmpty()) _uiState.emit(EditProfileUiState.EmptyPhone)
+                _uiState.emit(EditProfileUiState.INVALID_PHONE)
+                if (phone.isEmpty()) _uiState.emit(EditProfileUiState.EMPTY_PHONE)
             }
-            address.isEmpty() -> _uiState.emit(EditProfileUiState.EmptyAddress)
-            else -> _uiState.emit(EditProfileUiState.DataValidated)
+            address.isEmpty() -> _uiState.emit(EditProfileUiState.EMPTY_ADDRESS)
+            else -> _uiState.emit(EditProfileUiState.DATA_VALIDATED)
         }
     }
 
     fun uploadPhoto(photoUri: Uri) = viewModelScope.launch {
-        _uiState.emit(EditProfileUiState.PhotoUploading)
+        _uiState.emit(EditProfileUiState.PHOTO_UPLOADING)
         val isPhotoUpdated = repository.uploadPhoto(user.userId, photoUri)
         if (isPhotoUpdated) {
             photo = LocalStore.user?.photo!!
-            _uiState.emit(EditProfileUiState.PhotoUploadSuccess)
+            _uiState.emit(EditProfileUiState.PHOTO_UPLOAD_SUCCESS)
         } else {
-            _uiState.emit(EditProfileUiState.PhotoUploadFailed)
+            _uiState.emit(EditProfileUiState.PHOTO_UPLOAD_FAILED)
         }
     }
 
     fun updateUser() = viewModelScope.launch {
-        _uiState.emit(EditProfileUiState.ProfileUpdating)
+        _uiState.emit(EditProfileUiState.PROFILE_UPDATING)
 
         if (BuildTypeUtil.isDebug() || BuildTypeUtil.isDebugWithRegistration())
             phone = PhoneNumberUtils.formatNumberToE164(phone, "PK")
@@ -75,22 +75,33 @@ class EditProfileViewModel(
             address
         )
         if (isUpdated)
-            _uiState.emit(EditProfileUiState.ProfileUpdateSuccess)
+            _uiState.emit(EditProfileUiState.PROFILE_UPDATE_SUCCESS)
         else
-            _uiState.emit(EditProfileUiState.ProfileUpdateFailed)
+            _uiState.emit(EditProfileUiState.PROFILE_UPDATE_FAILED)
     }
 }
 
-sealed class EditProfileUiState {
-    object PhotoUploading : EditProfileUiState()
-    object PhotoUploadSuccess : EditProfileUiState()
-    object PhotoUploadFailed : EditProfileUiState()
-    object EmptyName : EditProfileUiState()
-    object InvalidPhone : EditProfileUiState()
-    object EmptyPhone : EditProfileUiState()
-    object EmptyAddress : EditProfileUiState()
-    object DataValidated : EditProfileUiState()
-    object ProfileUpdating : EditProfileUiState()
-    object ProfileUpdateSuccess : EditProfileUiState()
-    object ProfileUpdateFailed : EditProfileUiState()
+enum class EditProfileUiState {
+    PHOTO_UPLOADING,
+    PHOTO_UPLOAD_SUCCESS,
+    PHOTO_UPLOAD_FAILED,
+    EMPTY_NAME,
+    INVALID_PHONE,
+    EMPTY_PHONE,
+    EMPTY_ADDRESS,
+    DATA_VALIDATED,
+    PROFILE_UPDATING,
+    PROFILE_UPDATE_SUCCESS,
+    PROFILE_UPDATE_FAILED
+//    object PhotoUploading : EditProfileUiState()
+//    object PhotoUploadSuccess : EditProfileUiState()
+//    object PhotoUploadFailed : EditProfileUiState()
+//    object EmptyName : EditProfileUiState()
+//    object InvalidPhone : EditProfileUiState()
+//    object EmptyPhone : EditProfileUiState()
+//    object EmptyAddress : EditProfileUiState()
+//    object DataValidated : EditProfileUiState()
+//    object ProfileUpdating : EditProfileUiState()
+//    object ProfileUpdateSuccess : EditProfileUiState()
+//    object ProfileUpdateFailed : EditProfileUiState()
 }
