@@ -11,6 +11,8 @@
     <androidx.appcompat.widget.LinearLayoutCompat
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/_16dp"
+        android:layout_marginEnd="@dimen/_16dp"
         android:orientation="vertical"
         tools:context=".OTPVerificationFragment">
 
@@ -62,9 +64,7 @@
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
             android:layout_marginTop="20dp"
-            android:layout_marginEnd="16dp"
             android:background="@drawable/text_field"
             android:fontFamily="@font/poppins_regular"
             android:hint="6 Digit Code"
@@ -82,6 +82,16 @@
         </com.google.android.material.textfield.TextInputLayout>
 
         <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvCountDownTimer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="10dp"
+            android:fontFamily="@font/nunito_regular"
+            android:textColor="@color/colorTextBlack"
+            android:textSize="@dimen/_16sp" />
+
+        <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tvResendOtp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -94,15 +104,14 @@
             android:text="Resend Code"
             android:textColor="#46AA42"
             android:textSize="14sp"
+            android:visibility="gone"
             tools:ignore="OnClick" />
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/verify_btn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
             android:layout_marginTop="20dp"
-            android:layout_marginEnd="16dp"
             android:layout_marginBottom="5dp"
             android:background="@drawable/shape_bg_btn_green"
             android:backgroundTint="#46AA42"
@@ -116,9 +125,7 @@
             android:id="@+id/btnCancel"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
             android:layout_marginTop="20dp"
-            android:layout_marginEnd="16dp"
             android:layout_marginBottom="5dp"
             android:background="@drawable/rounded_button_outline"
             android:fontFamily="@font/poppins_regular"

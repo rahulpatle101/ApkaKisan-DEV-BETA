@@ -19,25 +19,25 @@ import android.widget.Button
 import androidx.lifecycle.lifecycleScope
 import com.apkakisan.myapplication.order.HomeActivity
 import com.apkakisan.myapplication.User
+import com.apkakisan.myapplication.databinding.ActivityVerifyPhoneNoBinding
 import com.apkakisan.myapplication.helpers.LocalStore
 import com.apkakisan.myapplication.helpers.USER
 import com.apkakisan.myapplication.helpers.showShortToast
-import com.apkakisan.myapplication.network.FirebaseDataSource
 import com.apkakisan.myapplication.utils.BuildTypeUtil
 import com.apkakisan.myapplication.utils.DialogUtil
+import com.apkakisan.myapplication.utils.TimerUtil
 import com.google.android.material.textfield.TextInputEditText
-import com.google.firebase.database.DatabaseReference
+import kotlinx.coroutines.flow.onCompletion
 import kotlinx.coroutines.launch
-import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
-import java.lang.Exception
 import java.util.concurrent.TimeUnit
 
 class VerifyPhoneNoActivity : AppCompatActivity() {
 
     private lateinit var verificationCodeEntered: TextInputEditText
 
-    private val verifyPhoneNoViewModel: VerifyPhoneNoViewModel by viewModel()
+    private lateinit var binding: ActivityVerifyPhoneNoBinding
+    //private val verifyPhoneNoViewModel: VerifyPhoneNoViewModel by viewModel()
     private lateinit var user: User
     private lateinit var progressBar: ProgressBar
 
@@ -45,7 +45,8 @@ class VerifyPhoneNoActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_verify_phone_no)
+        binding = ActivityVerifyPhoneNoBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
         user = intent?.getParcelableExtra(USER)!!
 
@@ -57,11 +58,14 @@ class VerifyPhoneNoActivity : AppCompatActivity() {
         if (BuildTypeUtil.isDebug() || BuildTypeUtil.isDebugWithRegistration())
             verificationCodeEntered.setText("123456")
 
-        val tvResendOtp = findViewById<TextView>(R.id.tvResendOtp)
-        tvResendOtp.setOnClickListener { sendVerificationCodeToUser() }
+        countDownProcess()
+        binding.tvResendOtp.setOnClickListener {
+            countDownProcess()
+            sendVerificationCodeToUser()
+        }
 
-        val verifyBtn = findViewById<Button>(R.id.verify_btn)
-        verifyBtn.setOnClickListener(View.OnClickListener {
+        findViewById<Button>(R.id.verify_btn).setOnClickListener(View.OnClickListener
+        {
             val code = verificationCodeEntered.text.toString().trim()
             if (code.isEmpty() || code.length < 6) {
                 verificationCodeEntered.error = "Wrong OTP..."
@@ -71,10 +75,22 @@ class VerifyPhoneNoActivity : AppCompatActivity() {
             verifyCode(code)
         })
 
-        val btnCancel = findViewById<Button>(R.id.btnCancel)
-        btnCancel.setOnClickListener { finish() }
+        findViewById<Button>(R.id.btnCancel).setOnClickListener { finish() }
 
         sendVerificationCodeToUser()
+    }
+
+    private fun countDownProcess() {
+        binding.tvResendOtp.visibility = View.INVISIBLE
+        binding.tvCountDownTimer.visibility = View.VISIBLE
+        lifecycleScope.launch {
+            TimerUtil.countDownTimer(COUNT_DOWN_TIMER)
+                .onCompletion {
+                    binding.tvCountDownTimer.visibility = View.GONE
+                    binding.tvResendOtp.visibility = View.VISIBLE
+                }
+                .collect { binding.tvCountDownTimer.text = String.format("%02d", it) }
+        }
     }
 
     private fun sendVerificationCodeToUser() {
@@ -134,5 +150,9 @@ class VerifyPhoneNoActivity : AppCompatActivity() {
                     showShortToast("------>>>ERROR- Failing in adding user to the db VerifyPhone.java" + task.exception?.message)
                 }
             }
+    }
+
+    companion object{
+        const val COUNT_DOWN_TIMER = 60L
     }
 }
