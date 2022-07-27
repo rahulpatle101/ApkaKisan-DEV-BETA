@@ -10,7 +10,7 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:orientation="vertical"
-        app:layout_constraintBottom_toTopOf="@+id/bottom_navigation"
+        app:layout_constraintBottom_toTopOf="@+id/layoutBottom"
         app:layout_constraintTop_toTopOf="parent">
 
         <androidx.appcompat.widget.SearchView
@@ -22,10 +22,9 @@
             android:layout_marginEnd="16dp"
             android:background="@drawable/rounded_searchbar_outline"
             android:fontFamily="@font/poppins_regular"
-            android:iconifiedByDefault="false"
-            android:queryBackground="@null"
-            android:queryHint="Search Mandi Commodities"
-            tools:targetApi="lollipop" />
+            app:iconifiedByDefault="false"
+            app:queryBackground="@null"
+            app:queryHint="Search Mandi Commodities" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:layout_width="match_parent"
