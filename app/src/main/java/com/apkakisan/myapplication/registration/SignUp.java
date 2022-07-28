@@ -49,8 +49,8 @@ public class SignUp extends AppCompatActivity {
 
         //Hooks to all xml elements in activity_sign_up.xml
         regName = findViewById(R.id.reg_name);
-        regPhoneNo = findViewById(R.id.reg_phoneNo);
-        regPhoneNoConfirmation = findViewById(R.id.reg_phoneNoConfirmation);
+//        regPhoneNo = findViewById(R.id.reg_phoneNo);
+//        regPhoneNoConfirmation = findViewById(R.id.reg_phoneNoConfirmation);
         regPincode = findViewById(R.id.reg_pincode);
         regLocation = findViewById(R.id.reg_location);
         checkBox = findViewById(R.id.checkBox);

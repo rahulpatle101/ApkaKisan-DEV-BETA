@@ -29,7 +29,6 @@ import com.apkakisan.myapplication.utils.TimerUtil
 import com.google.android.material.textfield.TextInputEditText
 import kotlinx.coroutines.flow.onCompletion
 import kotlinx.coroutines.launch
-import org.koin.androidx.viewmodel.ext.android.viewModel
 import java.util.concurrent.TimeUnit
 
 class VerifyPhoneNoActivity : AppCompatActivity() {
@@ -37,6 +36,7 @@ class VerifyPhoneNoActivity : AppCompatActivity() {
     private lateinit var verificationCodeEntered: TextInputEditText
 
     private lateinit var binding: ActivityVerifyPhoneNoBinding
+
     //private val verifyPhoneNoViewModel: VerifyPhoneNoViewModel by viewModel()
     private lateinit var user: User
     private lateinit var progressBar: ProgressBar
@@ -137,8 +137,10 @@ class VerifyPhoneNoActivity : AppCompatActivity() {
     }
 
     private fun signInTheUserByCredentials(credential: PhoneAuthCredential) {
-        FirebaseAuth.getInstance().signInWithCredential(credential)
+        FirebaseAuth.getInstance()
+            .signInWithCredential(credential)
             .addOnCompleteListener(this@VerifyPhoneNoActivity) { task ->
+                progressBar.visibility = View.GONE
                 if (task.isSuccessful) {
                     FirebaseDatabase.getInstance().getReference("User").child(user.userId)
                         .setValue(user)
@@ -147,12 +149,12 @@ class VerifyPhoneNoActivity : AppCompatActivity() {
                     intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
                     startActivity(intent)
                 } else {
-                    showShortToast("------>>>ERROR- Failing in adding user to the db VerifyPhone.java" + task.exception?.message)
+                    showShortToast("ERROR- Failing in adding user to the db VerifyPhone.java" + task.exception?.message)
                 }
             }
     }
 
-    companion object{
+    companion object {
         const val COUNT_DOWN_TIMER = 60L
     }
 }

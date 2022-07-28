@@ -14,8 +14,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="#fff"
-        android:orientation="vertical"
-        android:paddingBottom="20dp">
+        android:orientation="vertical">
 
         <androidx.appcompat.widget.AppCompatImageView
             android:layout_width="wrap_content"
@@ -55,37 +54,33 @@
 
             </com.google.android.material.textfield.TextInputLayout>
 
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/reg_phoneNo"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            <include
+                android:id="@+id/layoutPhone"
+                layout="@layout/layout_phone"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="Phone Number">
+                android:layout_height="@dimen/_48dp"
+                android:layout_marginStart="@dimen/dp0"
+                android:layout_marginTop="@dimen/_5dp"
+                android:layout_marginEnd="@dimen/dp0" />
 
-                <com.google.android.material.textfield.TextInputEditText
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/poppins_regular"
-                    android:inputType="phone"
-                    android:maxLength="10" />
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvPhoneError"
+                style="@style/TextView.FormField.Error"
+                android:layout_marginStart="@dimen/dp0" />
 
-            </com.google.android.material.textfield.TextInputLayout>
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/reg_phoneNoConfirmation"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            <include
+                android:id="@+id/layoutConfirmPhone"
+                layout="@layout/layout_phone"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="Confirm Phone Number">
+                android:layout_height="@dimen/_48dp"
+                android:layout_marginStart="@dimen/dp0"
+                android:layout_marginTop="@dimen/_5dp"
+                android:layout_marginEnd="@dimen/dp0" />
 
-                <com.google.android.material.textfield.TextInputEditText
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/poppins_regular"
-                    android:inputType="phone"
-                    android:maxLength="10" />
-
-            </com.google.android.material.textfield.TextInputLayout>
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvConfirmPhoneError"
+                style="@style/TextView.FormField.Error"
+                android:layout_marginStart="@dimen/dp0" />
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/reg_pincode"
@@ -151,6 +146,7 @@
             android:layout_marginStart="10dp"
             android:layout_marginTop="10dp"
             android:layout_marginEnd="10dp"
+            android:layout_marginBottom="@dimen/_20dp"
             android:background="@drawable/rounded_button_outline"
             android:elevation="0dp"
             android:fontFamily="@font/poppins_regular"

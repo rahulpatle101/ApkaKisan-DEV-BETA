@@ -56,7 +56,7 @@ class EditProfileFragment : BaseFragment() {
         }
 
         if (BuildTypeUtil.isDebug() || BuildTypeUtil.isDebugWithRegistration())
-            binding.tvCountryCode.text = "+92"
+            binding.layoutPhone.tvCountryCode.text = "+92"
 
         binding.btnSave.setOnClickListener {
             editProfileViewModel.validate()
@@ -70,8 +70,8 @@ class EditProfileFragment : BaseFragment() {
             editProfileViewModel.name = it.toString().trim()
         }
 
-        binding.etPhoneNo.addTextChangedListener(PhoneNumberFormattingTextWatcher("US"))
-        binding.etPhoneNo.doAfterTextChanged {
+        binding.layoutPhone.etPhoneNo.addTextChangedListener(PhoneNumberFormattingTextWatcher("US"))
+        binding.layoutPhone.etPhoneNo.doAfterTextChanged {
             binding.tvPhoneError.visibility = View.GONE
             editProfileViewModel.phone = it.toString().trim()
         }
@@ -171,7 +171,7 @@ class EditProfileFragment : BaseFragment() {
                     .circleCrop()
                     .into(binding.ivPhoto)
                 binding.etName.setText(editProfileViewModel.name)
-                binding.etPhoneNo.setText(editProfileViewModel.phone)
+                binding.layoutPhone.etPhoneNo.setText(editProfileViewModel.phone)
                 binding.etAddress.setText(editProfileViewModel.address)
             }
         }

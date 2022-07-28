@@ -2,13 +2,13 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
         android:id="@+id/home"
-        android:title="@string/home"
-        android:icon="@drawable/ic_home" />
+        android:icon="@drawable/ic_home"
+        android:title="@string/home" />
 
     <item
         android:id="@+id/orders"
-        android:title="@string/orders"
-        android:icon="@drawable/ic_order" />
+        android:icon="@drawable/ic_order"
+        android:title="@string/orders" />
 
     <item
         android:id="@+id/notifications"
@@ -17,6 +17,6 @@
 
     <item
         android:id="@+id/profile"
-        android:title="@string/profile"
-        android:icon="@drawable/ic_baseline_person_outline_24" />
+        android:icon="@drawable/ic_baseline_person_outline_24"
+        android:title="@string/profile" />
 </menu>

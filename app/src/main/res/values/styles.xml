@@ -19,6 +19,12 @@
         <item name="android:layout_height">wrap_content</item>
     </style>
 
+    <style name="ConstraintLayout.PhoneNo" parent="ConstraintLayout">
+        <item name="android:layout_height">@dimen/_48dp</item>
+        <item name="android:layout_marginTop">@dimen/_5dp</item>
+        <item name="android:background">@drawable/shape_edittext_form</item>
+    </style>
+
     <style name="ConstraintLayout.Profile.Field" parent="ConstraintLayout">
         <item name="android:minHeight">@dimen/_54dp</item>
         <item name="android:background">@color/white</item>

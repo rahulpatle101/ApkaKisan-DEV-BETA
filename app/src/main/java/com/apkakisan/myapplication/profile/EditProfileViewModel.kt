@@ -7,6 +7,7 @@ import com.apkakisan.myapplication.BaseViewModel
 import com.apkakisan.myapplication.User
 import com.apkakisan.myapplication.helpers.LocalStore
 import com.apkakisan.myapplication.utils.BuildTypeUtil
+import com.apkakisan.myapplication.utils.PhoneNoUtil
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.launch
@@ -30,14 +31,13 @@ class EditProfileViewModel(
         name = user.fullName ?: ""
         user.phoneNumber?.let {
             phone = it.substring(3, it.length)
-            phone = PhoneNumberUtils.formatNumber(phone, "US")
+            phone = PhoneNoUtil.format10DigitToUS(phone)
         }
         address = user.location ?: ""
     }
 
     fun validate() = viewModelScope.launch {
-        phone = phone.filter { it.isLetterOrDigit() || it.isWhitespace() }
-        phone = phone.replace(" ", "")
+        phone = PhoneNoUtil.formatUSTo10Digit(phone)
         when {
             name.isEmpty() -> _uiState.emit(EditProfileUiState.EmptyName)
             phone.length < 10 -> {
@@ -62,12 +62,7 @@ class EditProfileViewModel(
 
     fun updateUser() = viewModelScope.launch {
         _uiState.emit(EditProfileUiState.ProfileUpdating)
-
-        if (BuildTypeUtil.isDebug() || BuildTypeUtil.isDebugWithRegistration())
-            phone = PhoneNumberUtils.formatNumberToE164(phone, "PK")
-        if (BuildTypeUtil.isRahul())
-            phone = PhoneNumberUtils.formatNumberToE164(phone, "IN")
-
+        phone = PhoneNoUtil.formatForServer(phone)
         val isUpdated = repository.updateUser(
             user.userId,
             name,
