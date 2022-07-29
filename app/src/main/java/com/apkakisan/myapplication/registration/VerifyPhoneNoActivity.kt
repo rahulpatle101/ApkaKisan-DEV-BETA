@@ -142,12 +142,17 @@ class VerifyPhoneNoActivity : AppCompatActivity() {
             .addOnCompleteListener(this@VerifyPhoneNoActivity) { task ->
                 progressBar.visibility = View.GONE
                 if (task.isSuccessful) {
-                    FirebaseDatabase.getInstance().getReference("User").child(user.userId)
-                        .setValue(user)
-                    LocalStore.user = user
-                    val intent = Intent(this@VerifyPhoneNoActivity, HomeActivity::class.java)
-                    intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-                    startActivity(intent)
+                    try {
+                        FirebaseDatabase.getInstance().getReference("User").child(user.userId)
+                            .setValue(user)
+                        user.save()
+                        val intent = Intent(this@VerifyPhoneNoActivity, HomeActivity::class.java)
+                        intent.flags =
+                            Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                        startActivity(intent)
+                    } catch (ex: Exception) {
+                        showShortToast("ERROR- Failing in adding user to the db VerifyPhone.java" + task.exception?.message)
+                    }
                 } else {
                     showShortToast("ERROR- Failing in adding user to the db VerifyPhone.java" + task.exception?.message)
                 }

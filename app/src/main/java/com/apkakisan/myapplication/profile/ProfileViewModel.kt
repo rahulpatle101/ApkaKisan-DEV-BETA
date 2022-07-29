@@ -10,7 +10,7 @@ class ProfileViewModel(
     private val repository: ProfileRepository
 ) : BaseViewModel(repository) {
 
-    val user: User = LocalStore.user!!
+    val user: User = LocalStore.getUser()!!
 
     fun getFormattedPhone(): String {
         var phone = ""

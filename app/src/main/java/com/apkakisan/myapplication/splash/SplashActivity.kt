@@ -13,6 +13,7 @@ import android.view.View
 import android.view.animation.AnimationUtils
 import android.widget.ImageView
 import com.apkakisan.myapplication.R
+import com.apkakisan.myapplication.helpers.LocalStore
 import com.apkakisan.myapplication.utils.BuildTypeUtil
 import com.apkakisan.myapplication.order.HomeActivity
 
@@ -34,10 +35,9 @@ class SplashActivity : AppCompatActivity() {
         tvAppName.animation = topAnim
 
         Handler().postDelayed({
-            if (BuildTypeUtil.isDebug()) {
+            LocalStore.getUser()?.let {
                 openHomeActivity()
-            } else
-                openLoginActivity(image)
+            } ?: openLoginActivity(image)
         }, DELAY_SPLASH_SCREEN)
     }
 
@@ -64,6 +64,7 @@ class SplashActivity : AppCompatActivity() {
     }
 
     companion object {
-        private const val DELAY_SPLASH_SCREEN = 1000L
+        private val DELAY_SPLASH_SCREEN =
+            if (BuildTypeUtil.isDebug() || BuildTypeUtil.isDebugWithRegistration()) 1000L else 3000L
     }
 }

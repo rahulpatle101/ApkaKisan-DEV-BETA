@@ -1,5 +1,6 @@
 package com.apkakisan.myapplication.profile
 
+import android.content.Intent
 import android.os.Bundle
 import com.apkakisan.myapplication.R
 import android.view.LayoutInflater
@@ -9,6 +10,7 @@ import com.apkakisan.myapplication.BaseFragment
 import com.apkakisan.myapplication.customerservice.CustomerServiceFragment
 import com.apkakisan.myapplication.databinding.FragmentProfileBinding
 import com.apkakisan.myapplication.helpers.*
+import com.apkakisan.myapplication.registration.LoginActivity
 import com.bumptech.glide.Glide
 import com.google.firebase.auth.FirebaseAuth
 import kotlinx.coroutines.CoroutineScope
@@ -54,7 +56,11 @@ class ProfileFragment : BaseFragment() {
 
         binding.clLogout.setOnClickListener {
             FirebaseAuth.getInstance().signOut()
-            it.visibility = View.GONE
+            LocalStore.setUser(null)
+            val intent = Intent(requireContext(), LoginActivity::class.java)
+            intent.flags =
+                Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+            startActivity(intent)
         }
 
         updateUI()

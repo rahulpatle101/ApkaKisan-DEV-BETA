@@ -4,6 +4,7 @@ import android.os.Parcelable
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import com.apkakisan.myapplication.helpers.LocalStore
 import kotlinx.parcelize.Parcelize
 
 @Parcelize
@@ -17,4 +18,8 @@ data class User(
     @ColumnInfo(name = "phoneNumber") var phoneNumber: String? = null,
     @ColumnInfo(name = "pinCode") var pinCode: String? = null,
     @ColumnInfo(name = "photo") var photo: String? = null
-) : Parcelable
+) : Parcelable {
+    fun save() {
+        LocalStore.setUser(this)
+    }
+}

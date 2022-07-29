@@ -47,7 +47,7 @@ class ActiveOrderFragment : BaseFragment() {
     private fun getOrderFromFirebase() {
         binding.layoutLoader.loader.visibility = View.VISIBLE
         FirebaseDatabase.getInstance().getReference("Orders")
-            .orderByChild("userId").equalTo(LocalStore.user?.userId)
+            .orderByChild("userId").equalTo(LocalStore.getUser()?.userId)
             .addListenerForSingleValueEvent(object : ValueEventListener {
                 override fun onDataChange(snapshot: DataSnapshot) {
                     binding.layoutLoader.loader.visibility = View.GONE

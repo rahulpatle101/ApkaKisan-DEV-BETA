@@ -98,4 +98,7 @@ dependencies {
     // memory leakage components
     // debugImplementation because LeakCanary should only run in debug builds.
     debugImplementation 'com.squareup.leakcanary:leakcanary-android:2.9.1'
+
+    // secured shared preferences library
+    implementation "androidx.security:security-crypto:1.1.0-alpha03"
 }

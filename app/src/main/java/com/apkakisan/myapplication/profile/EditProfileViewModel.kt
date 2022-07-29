@@ -17,7 +17,7 @@ class EditProfileViewModel(
     private var _uiState = MutableSharedFlow<EditProfileUiState>()
     val uiState: SharedFlow<EditProfileUiState> = _uiState
 
-    val user: User = LocalStore.user ?: User()
+    val user: User = LocalStore.getUser() ?: User()
 
     var photo = ""
     var name = ""
@@ -52,7 +52,7 @@ class EditProfileViewModel(
         _uiState.emit(EditProfileUiState.PhotoUploading)
         val isPhotoUpdated = repository.uploadPhoto(user.userId, photoUri)
         if (isPhotoUpdated) {
-            photo = LocalStore.user?.photo!!
+            photo = LocalStore.getUser()?.photo!!
             _uiState.emit(EditProfileUiState.PhotoUploadSuccess)
         } else {
             _uiState.emit(EditProfileUiState.PhotoUploadFailed)
@@ -68,9 +68,16 @@ class EditProfileViewModel(
             phone,
             address
         )
-        if (isUpdated)
+        if (isUpdated) {
             _uiState.emit(EditProfileUiState.ProfileUpdateSuccess)
-        else
+            LocalStore.getUser()?.apply {
+                fullName = name
+                phoneNumber = phone
+                location = address
+            }?.also {
+                it.save()
+            }
+        } else
             _uiState.emit(EditProfileUiState.ProfileUpdateFailed)
     }
 }

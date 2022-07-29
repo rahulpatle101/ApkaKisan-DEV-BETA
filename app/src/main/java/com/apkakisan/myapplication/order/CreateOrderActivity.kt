@@ -129,7 +129,7 @@ class CreateOrderActivity : BaseActivity() {
                 street = addressStreet.editText?.text.toString().trim()
                 orderReceivedDateTime = currentDateAndTime
                 pincode = etPinCode.editText?.text.toString().trim()
-                userId = LocalStore.user?.userId!!
+                userId = LocalStore.getUser()?.userId!!
             }.also { order ->
                 val orderReference = FirebaseDatabase.getInstance().getReference("Orders")
                 orderReference.child(generateUUID).setValue(order)
@@ -141,7 +141,7 @@ class CreateOrderActivity : BaseActivity() {
                     title = "Order Received!"
                     description = "You order has received. Thanks."
                     createdDate = currentDateAndTime
-                    userId = LocalStore.user?.userId!!
+                    userId = LocalStore.getUser()?.userId!!
                     orderId = order.orderId
                 }.also { notification ->
                     val reference = FirebaseDatabase.getInstance().getReference("Notification")

@@ -16,7 +16,7 @@ class NotificationSettingViewModel(private val repository: NotificationSettingRe
     private val _notificationSettingList = MutableLiveData<List<NotificationType>>()
     val notificationSettingList: LiveData<List<NotificationType>> = _notificationSettingList
 
-    val user: User = LocalStore.user!!
+    val user: User = LocalStore.getUser()!!
 
     fun getNotificationType() {
         viewModelScope.launch {
