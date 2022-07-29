@@ -1,12 +1,10 @@
 package com.apkakisan.myapplication.profile
 
 import android.net.Uri
-import android.telephony.PhoneNumberUtils
 import androidx.lifecycle.viewModelScope
 import com.apkakisan.myapplication.BaseViewModel
 import com.apkakisan.myapplication.User
 import com.apkakisan.myapplication.helpers.LocalStore
-import com.apkakisan.myapplication.utils.BuildTypeUtil
 import com.apkakisan.myapplication.utils.PhoneNoUtil
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.SharedFlow
@@ -19,7 +17,7 @@ class EditProfileViewModel(
     private var _uiState = MutableSharedFlow<EditProfileUiState>()
     val uiState: SharedFlow<EditProfileUiState> = _uiState
 
-    val user: User = LocalStore.user!!
+    val user: User = LocalStore.user ?: User()
 
     var photo = ""
     var name = ""
@@ -36,14 +34,15 @@ class EditProfileViewModel(
         address = user.location ?: ""
     }
 
-    fun validate() = viewModelScope.launch {
+    fun formatUSTo10Digit() {
         phone = PhoneNoUtil.formatUSTo10Digit(phone)
+    }
+
+    fun validate() = viewModelScope.launch {
         when {
             name.isEmpty() -> _uiState.emit(EditProfileUiState.EmptyName)
-            phone.length < 10 -> {
-                _uiState.emit(EditProfileUiState.InvalidPhone)
-                if (phone.isEmpty()) _uiState.emit(EditProfileUiState.EmptyPhone)
-            }
+            phone.isEmpty() -> _uiState.emit(EditProfileUiState.EmptyPhone)
+            (phone.length < 10 || phone.length > 10) -> _uiState.emit(EditProfileUiState.InvalidPhone)
             address.isEmpty() -> _uiState.emit(EditProfileUiState.EmptyAddress)
             else -> _uiState.emit(EditProfileUiState.DataValidated)
         }

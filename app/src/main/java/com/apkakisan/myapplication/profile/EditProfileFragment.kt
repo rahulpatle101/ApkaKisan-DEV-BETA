@@ -59,6 +59,7 @@ class EditProfileFragment : BaseFragment() {
             binding.layoutPhone.tvCountryCode.text = "+92"
 
         binding.btnSave.setOnClickListener {
+            editProfileViewModel.formatUSTo10Digit()
             editProfileViewModel.validate()
         }
 
