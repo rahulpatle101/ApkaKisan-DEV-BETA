@@ -95,6 +95,8 @@
     <string name="etc">Etc</string>
     <string name="submit">Submit</string>
     <string name="please_select_cancellation_reason">Please select cancellation reason</string>
+    <string name="order_cancellation_succeedded">Order cancellation succeeded!</string>
+    <string name="order_cancellation_failed">Order cancellation failed!</string>
 
     <!--    notifications strings-->
     <string name="empty_notifications">There are no notifications.</string>
@@ -104,6 +106,8 @@
     <string name="edit_profile">Edit Profile</string>
     <string name="customer_service">Customer Service</string>
     <string name="logout">Logout</string>
+    <string name="english">English</string>
+    <string name="hindi">हिन्दी</string>
     <string name="name">Name</string>
     <string name="phone">Phone</string>
     <string name="address">Address</string>

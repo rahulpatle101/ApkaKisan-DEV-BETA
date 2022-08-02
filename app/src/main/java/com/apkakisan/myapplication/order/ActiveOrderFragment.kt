@@ -55,9 +55,9 @@ class ActiveOrderFragment : BaseFragment() {
                     for (postSnapshot in snapshot.children) {
                         val order: Order? = postSnapshot.getValue(Order::class.java)
                         order?.let {
-                            if (it.orderStatus == "Received"
-                                || it.orderStatus == "Inspected"
-                                || it.orderStatus == "Confirmed"
+                            if (it.orderStatusEn == "Received"
+                                || it.orderStatusEn == "Inspected"
+                                || it.orderStatusEn == "Confirmed"
                             )
                                 orderList.add(it)
                         }

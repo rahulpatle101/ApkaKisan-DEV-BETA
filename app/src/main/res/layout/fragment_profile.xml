@@ -136,14 +136,25 @@
                 android:id="@+id/btnEnglish"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_16dp"
                 android:layout_marginTop="@dimen/_20dp"
-                android:text="English" />
+                android:layout_marginEnd="@dimen/_16dp"
+                android:background="@drawable/shape_bg_btn_green"
+                android:fontFamily="@font/poppins_regular"
+                android:text="@string/english"
+                android:textColor="@color/white" />
 
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/btnHindi"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Hindi" />
+                android:layout_marginStart="@dimen/_16dp"
+                android:layout_marginTop="@dimen/_10dp"
+                android:layout_marginEnd="@dimen/_16dp"
+                android:background="@drawable/shape_bg_btn_green"
+                android:fontFamily="@font/poppins_regular"
+                android:text="@string/hindi"
+                android:textColor="@color/white" />
 
         </androidx.appcompat.widget.LinearLayoutCompat>
 

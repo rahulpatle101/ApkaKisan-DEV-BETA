@@ -10,6 +10,7 @@ import com.apkakisan.myapplication.customerservice.CustomerServiceFragment
 import com.apkakisan.myapplication.databinding.FragmentProfileBinding
 import com.apkakisan.myapplication.helpers.*
 import com.apkakisan.myapplication.order.HomeActivity
+import com.apkakisan.myapplication.utils.LanguageUtil
 import com.bumptech.glide.Glide
 import com.google.firebase.auth.FirebaseAuth
 import com.zeugmasolutions.localehelper.LocaleHelper
@@ -61,17 +62,21 @@ class ProfileFragment : BaseFragment() {
         }
 
         binding.btnEnglish.setOnClickListener {
-            // (activity as HomeActivity).updateLocale(Locale("ar"))
-            LocaleHelper.setLocale(requireContext(), Locale("en"))
-            // LocalStore.isLanguageChanged = true
-            (activity as ProfileActivity).restartHomeActivity()
+            if (LanguageUtil.isHindi()) {
+                // (activity as HomeActivity).updateLocale(Locale("ar"))
+                LocaleHelper.setLocale(requireContext(), Locale("en"))
+                // LocalStore.isLanguageChanged = true
+                (activity as ProfileActivity).restartHomeActivity()
+            }
         }
 
         binding.btnHindi.setOnClickListener {
-            // (activity as HomeActivity).updateLocale(Locale("en"))
-            LocaleHelper.setLocale(requireContext(), Locale("hi"))
-            // LocalStore.isLanguageChanged = true
-            (activity as ProfileActivity).restartHomeActivity()
+            if (LanguageUtil.isEnglish()) {
+                // (activity as HomeActivity).updateLocale(Locale("en"))
+                LocaleHelper.setLocale(requireContext(), Locale("hi"))
+                // LocalStore.isLanguageChanged = true
+                (activity as ProfileActivity).restartHomeActivity()
+            }
         }
 
         updateUI()

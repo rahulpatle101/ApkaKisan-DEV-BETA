@@ -54,8 +54,8 @@ class OrderHistoryFragment : BaseFragment() {
                     for (postSnapshot in snapshot.children) {
                         val order: Order? = postSnapshot.getValue(Order::class.java)
                         order?.let {
-                            if (it.orderStatus == "Completed"
-                                || it.orderStatus == "Cancelled"
+                            if (it.orderStatusEn == "Completed"
+                                || it.orderStatusEn == "Cancelled"
                             )
                                 orderList.add(it)
                         }

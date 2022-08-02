@@ -54,7 +54,7 @@ class OrderAdapter(
             tvCommodityName.text = order.name
 
             tvStatus.text = order.orderStatus
-            if (order.orderStatus == "Cancelled") {
+            if (order.orderStatusEn == "Cancelled") {
                 tvStatus.setTextColor(ContextCompat.getColor(context, R.color.colorError))
                 btnSellAgain.background =
                     ContextCompat.getDrawable(context, R.drawable.shape_bg_btn_red)

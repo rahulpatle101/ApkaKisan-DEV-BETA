@@ -1,10 +1,9 @@
 package com.apkakisan.myapplication.network.responses
 
 import android.os.Parcelable
-import com.google.gson.annotations.Expose
+import com.apkakisan.myapplication.utils.LanguageUtil
 import com.google.gson.annotations.SerializedName
 import kotlinx.parcelize.Parcelize
-
 
 @Parcelize
 class Order(
@@ -54,7 +53,10 @@ class Order(
     var orderReceivedDateTime: String = "",
 
     @SerializedName("orderStatus")
-    var orderStatus: String = "",
+    var orderStatusEn: String = "",
+
+    @SerializedName("orderStatus")
+    var orderStatusHi: String = "",
 
     @SerializedName("phoneNo")
     var phoneNo: String = "",
@@ -63,8 +65,13 @@ class Order(
     var upiContact: String = "",
 
     @SerializedName("cancellationReason")
-    var cancellationReason: String = "",
+    var cancellationReasonEn: String = "",
+
+    @SerializedName("cancellationReason")
+    var cancellationReasonHi: String = "",
 
     @SerializedName("userId")
     var userId: String = ""
-) : Parcelable
+) : Parcelable {
+    val orderStatus: String get() = if (LanguageUtil.isEnglish()) orderStatusEn else orderStatusHi
+}
