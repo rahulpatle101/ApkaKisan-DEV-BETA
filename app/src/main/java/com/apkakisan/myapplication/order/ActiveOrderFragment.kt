@@ -128,9 +128,7 @@ class ActiveOrderFragment : BaseFragment() {
         spannableString.setSpan(object : ClickableSpan() {
             override fun onClick(widget: View) {
                 widget.invalidate()
-                startActivity(Intent(requireContext(), HomeActivity::class.java))
-                activity?.overridePendingTransition(0, 0)
-                activity?.finish()
+                startHomeActivity()
             }
 
             override fun updateDrawState(ds: TextPaint) {
@@ -146,6 +144,14 @@ class ActiveOrderFragment : BaseFragment() {
         )
         binding.tvNoOrders.text = spannableString
         binding.tvNoOrders.movementMethod = LinkMovementMethod.getInstance()
+    }
+
+    private fun startHomeActivity() {
+        val intent = Intent(requireContext(), HomeActivity::class.java)
+        intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
+        startActivity(intent)
+        activity?.overridePendingTransition(0, 0)
+        activity?.finish()
     }
 
     companion object {
