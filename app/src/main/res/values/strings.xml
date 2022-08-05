@@ -17,6 +17,8 @@
     <string name="active">Active</string>
     <string name="history">History</string>
     <string name="details">Details</string>
+    <string name="no_active_orders">There are no Active order.\nExplore products on sell in Home</string>
+    <string name="no_orders_history">There are no orders history.\nExplore products on sell in Home</string>
 
     <!--    create order screen-->
     <string name="selling_commodity">Sell Order details for %s Rs %s/kg</string>

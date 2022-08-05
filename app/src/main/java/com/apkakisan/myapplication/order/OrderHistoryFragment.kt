@@ -2,14 +2,23 @@ package com.apkakisan.myapplication.order
 
 import android.content.Intent
 import android.os.Bundle
+import android.text.SpannableString
+import android.text.Spanned
+import android.text.TextPaint
+import android.text.method.LinkMovementMethod
+import android.text.style.ClickableSpan
+import android.text.style.ForegroundColorSpan
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.apkakisan.myapplication.BaseFragment
+import com.apkakisan.myapplication.R
 import com.apkakisan.myapplication.databinding.FragmentOrderBinding
 import com.apkakisan.myapplication.helpers.DefaultItemDecorator
 import com.apkakisan.myapplication.helpers.LocalStore
+import com.apkakisan.myapplication.helpers.showShortToast
 import com.apkakisan.myapplication.network.responses.Order
+import com.apkakisan.myapplication.utils.StringUtil
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
@@ -43,6 +52,24 @@ class OrderHistoryFragment : BaseFragment() {
         getOrderFromFirebase()
     }
 
+    private fun adapterProcess() {
+        if (adapter == null)
+            adapter = OrderAdapter(
+                requireContext(),
+                TAG,
+                orderList,
+                onDetailsBtnClick = { _: Order, _: View, _: Int -> },
+                onSellAgainBtnClick = { order: Order, _: View, _: Int ->
+                    startActivity(Intent(activity, CreateOrderActivity::class.java).apply {
+                        putExtra(CreateOrderActivity.TITLE, order.name)
+                        putExtra(CreateOrderActivity.MANDI_PRICE, order.mandiRate)
+                        putExtra(CreateOrderActivity.APKAKISAN_PRICE, order.apkakisanRate)
+                    })
+                }
+            )
+        binding.rvOrders.adapter = adapter
+    }
+
     private fun getOrderFromFirebase() {
         binding.layoutLoader.loader.visibility = View.VISIBLE
         FirebaseDatabase.getInstance().getReference("Orders")
@@ -72,43 +99,53 @@ class OrderHistoryFragment : BaseFragment() {
             })
     }
 
+    override fun showLoadingView() {
+        binding.layoutLoader.loader.visibility = View.VISIBLE
+        binding.tvNoOrders.visibility = View.GONE
+    }
+
+    override fun showContentView() {
+        binding.layoutLoader.loader.visibility = View.GONE
+        binding.tvNoOrders.visibility = View.GONE
+    }
+
     override fun showEmptyView() {
+        formatNoOrderString()
+        binding.tvNoOrders.visibility = View.VISIBLE
+        binding.layoutLoader.loader.visibility = View.GONE
     }
 
-    private val orderCancelledListener = object : ValueEventListener {
-        override fun onDataChange(snapshot: DataSnapshot) {
-            binding.layoutLoader.loader.visibility = View.GONE
-            for (postSnapshot in snapshot.children) {
-                val order: Order? = postSnapshot.getValue(Order::class.java)
-                order?.let {
-                    orderList.add(it)
-                }
+    private fun formatNoOrderString() {
+        val spannableString = SpannableString(getString(R.string.no_orders_history))
+        val startIndex = StringUtil.findStartIndex(
+            getString(R.string.no_orders_history),
+            getString(R.string.home)
+        )
+        val endIndex = StringUtil.findEndIndex(
+            startIndex,
+            getString(R.string.home)
+        )
+        spannableString.setSpan(object : ClickableSpan() {
+            override fun onClick(widget: View) {
+                widget.invalidate()
+                startActivity(Intent(requireContext(), HomeActivity::class.java))
+                activity?.overridePendingTransition(0, 0)
+                activity?.finish()
             }
-            adapter?.notifyDataSetChanged()
-        }
 
-        override fun onCancelled(error: DatabaseError) {
-            binding.layoutLoader.loader.visibility = View.GONE
-            showErrorView()
-        }
-    }
-
-    private fun adapterProcess() {
-        if (adapter == null)
-            adapter = OrderAdapter(
-                requireContext(),
-                TAG,
-                orderList,
-                onDetailsBtnClick = { _: Order, _: View, _: Int -> },
-                onSellAgainBtnClick = { order: Order, _: View, _: Int ->
-                    startActivity(Intent(activity, CreateOrderActivity::class.java).apply {
-                        putExtra(CreateOrderActivity.TITLE, order.name)
-                        putExtra(CreateOrderActivity.MANDI_PRICE, order.mandiRate)
-                        putExtra(CreateOrderActivity.APKAKISAN_PRICE, order.apkakisanRate)
-                    })
-                }
-            )
-        binding.rvOrders.adapter = adapter
+            override fun updateDrawState(ds: TextPaint) {
+                super.updateDrawState(ds)
+                ds.isUnderlineText = false
+            }
+        }, startIndex, endIndex, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
+        spannableString.setSpan(
+            ForegroundColorSpan(R.color.blue),
+            startIndex,
+            endIndex,
+            Spanned.SPAN_EXCLUSIVE_EXCLUSIVE
+        )
+        binding.tvNoOrders.text = spannableString
+        binding.tvNoOrders.movementMethod = LinkMovementMethod.getInstance()
     }
 
     companion object {

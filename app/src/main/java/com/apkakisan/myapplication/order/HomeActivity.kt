@@ -6,17 +6,13 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.apkakisan.myapplication.network.responses.Commodity
 import android.os.Bundle
 import com.apkakisan.myapplication.R
-import com.google.android.material.bottomnavigation.BottomNavigationView
-import com.google.android.material.navigation.NavigationBarView
 import android.content.Intent
 import android.view.View
-import com.apkakisan.myapplication.profile.ProfileActivity
 import com.apkakisan.myapplication.network.RetrofitClient
 import android.widget.Toast
 import androidx.appcompat.widget.SearchView
 import com.apkakisan.myapplication.BaseActivity
 import com.apkakisan.myapplication.helpers.DefaultItemDecorator
-import com.apkakisan.myapplication.notifications.NotificationActivity
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
