@@ -17,6 +17,7 @@ import android.text.TextWatcher
 import android.widget.*
 import com.apkakisan.myapplication.BaseActivity
 import com.apkakisan.myapplication.common.AppDialogFragment
+import com.apkakisan.myapplication.domainlayer.TermsAndPrivacyManager
 import com.apkakisan.myapplication.helpers.LocalStore
 import com.apkakisan.myapplication.helpers.popFragment
 import com.apkakisan.myapplication.network.responses.Notification
@@ -93,7 +94,10 @@ class CreateOrderActivity : BaseActivity() {
         tvHarvestPrice = findViewById(R.id.harvest_price)
         tvTotalEarning = findViewById(R.id.earning_price)
         orderUPIPhoneNo = findViewById(R.id.upi_phone_number)
-        orderCheckBox = findViewById(R.id.order_check_box)
+        orderCheckBox = findViewById(R.id.checkBox)
+
+        val tvTermsPrivacy = findViewById<TextView>(R.id.tvTermsPrivacy)
+        TermsAndPrivacyManager().formatTermsAndPolicyString(this, tvTermsPrivacy)
 
         sellOrderBtn = findViewById(R.id.sell_order_btn)
         sellOrderBtn.setOnClickListener {

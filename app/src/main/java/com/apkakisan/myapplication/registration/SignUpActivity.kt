@@ -12,14 +12,24 @@ import com.google.firebase.database.DataSnapshot
 import android.content.Intent
 import android.graphics.Color
 import android.telephony.PhoneNumberFormattingTextWatcher
+import android.text.SpannableString
+import android.text.Spanned
+import android.text.TextPaint
+import android.text.method.LinkMovementMethod
+import android.text.style.ClickableSpan
+import android.text.style.ForegroundColorSpan
 import android.view.View
 import android.widget.Button
 import androidx.core.widget.doAfterTextChanged
 import com.apkakisan.myapplication.User
+import com.apkakisan.myapplication.common.TermsPrivacyActivity
 import com.apkakisan.myapplication.databinding.ActivitySignUpBinding
+import com.apkakisan.myapplication.domainlayer.TermsAndPrivacyManager
 import com.apkakisan.myapplication.helpers.*
+import com.apkakisan.myapplication.order.HomeActivity
 import com.apkakisan.myapplication.utils.BuildTypeUtil
 import com.apkakisan.myapplication.utils.PhoneNoUtil
+import com.apkakisan.myapplication.utils.StringUtil
 import com.google.firebase.database.DatabaseError
 import java.text.SimpleDateFormat
 import java.util.*
@@ -82,6 +92,8 @@ class SignUpActivity : AppCompatActivity() {
         binding.layoutConfirmPhone.etPhoneNo.doAfterTextChanged {
             binding.tvConfirmPhoneError.visibility = View.GONE
         }
+
+        TermsAndPrivacyManager().formatTermsAndPolicyString(this, binding.tvTermsPrivacy)
 
         regBtn = findViewById(R.id.reg_btn)
         regBtn.setOnClickListener(View.OnClickListener {
