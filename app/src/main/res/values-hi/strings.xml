@@ -14,6 +14,7 @@
     <string name="your_phone_no">आपका फ़ोन नंबर</string>
     <string name="sign_in_with_otp">ओटीपी के साथ साइन इन करें</string>
     <string name="new_user">नया उपयोगकर्ता? साइन अप करेंं</string>
+    <string name="user_not_found">ऐसा कोई उपयोगकर्ता मौजूद नहीं है। कृपया एक नए खाते के लिए साइन अप करें</string>
 
     <!--    sign up string-->
     <string name="register_an_account">आपका किसान में आपका स्वागत है। खाता पंजीकृत करने के लिए कृपया नीचे दिए गए फ़ील्ड भरें।</string>
@@ -27,6 +28,9 @@
     <string name="privacy_policy">गोपनीयता नीति</string>
     <string name="sign_up">साइन अप करेंं</string>
     <string name="already_have_account">क्या आपके पास पहले से एक खाता मौजूद है? साइन इन करेंं</string>
+    <string name="user_exists">उपयोगकर्ता पहले से मौजूद है। कृपया साइन इन करें।</string>
+    <string name="empty_field">फ़ील्ड खाली नहीं हो सकता</string>
+    <string name="invalid_pincode">कृपया एक मान्य पिन कोड प्रदान करें।</string>
 
     <!--    phone verification string-->
     <string name="enter_authorization_code">प्राधिकरण कोड दर्ज करें</string>
@@ -70,8 +74,8 @@
     <string name="active">सक्रिय आदेश</string>
     <string name="history">पुराने आदेश</string>
     <string name="details">विवरण</string>
-    <string name="no_active_orders">कोई सक्रिय आदेश नहीं हैं।\nहोम में बेचने पर उत्पादों को एक्सप्लोर करें</string>
-    <string name="no_orders_history">कोई ऑर्डर इतिहास नहीं है।\nहोम में बेचने पर उत्पादों को एक्सप्लोर करें</string>
+    <string name="no_active_orders">कोई सक्रिय आदेश नहीं हैं।\nघर में बेचने पर उत्पादों को एक्सप्लोर करें</string>
+    <string name="no_orders_history">कोई ऑर्डर इतिहास नहीं है।\nघर में बेचने पर उत्पादों को एक्सप्लोर करें</string>
 
     <!--    order details strings-->
     <string name="order_status">विक्रय आदेश की स्थिति</string>

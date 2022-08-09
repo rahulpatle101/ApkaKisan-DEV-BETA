@@ -118,7 +118,7 @@ class SignUpActivity : AppCompatActivity() {
             checkUser.addListenerForSingleValueEvent(object : ValueEventListener {
                 override fun onDataChange(dataSnapshot: DataSnapshot) {
                     if (dataSnapshot.exists()) {
-                        binding.layoutPhone.etPhoneNo.error = "User already exists. Please Sign in."
+                        binding.layoutPhone.etPhoneNo.error = getString(R.string.user_exists)
                         binding.layoutPhone.etPhoneNo.requestFocus()
                     } else {
                         val fullNameValue = regName.editText?.text.toString()
@@ -143,7 +143,7 @@ class SignUpActivity : AppCompatActivity() {
                 }
 
                 override fun onCancelled(databaseError: DatabaseError) {
-                    showShortToast("------->>> Database Error: Line 120 in SignupJava, on data changed else condition")
+                    println("Database Error: Line 120 in SignupJava, on data changed else condition")
                 }
             })
         })
@@ -175,11 +175,11 @@ class SignUpActivity : AppCompatActivity() {
                 regPinCode.isErrorEnabled = false
                 true
             } else {
-                regPinCode.error = "Please provide a valid Pin Code."
+                regPinCode.error = getString(R.string.invalid_pincode)
                 false
             }
         } else {
-            regPinCode.error = "Field cannot be empty"
+            regPinCode.error = getString(R.string.empty_field)
             false
         }
     }
@@ -191,14 +191,14 @@ class SignUpActivity : AppCompatActivity() {
             regLocation.isErrorEnabled = false
             true
         } else {
-            regLocation.error = "Field cannot be empty"
+            regLocation.error = getString(R.string.empty_field)
             false
         }
     }
 
     private fun validateTermsAndCondition(): Boolean {
         return if (!checkBox.isChecked) {
-            checkBox.error = "Field cannot be empty"
+            checkBox.error = getString(R.string.empty_field)
             checkBox.setTextColor(Color.parseColor("#FB4141"))
             false
         } else {

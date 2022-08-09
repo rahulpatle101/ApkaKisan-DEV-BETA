@@ -136,12 +136,6 @@ class OrderHistoryFragment : BaseFragment() {
                 ds.isUnderlineText = false
             }
         }, startIndex, endIndex, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
-        spannableString.setSpan(
-            ForegroundColorSpan(R.color.blue),
-            startIndex,
-            endIndex,
-            Spanned.SPAN_EXCLUSIVE_EXCLUSIVE
-        )
         binding.tvNoOrders.text = spannableString
         binding.tvNoOrders.movementMethod = LinkMovementMethod.getInstance()
     }

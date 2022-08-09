@@ -21,6 +21,7 @@ import com.apkakisan.myapplication.databinding.ActivityLoginBinding
 import com.apkakisan.myapplication.helpers.*
 import com.apkakisan.myapplication.utils.BuildTypeUtil
 import com.apkakisan.myapplication.utils.PhoneNoUtil
+import org.koin.android.ext.android.get
 
 class LoginActivity : AppCompatActivity() {
 
@@ -110,8 +111,7 @@ class LoginActivity : AppCompatActivity() {
                     intent.putExtra(USER, user)
                     startActivity(intent)
                 } else {
-                    binding.layoutPhone.etPhoneNo.error =
-                        "No such user exist. Please Sign up for a new account"
+                    binding.layoutPhone.etPhoneNo.error = getString(R.string.user_not_found)
                     binding.layoutPhone.etPhoneNo.requestFocus()
                 }
             }

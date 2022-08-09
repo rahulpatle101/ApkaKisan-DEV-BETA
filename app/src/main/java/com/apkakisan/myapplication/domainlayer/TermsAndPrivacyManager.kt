@@ -53,7 +53,7 @@ class TermsAndPrivacyManager {
                 super.updateDrawState(ds)
                 ds.isUnderlineText = false
             }
-        }, startIndex, endIndex, Spanned.SPAN_INCLUSIVE_EXCLUSIVE)
+        }, startIndex, endIndex, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
     }
 
     @Throws(Exception::class)
@@ -79,6 +79,6 @@ class TermsAndPrivacyManager {
                 super.updateDrawState(ds)
                 ds.isUnderlineText = false
             }
-        }, startIndex, endIndex, Spanned.SPAN_INCLUSIVE_EXCLUSIVE)
+        }, startIndex, endIndex, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
     }
 }
