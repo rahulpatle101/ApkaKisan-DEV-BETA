@@ -103,48 +103,48 @@ class EditProfileFragment : BaseFragment() {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
                 editProfileViewModel.uiState.collect { uiState ->
                     when (uiState) {
-                        is EditProfileUiState.PhotoUploading -> {
+                        EditProfileUiState.PHOTO_UPLOADING -> {
                             binding.loader.loader.visibility = View.VISIBLE
                         }
-                        is EditProfileUiState.PhotoUploadSuccess -> {
+                        EditProfileUiState.PHOTO_UPLOAD_SUCCESS -> {
                             binding.loader.loader.visibility = View.GONE
                             Glide.with(requireContext())
                                 .load(editProfileViewModel.photo)
                                 .circleCrop()
                                 .into(binding.ivPhoto)
                         }
-                        is EditProfileUiState.PhotoUploadFailed -> {
+                        EditProfileUiState.PHOTO_UPLOAD_FAILED -> {
                             binding.loader.loader.visibility = View.GONE
                             showShortToast(getString(R.string.image_upload_failed))
                         }
-                        is EditProfileUiState.EmptyName -> {
+                        EditProfileUiState.EMPTY_NAME -> {
                             binding.tvNameError.visibility = View.VISIBLE
                             binding.tvNameError.text = getString(R.string.empty_name)
                         }
-                        is EditProfileUiState.InvalidPhone -> {
+                        EditProfileUiState.INVALID_PHONE -> {
                             binding.tvPhoneError.visibility = View.VISIBLE
                             binding.tvPhoneError.text = getString(R.string.invalid_phone)
                         }
-                        is EditProfileUiState.EmptyPhone -> {
+                        EditProfileUiState.EMPTY_PHONE -> {
                             binding.tvPhoneError.visibility = View.VISIBLE
                             binding.tvPhoneError.text = getString(R.string.empty_phone)
                         }
-                        is EditProfileUiState.EmptyAddress -> {
+                        EditProfileUiState.EMPTY_ADDRESS -> {
                             binding.tvAddressError.visibility = View.VISIBLE
                             binding.tvAddressError.text = getString(R.string.empty_address)
                         }
-                        is EditProfileUiState.DataValidated -> {
+                        EditProfileUiState.DATA_VALIDATED -> {
                             editProfileViewModel.updateUser()
                         }
-                        is EditProfileUiState.ProfileUpdating -> {
+                        EditProfileUiState.PROFILE_UPDATING -> {
                             KeyBoardUtil.hideKeyboard(requireContext(), binding.btnSave)
                             binding.loader.loader.visibility = View.VISIBLE
                         }
-                        is EditProfileUiState.ProfileUpdateSuccess -> {
+                        EditProfileUiState.PROFILE_UPDATE_SUCCESS -> {
                             binding.loader.loader.visibility = View.GONE
                             showAppDialog()
                         }
-                        is EditProfileUiState.ProfileUpdateFailed -> {
+                        EditProfileUiState.PROFILE_UPDATE_FAILED -> {
                             binding.loader.loader.visibility = View.GONE
                             showErrorView()
                         }

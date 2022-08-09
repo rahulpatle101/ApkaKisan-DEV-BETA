@@ -1,6 +1,5 @@
 package com.apkakisan.myapplication.profile
 
-import android.content.Intent
 import android.os.Bundle
 import com.apkakisan.myapplication.R
 import android.view.LayoutInflater
@@ -10,14 +9,17 @@ import com.apkakisan.myapplication.BaseFragment
 import com.apkakisan.myapplication.customerservice.CustomerServiceFragment
 import com.apkakisan.myapplication.databinding.FragmentProfileBinding
 import com.apkakisan.myapplication.helpers.*
-import com.apkakisan.myapplication.registration.LoginActivity
+import com.apkakisan.myapplication.order.HomeActivity
+import com.apkakisan.myapplication.utils.LanguageUtil
 import com.bumptech.glide.Glide
 import com.google.firebase.auth.FirebaseAuth
+import com.zeugmasolutions.localehelper.LocaleHelper
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import org.koin.androidx.viewmodel.ext.android.viewModel
+import java.util.*
 
 class ProfileFragment : BaseFragment() {
 
@@ -56,11 +58,25 @@ class ProfileFragment : BaseFragment() {
 
         binding.clLogout.setOnClickListener {
             FirebaseAuth.getInstance().signOut()
-            LocalStore.setUser(null)
-            val intent = Intent(requireContext(), LoginActivity::class.java)
-            intent.flags =
-                Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-            startActivity(intent)
+            it.visibility = View.GONE
+        }
+
+        binding.btnEnglish.setOnClickListener {
+            if (LanguageUtil.isHindi()) {
+                // (activity as HomeActivity).updateLocale(Locale("ar"))
+                LocaleHelper.setLocale(requireContext(), Locale("en"))
+                // LocalStore.isLanguageChanged = true
+                (activity as ProfileActivity).restartHomeActivity()
+            }
+        }
+
+        binding.btnHindi.setOnClickListener {
+            if (LanguageUtil.isEnglish()) {
+                // (activity as HomeActivity).updateLocale(Locale("en"))
+                LocaleHelper.setLocale(requireContext(), Locale("hi"))
+                // LocalStore.isLanguageChanged = true
+                (activity as ProfileActivity).restartHomeActivity()
+            }
         }
 
         updateUI()

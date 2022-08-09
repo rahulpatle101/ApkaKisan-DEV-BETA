@@ -123,7 +123,8 @@ class CreateOrderActivity : BaseActivity() {
                 quantity = tiQuantity.editText?.text.toString().trim().toInt()
                 apkakisanRate = apkaKisanPriceArg
                 mandiRate = mandiPriceArg
-                orderStatus = "Received"
+                orderStatusEn = "Received"
+                orderStatusHi = "प्राप्त हुआ"
                 totalSellPrice = totalEarning
                 inspectionDateTime = pickupDateTimeInput.text.toString().trim()
                 detail = etCommoditydetail.editText?.text.toString().trim()
@@ -141,9 +142,12 @@ class CreateOrderActivity : BaseActivity() {
                 val notificationId = UUID.randomUUID().toString()
                 Notification().apply {
                     id = notificationId
-                    type = "In App Notification"
-                    title = "Order Received!"
-                    description = "You order has received. Thanks."
+                    typeEn = "In App Notification"
+                    typeHi = "ऐप अधिसूचना में"
+                    titleEn = "Order Received!"
+                    titleHi = "आदेश प्राप्त!"
+                    descriptionEn = "You order has received. Thanks."
+                    descriptionHi = "आपको आदेश प्राप्त हुआ है। धन्यवाद।"
                     createdDate = currentDateAndTime
                     userId = LocalStore.getUser()?.userId!!
                     orderId = order.orderId

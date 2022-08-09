@@ -22,7 +22,7 @@
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="80dp"
             android:fontFamily="@font/nunito_bold"
-            android:text="Enter Authorization Code"
+            android:text="@string/enter_authorization_code"
             android:textAlignment="center"
             android:textColor="#171725"
             android:textSize="20sp" />
@@ -33,7 +33,7 @@
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="20dp"
             android:fontFamily="@font/nunito_regular"
-            android:text="We have sent SMS to:"
+            android:text="@string/sms_sent"
             android:textAlignment="center"
             android:textColor="#92929D"
             android:textSize="14sp" />
@@ -67,7 +67,7 @@
             android:layout_marginTop="20dp"
             android:background="@drawable/text_field"
             android:fontFamily="@font/poppins_regular"
-            android:hint="6 Digit Code"
+            android:hint="@string/six_digit_code"
             android:textColorHint="#92929D">
 
             <com.google.android.material.textfield.TextInputEditText
@@ -101,7 +101,7 @@
             android:fontFamily="@font/nunito_regular"
             android:gravity="end"
             android:onClick="callResendCode"
-            android:text="Resend Code"
+            android:text="@string/resend_code"
             android:textColor="#46AA42"
             android:textSize="14sp"
             android:visibility="gone"
@@ -116,7 +116,7 @@
             android:background="@drawable/shape_bg_btn_green"
             android:backgroundTint="#46AA42"
             android:fontFamily="@font/poppins_regular"
-            android:text="Verify"
+            android:text="@string/verify"
             android:textAllCaps="false"
             android:textColor="#fff"
             android:transitionName="button_tran" />
@@ -129,7 +129,7 @@
             android:layout_marginBottom="5dp"
             android:background="@drawable/rounded_button_outline"
             android:fontFamily="@font/poppins_regular"
-            android:text="Cancel"
+            android:text="@string/cancel"
             android:textAllCaps="false"
             android:textColor="#46AA42"
             android:transitionName="button_tran"

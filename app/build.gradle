@@ -100,4 +100,7 @@ dependencies {
 
     // secured shared preferences library
     implementation "androidx.security:security-crypto:1.1.0-alpha03"
+
+    // localization components
+    implementation 'com.zeugmasolutions.localehelper:locale-helper-android:1.5.1'
 }

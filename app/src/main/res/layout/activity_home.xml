@@ -33,7 +33,7 @@
             android:layout_marginTop="20dp"
             android:layout_marginEnd="16dp"
             android:fontFamily="@font/poppins_regular"
-            android:text="Mandi Prices"
+            android:text="@string/mandi_prices"
             android:textColor="@color/colorTextBlack"
             android:textSize="18sp" />
 

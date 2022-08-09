@@ -44,16 +44,16 @@
         <entry key="..\:/Fiverr/ApkaKisan/ApkaKisan/app/src/main/res/drawable/shape_bg_profile_option_green.xml" value="0.13" />
         <entry key="..\:/Fiverr/ApkaKisan/ApkaKisan/app/src/main/res/drawable/shape_edittext_form.xml" value="0.13" />
         <entry key="..\:/Fiverr/ApkaKisan/ApkaKisan/app/src/main/res/drawable/shape_line_dotted_vertical.xml" value="0.137" />
-        <entry key="..\:/Fiverr/ApkaKisan/ApkaKisan/app/src/main/res/layout/activity_cancel_order.xml" value="0.20416666666666666" />
-        <entry key="..\:/Fiverr/ApkaKisan/ApkaKisan/app/src/main/res/layout/activity_create_order.xml" value="0.21927083333333333" />
+        <entry key="..\:/Fiverr/ApkaKisan/ApkaKisan/app/src/main/res/layout/activity_cancel_order.xml" value="0.32533197139938713" />
+        <entry key="..\:/Fiverr/ApkaKisan/ApkaKisan/app/src/main/res/layout/activity_create_order.xml" value="0.33177083333333335" />
         <entry key="..\:/Fiverr/ApkaKisan/ApkaKisan/app/src/main/res/layout/activity_home.xml" value="0.32533197139938713" />
         <entry key="..\:/Fiverr/ApkaKisan/ApkaKisan/app/src/main/res/layout/activity_login.xml" value="0.32533197139938713" />
         <entry key="..\:/Fiverr/ApkaKisan/ApkaKisan/app/src/main/res/layout/activity_notification.xml" value="0.164453125" />
         <entry key="..\:/Fiverr/ApkaKisan/ApkaKisan/app/src/main/res/layout/activity_order_detail.xml" value="0.20416666666666666" />
         <entry key="..\:/Fiverr/ApkaKisan/ApkaKisan/app/src/main/res/layout/activity_orders.xml" value="0.20416666666666666" />
         <entry key="..\:/Fiverr/ApkaKisan/ApkaKisan/app/src/main/res/layout/activity_profile.xml" value="0.21927083333333333" />
-        <entry key="..\:/Fiverr/ApkaKisan/ApkaKisan/app/src/main/res/layout/activity_sign_up.xml" value="0.25" />
-        <entry key="..\:/Fiverr/ApkaKisan/ApkaKisan/app/src/main/res/layout/activity_terms_privacy.xml" value="0.21501532175689478" />
+        <entry key="..\:/Fiverr/ApkaKisan/ApkaKisan/app/src/main/res/layout/activity_sign_up.xml" value="0.32533197139938713" />
+        <entry key="..\:/Fiverr/ApkaKisan/ApkaKisan/app/src/main/res/layout/activity_splash.xml" value="0.33177083333333335" />
         <entry key="..\:/Fiverr/ApkaKisan/ApkaKisan/app/src/main/res/layout/activity_user_profile.xml" value="0.21501532175689478" />
         <entry key="..\:/Fiverr/ApkaKisan/ApkaKisan/app/src/main/res/layout/activity_verify_phone_no.xml" value="0.32533197139938713" />
         <entry key="..\:/Fiverr/ApkaKisan/ApkaKisan/app/src/main/res/layout/dialog_app.xml" value="0.21501532175689478" />
@@ -64,7 +64,7 @@
         <entry key="..\:/Fiverr/ApkaKisan/ApkaKisan/app/src/main/res/layout/fragment_notification.xml" value="0.21927083333333333" />
         <entry key="..\:/Fiverr/ApkaKisan/ApkaKisan/app/src/main/res/layout/fragment_notification_setting.xml" value="0.21927083333333333" />
         <entry key="..\:/Fiverr/ApkaKisan/ApkaKisan/app/src/main/res/layout/fragment_order.xml" value="0.20416666666666666" />
-        <entry key="..\:/Fiverr/ApkaKisan/ApkaKisan/app/src/main/res/layout/fragment_profile.xml" value="0.21927083333333333" />
+        <entry key="..\:/Fiverr/ApkaKisan/ApkaKisan/app/src/main/res/layout/fragment_profile.xml" value="0.32533197139938713" />
         <entry key="..\:/Fiverr/ApkaKisan/ApkaKisan/app/src/main/res/layout/item_cancel_order.xml" value="0.20416666666666666" />
         <entry key="..\:/Fiverr/ApkaKisan/ApkaKisan/app/src/main/res/layout/item_notification.xml" value="0.21927083333333333" />
         <entry key="..\:/Fiverr/ApkaKisan/ApkaKisan/app/src/main/res/layout/item_notification_setting.xml" value="0.21927083333333333" />

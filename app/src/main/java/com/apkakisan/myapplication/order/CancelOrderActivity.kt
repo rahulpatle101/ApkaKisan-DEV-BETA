@@ -19,7 +19,8 @@ class CancelOrderActivity : BaseActivity() {
     private lateinit var binding: ActivityCancelOrderBinding
     private lateinit var order: Order
 
-    private var cancellationReason = ""
+    private var cancellationReasonEn = ""
+    private var cancellationReasonHi = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -35,17 +36,18 @@ class CancelOrderActivity : BaseActivity() {
         binding.toolbar.tvTitle.text = getString(R.string.cancellation_reason)
 
         binding.btnSubmit.setOnClickListener {
-            if (cancellationReason.isEmpty()) {
+            if (cancellationReasonEn.isEmpty() || cancellationReasonHi.isEmpty()) {
                 showShortToast("Please select cancellation reason")
                 return@setOnClickListener
             }
-            
-            if (cancellationReason == "Etc") {
+
+            if (cancellationReasonEn == "Etc" || cancellationReasonHi == "आदि") {
                 val cancellationReasonText = binding.etReason.text.toString().trim()
                 if (cancellationReasonText.isEmpty()) {
                     binding.etReason.error = "Must not be empty"
                 } else {
-                    cancellationReason = cancellationReasonText
+                    cancellationReasonEn = cancellationReasonText
+                    cancellationReasonHi = cancellationReasonText
                     cancelOrderProcess()
                 }
             } else cancelOrderProcess()
@@ -60,12 +62,14 @@ class CancelOrderActivity : BaseActivity() {
             this,
             getCancellationReasonList(),
             onItemClick = { reason: CancellationReason, _: View, _: Int ->
-                if (reason.cancellationReason == "Etc")
+                if (reason.cancellationReason == "Etc" || reason.cancellationReason == "आदि")
                     binding.etReason.visibility = View.VISIBLE
                 else {
                     binding.etReason.visibility = View.GONE
                 }
-                cancellationReason = reason.cancellationReason
+                cancellationReasonEn = reason.cancellationReasonEn
+                cancellationReasonHi = reason.cancellationReasonHi
+
             }
         )
         binding.rvCancellationReasons.adapter = adapter
@@ -78,17 +82,31 @@ class CancelOrderActivity : BaseActivity() {
     private fun cancelOrderProcess() {
         val reference = FirebaseDatabase.getInstance().getReference("Orders")
         reference.child(order.orderId)
-            .child("orderStatus")
+            .child("orderStatusEn")
             .setValue("Cancelled")
             .addOnSuccessListener {
-                showShortToast("Order cancellation succeeded!")
-                reference.child(order.orderId).child("cancellationReason")
-                    .setValue(cancellationReason)
+                showShortToast(getString(R.string.order_cancellation_succeedded))
+                reference.child(order.orderId).child("cancellationReasonEn")
+                    .setValue(cancellationReasonEn)
                 setResult(Activity.RESULT_OK)
                 finish()
             }
             .addOnFailureListener {
-                showShortToast("Order cancellation failed!")
+                showShortToast(getString(R.string.order_cancellation_failed))
+            }
+
+        reference.child(order.orderId)
+            .child("orderStatusHi")
+            .setValue("रद्द")
+            .addOnSuccessListener {
+                showShortToast(getString(R.string.order_cancellation_succeedded))
+                reference.child(order.orderId).child("cancellationReasonHi")
+                    .setValue(cancellationReasonHi)
+                setResult(Activity.RESULT_OK)
+                finish()
+            }
+            .addOnFailureListener {
+                showShortToast(getString(R.string.order_cancellation_failed))
             }
     }
 }

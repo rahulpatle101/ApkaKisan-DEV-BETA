@@ -25,7 +25,7 @@ class FirebaseDataSource {
                 notificationList.add(notification!!)
             }
             notificationList.filter {
-                it.type == "In App Notification"
+                it.typeEn == "In App Notification"
             }
         } catch (ex: Exception) {
             null

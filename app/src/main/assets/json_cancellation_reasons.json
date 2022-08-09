@@ -1,14 +1,18 @@
 [
   {
-    "cancellation_reason": "Found a better price somewhere"
+    "cancellation_reason_en": "Found a better price somewhere",
+    "cancellation_reason_hi": "कहीं बेहतर कीमत मिली"
   },
   {
-    "cancellation_reason": "Want to change the payment method"
+    "cancellation_reason_en": "Want to change the payment method",
+    "cancellation_reason_hi": "भुगतान का तरीका बदलना चाहते हैं"
   },
   {
-    "cancellation_reason": "Wrongly placed sell order"
+    "cancellation_reason_en": "Wrongly placed sell order",
+    "cancellation_reason_hi": "गलत तरीके से दिया गया विक्रय आदेश"
   },
   {
-    "cancellation_reason": "Etc"
+    "cancellation_reason_en": "Etc",
+    "cancellation_reason_hi": "आदि"
   }
 ]

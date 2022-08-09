@@ -1,40 +1,75 @@
 <resources>
     <string name="app_name">ApkaKisan</string>
 
-    <!--    general errors-->
-    <string name="file_load_failed">File loading failed.</string>
-
-    <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="terms_privacy">I accept the Terms of Use and Privacy Policy</string>
-    <string name="terms_of_use">Terms of Use</string>
-    <string name="privacy_policy">Privacy Policy</string>
-    <string name="home">Home</string>
-    <string name="orders">Orders</string>
-    <string name="title_activity_main_container">MainContainer</string>
-    <string name="title_home">Home</string>
-    <string name="title_dashboard">Dashboard</string>
-    <string name="title_notifications">Notifications</string>
+    <!--    general string-->
     <string name="ok">OK</string>
     <string name="something_went_wrong">Something went wrong. Please try again later.</string>
     <string name="coming_soon">Coming soon!</string>
-    <string name="create_another_sell_order">Create another sell order</string>
-    <string name="my_orders">My Orders</string>
-    <string name="active">Active</string>
-    <string name="history">History</string>
-    <string name="details">Details</string>
-    <string name="no_active_orders">There are no Active order.\nExplore products on sell in Home</string>
-    <string name="no_orders_history">There are no orders history.\nExplore products on sell in Home</string>
+    <string name="no_result_found">No result found.</string>
 
-    <!--    create order screen-->
+    <!--    sign in string-->
+    <string name="welcome_to_apkakisan">Welcome to ApkaKisan!</string>
+    <string name="sign_in_with_phone_no">Please sign in with your phone number.</string>
+    <string name="your_phone_no">Your Phone Number</string>
+    <string name="sign_in_with_otp">Sign In with OTP</string>
+    <string name="new_user">New User? Sign Up</string>
+
+    <!--    sign up string-->
+    <string name="register_an_account">Welcome to ApkaKisan. Please fill in the fields below to register an account.</string>
+    <string name="full_name">Full Name</string>
+    <string name="phone_no">Phone Number</string>
+    <string name="confirm_phone_no">Confirm Phone Number</string>
+    <string name="pin_code">Pin Code</string>
+    <string name="location">Location</string>
+    <string name="accept_term_policy">I accept the <u>Terms of Use</u> and <u>Privacy Policy</u></string>
+    <string name="sign_up">Sign Up</string>
+    <string name="already_have_account">Already have an account? Sign In</string>
+
+    <!--    phone verification string-->
+    <string name="enter_authorization_code">Enter Authorization Code</string>
+    <string name="sms_sent">We have sent SMS to:</string>
+    <string name="six_digit_code">6 Digit Code</string>
+    <string name="resend_code">Resend Code</string>
+    <string name="verify">Verify</string>
+    <string name="cancel">Cancel</string>
+
+    <!--    home string-->
+    <string name="home">Home</string>
+    <string name="orders">Orders</string>
+    <string name="notification">Notification</string>
+    <string name="profile">Profile</string>
+    <string name="mandi_prices">Mandi Prices</string>
+    <string name="mandi">Mandi</string>
+    <string name="apkakisan">ApkaKisan</string>
+    <string name="sell_to_apkakisan">+ Sell to ApkaKisan</string>
+
+    <!--    create order strings-->
     <string name="selling_commodity">Sell Order details for %s Rs %s/kg</string>
+    <string name="quantity">Quantity / kg</string>
+    <string name="commodity_pickup">Commodity Pickup Date and Time</string>
+    <string name="address_location">Address Location</string>
+    <string name="address_street">Address - Street</string>
+    <string name="pincode">Pincode</string>
+    <string name="details_about_commodity">Details about the Commodity (Optional)</string>
+    <string name="earning_overview">Earning Overview</string>
+    <string name="harvest_name_quantity_x_kg">Harvest Name Quantity x kg</string>
+    <string name="total_earning">Total Earning</string>
+    <string name="payment_method_info">Payment Method Info</string>
+    <string name="upi_phone">UPI Phone Number</string>
+    <string name="sell_now">Sell Now</string>
     <string name="sell_order_created">Sell Order Created!</string>
     <string name="sell_order_created_congrats">Congratulations! You sell order has been successfully been created.
         We will notify you when the order status will be processed. Additionally you can check details under My Order Page.</string>
     <string name="sell_again">Sell again</string>
-    <string name="cancel">Cancel</string>
+    <string name="create_another_sell_order">Create another sell order</string>
     <string name="done">Done</string>
 
-    <!--    order details screen-->
+    <!--    orders strings-->
+    <string name="active">Active</string>
+    <string name="history">History</string>
+    <string name="details">Details</string>
+
+    <!--    order details strings-->
     <string name="order_status">Order Status</string>
     <string name="order_completed">Order Completed</string>
     <string name="order_inspected">Order Inspected</string>
@@ -48,9 +83,6 @@
     <string name="inspection_appointment_date">Inspection Appointment Date</string>
     <string name="harvest_location">Harvest Location</string>
     <string name="notes">Notes</string>
-    <string name="earning_overview">Earning Overview</string>
-    <string name="harvest_name_quantity_x_kg">Harvest Name Quantity x kg</string>
-    <string name="total_earning">Total Earning</string>
     <string name="cancel_order">Cancel order</string>
     <string name="contact_support">Contact Support</string>
 
@@ -62,30 +94,29 @@
     <string name="wrongly_placed_sell_order">Wrongly placed sell order</string>
     <string name="etc">Etc</string>
     <string name="submit">Submit</string>
-    <string name="no_result_found">No result found.</string>
+    <string name="please_select_cancellation_reason">Please select cancellation reason</string>
+    <string name="order_cancellation_succeedded">Order cancellation succeeded!</string>
+    <string name="order_cancellation_failed">Order cancellation failed!</string>
 
-    <!--    notifications screen-->
-    <string name="notification">Notification</string>
-    <string name="notification_settings">Notification Settings</string>
+    <!--    notifications strings-->
     <string name="empty_notifications">There are no notifications.</string>
+    <string name="notification_settings">Notification Settings</string>
 
-    <!--    profile screen-->
-    <string name="profile">Profile</string>
-    <string name="name">Name</string>
-    <string name="phone">Phone </string>
+    <!--    profile strings-->
     <string name="edit_profile">Edit Profile</string>
     <string name="customer_service">Customer Service</string>
     <string name="logout">Logout</string>
+    <string name="english">English</string>
+    <string name="hindi">हिन्दी</string>
+    <string name="name">Name</string>
+    <string name="phone">Phone</string>
     <string name="address">Address</string>
     <string name="save">Save</string>
     <string name="profile_updated">Profile Updated!</string>
     <string name="profile_updated_successfully">You have successfully updated your profile.</string>
     <string name="empty_name">Name must not be empty</string>
-    <string name="empty_phone">Phone number must not be empty</string>
-    <string name="empty_confirmed_phone">Confirm phone number must not be empty</string>
     <string name="invalid_phone">Invalid phone number</string>
-    <string name="invalid_confirmed_phone">Invalid confirm phone number</string>
-    <string name="phone_confirmed_not_matched">Phone and confirmed phone not matched</string>
+    <string name="empty_phone">Phone number must not be empty</string>
     <string name="empty_address">Address must not be empty</string>
     <string name="image_upload_failed">Image upload failed.</string>
 

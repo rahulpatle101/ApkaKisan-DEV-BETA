@@ -1,14 +1,12 @@
 package com.apkakisan.myapplication.network.responses
 
-import com.google.gson.annotations.SerializedName
+import com.apkakisan.myapplication.utils.LanguageUtil
 
 data class NotificationType(
-
-    @SerializedName("id")
     var id: String = "",
-
-    @SerializedName("type")
-    var type: String = "",
-
+    var typeEn: String = "",
+    var typeHi: String = "",
     var notificationSetting: NotificationTypeSetting = NotificationTypeSetting()
-)
+) {
+    val type: String get() = if (LanguageUtil.isEnglish()) typeEn else typeHi
+}
