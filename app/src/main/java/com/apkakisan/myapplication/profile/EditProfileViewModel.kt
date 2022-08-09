@@ -7,6 +7,7 @@ import com.apkakisan.myapplication.BaseViewModel
 import com.apkakisan.myapplication.User
 import com.apkakisan.myapplication.helpers.LocalStore
 import com.apkakisan.myapplication.utils.BuildTypeUtil
+import com.apkakisan.myapplication.utils.PhoneNoUtil
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.launch
@@ -33,6 +34,10 @@ class EditProfileViewModel(
             phone = PhoneNumberUtils.formatNumber(phone, "US")
         }
         address = user.location ?: ""
+    }
+
+    fun formatUSTo10Digit() {
+        phone = PhoneNoUtil.formatUSTo10Digit(phone)
     }
 
     fun validate() = viewModelScope.launch {
