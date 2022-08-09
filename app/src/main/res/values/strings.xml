@@ -120,6 +120,9 @@
     <string name="profile_updated_successfully">You have successfully updated your profile.</string>
     <string name="empty_name">Name must not be empty</string>
     <string name="invalid_phone">Invalid phone number</string>
+    <string name="empty_confirmed_phone">Confirm phone number must not be empty</string>
+    <string name="invalid_confirmed_phone">Invalid confirm phone number</string>
+    <string name="phone_confirmed_not_matched">Phone and confirmed phone not matched</string>
     <string name="empty_phone">Phone number must not be empty</string>
     <string name="empty_address">Address must not be empty</string>
     <string name="image_upload_failed">Image upload failed.</string>
