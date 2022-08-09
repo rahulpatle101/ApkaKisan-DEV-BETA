@@ -6,6 +6,7 @@
     <string name="something_went_wrong">कुछ गलत हो गया। बाद में पुन: प्रयास करें।</string>
     <string name="coming_soon">जल्द आ रहा है!</string>
     <string name="no_result_found">कोई परिणाम नहीं मिला।</string>
+    <string name="file_load_failed">फ़ाइल लोड करना विफल रहा.</string>
 
     <!--    sign in string-->
     <string name="welcome_to_apkakisan">आपका किसान में आपका स्वागत है!</string>

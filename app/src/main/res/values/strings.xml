@@ -6,6 +6,7 @@
     <string name="something_went_wrong">Something went wrong. Please try again later.</string>
     <string name="coming_soon">Coming soon!</string>
     <string name="no_result_found">No result found.</string>
+    <string name="file_load_failed">File loading failed.</string>
 
     <!--    sign in string-->
     <string name="welcome_to_apkakisan">Welcome to ApkaKisan!</string>
