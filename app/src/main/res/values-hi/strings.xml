@@ -21,10 +21,9 @@
     <string name="confirm_phone_no">फ़ोन नंबर की पुष्टि करें</string>
     <string name="pin_code">पिन कोड</string>
     <string name="location">स्थान</string>
-    <string name="accept_term_policy">मैं उपयोग की शर्तें और गोपनीयता नीति स्वीकार करता हूं</string>
-    <string name="terms_privacy">I accept the Terms of Use and Privacy Policy</string>
-    <string name="terms_of_use">Terms of Use</string>
-    <string name="privacy_policy">Privacy Policy</string>
+    <string name="terms_privacy">मैं उपयोग की शर्तें और गोपनीयता नीति स्वीकार करता हू</string>
+    <string name="terms_of_use">उपयोग की शर्तें</string>
+    <string name="privacy_policy">गोपनीयता नीति</string>
     <string name="sign_up">साइन अप करेंं</string>
     <string name="already_have_account">क्या आपके पास पहले से एक खाता मौजूद है? साइन इन करेंं</string>
 
@@ -70,6 +69,8 @@
     <string name="active">सक्रिय आदेश</string>
     <string name="history">पुराने आदेश</string>
     <string name="details">विवरण</string>
+    <string name="no_active_orders">कोई सक्रिय आदेश नहीं हैं।\nहोम में बेचने पर उत्पादों को एक्सप्लोर करें</string>
+    <string name="no_orders_history">कोई ऑर्डर इतिहास नहीं है।\nहोम में बेचने पर उत्पादों को एक्सप्लोर करें</string>
 
     <!--    order details strings-->
     <string name="order_status">विक्रय आदेश की स्थिति</string>

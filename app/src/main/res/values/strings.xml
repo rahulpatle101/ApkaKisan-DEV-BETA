@@ -70,6 +70,8 @@
     <string name="active">Active</string>
     <string name="history">History</string>
     <string name="details">Details</string>
+    <string name="no_active_orders">There are no Active orders.\nExplore products on sell in Home</string>
+    <string name="no_orders_history">There are no orders History.\nExplore products on sell in Home</string>
 
     <!--    order details strings-->
     <string name="order_status">Order Status</string>
