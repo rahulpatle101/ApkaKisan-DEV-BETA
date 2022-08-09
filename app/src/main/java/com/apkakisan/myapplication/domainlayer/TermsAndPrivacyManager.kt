@@ -22,7 +22,7 @@ class TermsAndPrivacyManager {
     ) {
         try {
             val spannableString = SpannableString(context.getString(R.string.terms_privacy))
-            formatTermsOfUserString(context, spannableString)
+            formatTermsOfUseString(context, spannableString)
             formatPrivacyPolicyString(context, spannableString)
             textView.text = spannableString
             textView.movementMethod = LinkMovementMethod.getInstance()
@@ -32,7 +32,7 @@ class TermsAndPrivacyManager {
     }
 
     @Throws(Exception::class)
-    private fun formatTermsOfUserString(
+    private fun formatTermsOfUseString(
         context: Context, spannableString: SpannableString
     ) {
         val startIndex = StringUtil.findStartIndex(
@@ -53,13 +53,7 @@ class TermsAndPrivacyManager {
                 super.updateDrawState(ds)
                 ds.isUnderlineText = false
             }
-        }, startIndex, endIndex, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
-        spannableString.setSpan(
-            ForegroundColorSpan(R.color.blue),
-            startIndex,
-            endIndex,
-            Spanned.SPAN_EXCLUSIVE_EXCLUSIVE
-        )
+        }, startIndex, endIndex, Spanned.SPAN_INCLUSIVE_EXCLUSIVE)
     }
 
     @Throws(Exception::class)
@@ -85,12 +79,6 @@ class TermsAndPrivacyManager {
                 super.updateDrawState(ds)
                 ds.isUnderlineText = false
             }
-        }, startIndex, endIndex, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
-        spannableString.setSpan(
-            ForegroundColorSpan(R.color.blue),
-            startIndex,
-            endIndex,
-            Spanned.SPAN_EXCLUSIVE_EXCLUSIVE
-        )
+        }, startIndex, endIndex, Spanned.SPAN_INCLUSIVE_EXCLUSIVE)
     }
 }

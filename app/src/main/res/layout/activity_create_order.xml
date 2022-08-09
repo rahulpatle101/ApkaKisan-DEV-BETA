@@ -242,6 +242,7 @@
                     android:fontFamily="@font/nunito_regular"
                     android:text="@string/terms_privacy"
                     android:textColor="@color/colorTextBlack"
+                    android:textColorLink="@color/green"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toEndOf="@+id/checkBox"
                     app:layout_constraintTop_toTopOf="parent" />
