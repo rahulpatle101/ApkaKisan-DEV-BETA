@@ -21,7 +21,9 @@
     <string name="confirm_phone_no">Confirm Phone Number</string>
     <string name="pin_code">Pin Code</string>
     <string name="location">Location</string>
-    <string name="accept_term_policy">I accept the <u>Terms of Use</u> and <u>Privacy Policy</u></string>
+    <string name="terms_privacy">I accept the Terms of Use and Privacy Policy</string>
+    <string name="terms_of_use">Terms of Use</string>
+    <string name="privacy_policy">Privacy Policy</string>
     <string name="sign_up">Sign Up</string>
     <string name="already_have_account">Already have an account? Sign In</string>
 

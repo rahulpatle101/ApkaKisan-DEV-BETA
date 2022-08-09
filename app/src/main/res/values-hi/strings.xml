@@ -22,6 +22,9 @@
     <string name="pin_code">पिन कोड</string>
     <string name="location">स्थान</string>
     <string name="accept_term_policy">मैं उपयोग की शर्तें और गोपनीयता नीति स्वीकार करता हूं</string>
+    <string name="terms_privacy">I accept the Terms of Use and Privacy Policy</string>
+    <string name="terms_of_use">Terms of Use</string>
+    <string name="privacy_policy">Privacy Policy</string>
     <string name="sign_up">साइन अप करेंं</string>
     <string name="already_have_account">क्या आपके पास पहले से एक खाता मौजूद है? साइन इन करेंं</string>
 
