@@ -24,7 +24,7 @@
             android:fontFamily="@font/poppins_regular"
             app:iconifiedByDefault="false"
             app:queryBackground="@null"
-            app:queryHint="Search Mandi Commodities" />
+            app:queryHint="@string/search_mandi_commodities" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:layout_width="match_parent"

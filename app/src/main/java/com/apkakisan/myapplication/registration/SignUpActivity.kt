@@ -12,24 +12,17 @@ import com.google.firebase.database.DataSnapshot
 import android.content.Intent
 import android.graphics.Color
 import android.telephony.PhoneNumberFormattingTextWatcher
-import android.text.SpannableString
-import android.text.Spanned
-import android.text.TextPaint
-import android.text.method.LinkMovementMethod
-import android.text.style.ClickableSpan
-import android.text.style.ForegroundColorSpan
+import android.util.TypedValue
 import android.view.View
 import android.widget.Button
 import androidx.core.widget.doAfterTextChanged
 import com.apkakisan.myapplication.User
-import com.apkakisan.myapplication.common.TermsPrivacyActivity
 import com.apkakisan.myapplication.databinding.ActivitySignUpBinding
 import com.apkakisan.myapplication.domainlayer.TermsAndPrivacyManager
 import com.apkakisan.myapplication.helpers.*
-import com.apkakisan.myapplication.order.HomeActivity
 import com.apkakisan.myapplication.utils.BuildTypeUtil
+import com.apkakisan.myapplication.utils.LanguageUtil
 import com.apkakisan.myapplication.utils.PhoneNoUtil
-import com.apkakisan.myapplication.utils.StringUtil
 import com.google.firebase.database.DatabaseError
 import java.text.SimpleDateFormat
 import java.util.*
@@ -40,7 +33,6 @@ class SignUpActivity : AppCompatActivity() {
     private lateinit var regPinCode: TextInputLayout
     private lateinit var regLocation: TextInputLayout
     private lateinit var regBtn: Button
-    private lateinit var regToLoginBtn: Button
     private lateinit var checkBox: CheckBox
 
     private lateinit var binding: ActivitySignUpBinding
@@ -148,10 +140,13 @@ class SignUpActivity : AppCompatActivity() {
             })
         })
 
-        regToLoginBtn = findViewById(R.id.reg_login_btn)
-        regToLoginBtn.setOnClickListener {
-            hideKeyboard()
-            finish()
+        findViewById<Button>(R.id.reg_login_btn).apply {
+            if (LanguageUtil.isHindi())
+                setTextSize(TypedValue.COMPLEX_UNIT_SP, 12f);
+            setOnClickListener {
+                hideKeyboard()
+                finish()
+            }
         }
     }
 
