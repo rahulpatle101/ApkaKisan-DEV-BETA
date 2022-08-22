@@ -10,7 +10,7 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:orientation="vertical"
-        app:layout_constraintBottom_toTopOf="@+id/bottom_navigation"
+        app:layout_constraintBottom_toTopOf="@+id/layoutBottom"
         app:layout_constraintTop_toTopOf="parent">
 
         <androidx.appcompat.widget.SearchView
@@ -21,11 +21,10 @@
             android:layout_marginTop="16dp"
             android:layout_marginEnd="16dp"
             android:background="@drawable/rounded_searchbar_outline"
-            android:fontFamily="@font/poppins_regular"
-            android:iconifiedByDefault="false"
-            android:queryBackground="@null"
-            android:queryHint="Search Mandi Commodities"
-            tools:targetApi="lollipop" />
+            app:iconifiedByDefault="false"
+            app:queryBackground="@null"
+            app:queryHint="@string/search_mandi_commodities"
+            app:theme="@style/HomeSearchView" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:layout_width="match_parent"
@@ -34,7 +33,7 @@
             android:layout_marginTop="20dp"
             android:layout_marginEnd="16dp"
             android:fontFamily="@font/poppins_regular"
-            android:text="Mandi Prices"
+            android:text="@string/mandi_prices"
             android:textColor="@color/colorTextBlack"
             android:textSize="18sp" />
 
@@ -64,6 +63,7 @@
         app:itemIconTint="@color/navigation_item"
         app:itemTextColor="@color/navigation_item"
         app:labelVisibilityMode="labeled"
+
         app:layout_constraintBottom_toBottomOf="parent"
         app:menu="@menu/menu_navigation" />
 

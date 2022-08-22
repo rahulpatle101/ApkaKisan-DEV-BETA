@@ -16,5 +16,6 @@
     <color name="colorWhiteGrey">#F1F1F5</color>
     <color name="colorTextBlack">#171725</color>
     <color name="colorLightBlue">#e0f7ea</color>
+    <color name="blue">#4d6ff0</color>
 
 </resources>

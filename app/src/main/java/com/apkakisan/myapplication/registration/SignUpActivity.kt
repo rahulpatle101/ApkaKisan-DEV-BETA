@@ -9,16 +9,20 @@ import android.view.WindowManager
 import com.apkakisan.myapplication.R
 import com.google.firebase.database.ValueEventListener
 import com.google.firebase.database.DataSnapshot
-import android.widget.Toast
 import android.content.Intent
 import android.graphics.Color
+import android.telephony.PhoneNumberFormattingTextWatcher
+import android.util.TypedValue
 import android.view.View
 import android.widget.Button
+import androidx.core.widget.doAfterTextChanged
 import com.apkakisan.myapplication.User
-import com.apkakisan.myapplication.helpers.USER
-import com.apkakisan.myapplication.helpers.hideKeyboard
-import com.apkakisan.myapplication.helpers.showShortToast
+import com.apkakisan.myapplication.databinding.ActivitySignUpBinding
+import com.apkakisan.myapplication.domainlayer.TermsAndPrivacyManager
+import com.apkakisan.myapplication.helpers.*
 import com.apkakisan.myapplication.utils.BuildTypeUtil
+import com.apkakisan.myapplication.utils.LanguageUtil
+import com.apkakisan.myapplication.utils.PhoneNoUtil
 import com.google.firebase.database.DatabaseError
 import java.text.SimpleDateFormat
 import java.util.*
@@ -26,17 +30,17 @@ import java.util.*
 class SignUpActivity : AppCompatActivity() {
 
     private lateinit var regName: TextInputLayout
-    private lateinit var regPhoneNo: TextInputLayout
-    private lateinit var regPhoneNoConfirmation: TextInputLayout
     private lateinit var regPinCode: TextInputLayout
     private lateinit var regLocation: TextInputLayout
     private lateinit var regBtn: Button
-    private lateinit var regToLoginBtn: Button
     private lateinit var checkBox: CheckBox
+
+    private lateinit var binding: ActivitySignUpBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_sign_up)
+        binding = ActivitySignUpBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
         //This Line will hide the status bar from the screen
         window.setFlags(
@@ -45,20 +49,43 @@ class SignUpActivity : AppCompatActivity() {
         )
 
         regName = findViewById(R.id.reg_name)
-        regPhoneNo = findViewById(R.id.reg_phoneNo)
-        regPhoneNoConfirmation = findViewById(R.id.reg_phoneNoConfirmation)
         regPinCode = findViewById(R.id.reg_pincode)
         regLocation = findViewById(R.id.reg_location)
         checkBox = findViewById(R.id.checkBox)
 
+        if (BuildTypeUtil.isDebug() || BuildTypeUtil.isDebugWithRegistration()) {
+            binding.layoutPhone.tvCountryCode.text = CountryCode.PAKISTAN.countryCode
+            binding.layoutConfirmPhone.tvCountryCode.text = CountryCode.PAKISTAN.countryCode
+        }
+
         if (BuildTypeUtil.isDebugWithRegistration()) {
             regName.editText?.setText("Muhammad Omer Saleem")
-            regPhoneNo.editText?.setText("3234364949")
-            regPhoneNoConfirmation.editText?.setText("3234364949")
+            binding.layoutPhone.etPhoneNo.setText(PhoneNoUtil.format10DigitToUS(PHONE_PK))
+            binding.layoutConfirmPhone.etPhoneNo.setText(PhoneNoUtil.format10DigitToUS(PHONE_PK))
             regPinCode.editText?.setText("123456")
             regLocation.editText?.setText("Lahore, Pakistan")
             checkBox.isChecked = true
         }
+
+        binding.layoutPhone.etPhoneNo.addTextChangedListener(
+            PhoneNumberFormattingTextWatcher(
+                PHONE_COUNTRY_CODE_FORMAT
+            )
+        )
+        binding.layoutPhone.etPhoneNo.doAfterTextChanged {
+            binding.tvPhoneError.visibility = View.GONE
+        }
+
+        binding.layoutConfirmPhone.etPhoneNo.addTextChangedListener(
+            PhoneNumberFormattingTextWatcher(
+                PHONE_COUNTRY_CODE_FORMAT
+            )
+        )
+        binding.layoutConfirmPhone.etPhoneNo.doAfterTextChanged {
+            binding.tvConfirmPhoneError.visibility = View.GONE
+        }
+
+        TermsAndPrivacyManager().formatTermsAndPolicyString(this, binding.tvTermsPrivacy)
 
         regBtn = findViewById(R.id.reg_btn)
         regBtn.setOnClickListener(View.OnClickListener {
@@ -76,19 +103,15 @@ class SignUpActivity : AppCompatActivity() {
             }
 
             val userEnteredPhoneNumber =
-                if (BuildTypeUtil.isDebug() || BuildTypeUtil.isDebugWithRegistration())
-                    "+92${regPhoneNo.editText?.text.toString().trim()}"
-                else
-                    "+91${regPhoneNo.editText?.text.toString().trim()}"
+                PhoneNoUtil.formatForServer(binding.layoutPhone.etPhoneNo.text.toString())
 
-            //Set Firebase Root reference
             val reference = FirebaseDatabase.getInstance().getReference("User")
-            val checkUser = reference.child("phoneNumber").equalTo(userEnteredPhoneNumber)
+            val checkUser = reference.orderByChild("phoneNumber").equalTo(userEnteredPhoneNumber)
             checkUser.addListenerForSingleValueEvent(object : ValueEventListener {
                 override fun onDataChange(dataSnapshot: DataSnapshot) {
                     if (dataSnapshot.exists()) {
-                        regPhoneNo.error = "User already exists. Please Sign in."
-                        regPhoneNo.requestFocus()
+                        binding.layoutPhone.etPhoneNo.error = getString(R.string.user_exists)
+                        binding.layoutPhone.etPhoneNo.requestFocus()
                     } else {
                         val fullNameValue = regName.editText?.text.toString()
                         val pinCodeValue = regPinCode.editText?.text.toString()
@@ -112,15 +135,18 @@ class SignUpActivity : AppCompatActivity() {
                 }
 
                 override fun onCancelled(databaseError: DatabaseError) {
-                    showShortToast("------->>> Database Error: Line 120 in SignupJava, on data changed else condition")
+                    println("Database Error: Line 120 in SignupJava, on data changed else condition")
                 }
             })
         })
 
-        regToLoginBtn = findViewById(R.id.reg_login_btn)
-        regToLoginBtn.setOnClickListener {
-            hideKeyboard()
-            finish()
+        findViewById<Button>(R.id.reg_login_btn).apply {
+            if (LanguageUtil.isHindi())
+                setTextSize(TypedValue.COMPLEX_UNIT_SP, 12f);
+            setOnClickListener {
+                hideKeyboard()
+                finish()
+            }
         }
     }
 
@@ -144,30 +170,11 @@ class SignUpActivity : AppCompatActivity() {
                 regPinCode.isErrorEnabled = false
                 true
             } else {
-                regPinCode.error = "Please provide a valid Pin Code."
+                regPinCode.error = getString(R.string.invalid_pincode)
                 false
             }
         } else {
-            regPinCode.error = "Field cannot be empty"
-            false
-        }
-    }
-
-    private fun matchPhoneNumber(): Boolean {
-        val temp = regPhoneNoConfirmation.editText?.text.toString()
-        val tempConfirm = regPhoneNo.editText?.text.toString()
-
-//        Convert Numbers to string and use compareTo() method in the string class. compareTo() method returns 0 if both strings are same, else returns 1 or -1.
-        return if (temp.compareTo(tempConfirm) == 0) {
-            regPhoneNoConfirmation.error = null
-            regPhoneNoConfirmation.isErrorEnabled = false
-            regPhoneNo.error = null
-            regPhoneNo.isErrorEnabled = false
-            true
-        } else {
-            regPhoneNoConfirmation.error =
-                "Phone numbers are not the same. Please enter same numbers"
-            regPhoneNo.error = "Phone Numbers not the same"
+            regPinCode.error = getString(R.string.empty_field)
             false
         }
     }
@@ -179,14 +186,14 @@ class SignUpActivity : AppCompatActivity() {
             regLocation.isErrorEnabled = false
             true
         } else {
-            regLocation.error = "Field cannot be empty"
+            regLocation.error = getString(R.string.empty_field)
             false
         }
     }
 
     private fun validateTermsAndCondition(): Boolean {
         return if (!checkBox.isChecked) {
-            checkBox.error = "Field cannot be empty"
+            checkBox.error = getString(R.string.empty_field)
             checkBox.setTextColor(Color.parseColor("#FB4141"))
             false
         } else {
@@ -197,29 +204,39 @@ class SignUpActivity : AppCompatActivity() {
     }
 
     private fun validatePhoneNo(): Boolean {
-        val phoneNo = regPhoneNo.editText?.text.toString()
-        val confirmPhoneNo = regPhoneNoConfirmation.editText?.text.toString()
-        return if (phoneNo.isNotEmpty()) {
-            if (phoneNo.length == 10 && confirmPhoneNo.length == 10) {
-                if (matchPhoneNumber()) {
-                    regPhoneNoConfirmation.error = null
-                    regPhoneNoConfirmation.isErrorEnabled = false
-                    regPhoneNo.error = null
-                    regPhoneNo.isErrorEnabled = false
-                    true
-                } else {
-                    regPhoneNoConfirmation.error = "Phone number don't match"
-                    regPhoneNo.error = "Phone number don't match"
-                    false
-                }
-            } else {
-                regPhoneNoConfirmation.error = "Please enter valid phone number"
-                regPhoneNo.error = "Please enter valid phone number"
-                false
-            }
-        } else {
-            regPhoneNo.error = "Field cannot be empty"
-            false
+        val usFormattedPhoneNo = binding.layoutPhone.etPhoneNo.text.toString()
+        val phoneNo = PhoneNoUtil.formatUSTo10Digit(usFormattedPhoneNo)
+
+        val usFormattedConfirmedPhoneNo = binding.layoutConfirmPhone.etPhoneNo.text.toString()
+        val confirmedPhoneNo = PhoneNoUtil.formatUSTo10Digit(usFormattedConfirmedPhoneNo)
+
+        if (phoneNo.isEmpty()) {
+            binding.tvPhoneError.visibility = View.VISIBLE
+            binding.tvPhoneError.text = getString(R.string.empty_phone)
+            return false
         }
+        if (phoneNo.length < 10) {
+            binding.tvPhoneError.visibility = View.VISIBLE
+            binding.tvPhoneError.text = getString(R.string.invalid_phone)
+            return false
+        }
+        if (confirmedPhoneNo.isEmpty()) {
+            binding.tvConfirmPhoneError.visibility = View.VISIBLE
+            binding.tvConfirmPhoneError.text = getString(R.string.empty_confirmed_phone)
+            return false
+        }
+        if (confirmedPhoneNo.length < 10) {
+            binding.tvConfirmPhoneError.visibility = View.VISIBLE
+            binding.tvConfirmPhoneError.text = getString(R.string.invalid_confirmed_phone)
+            return false
+        }
+        if (phoneNo != confirmedPhoneNo) {
+            binding.tvPhoneError.visibility = View.GONE
+            binding.tvConfirmPhoneError.visibility = View.VISIBLE
+            binding.tvConfirmPhoneError.text = getString(R.string.phone_confirmed_not_matched)
+            return false
+        }
+
+        return true
     }
 }

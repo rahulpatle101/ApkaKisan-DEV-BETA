@@ -1,7 +1,6 @@
 package com.apkakisan.myapplication.registration
 
 import androidx.appcompat.app.AppCompatActivity
-import com.google.android.material.textfield.TextInputLayout
 import android.os.Bundle
 import android.view.WindowManager
 import com.apkakisan.myapplication.R
@@ -12,14 +11,17 @@ import android.content.Intent
 import com.google.firebase.database.DatabaseError
 import android.app.ActivityOptions
 import android.os.Build
+import android.telephony.PhoneNumberFormattingTextWatcher
 import android.util.Pair
 import android.view.View
 import android.widget.*
+import androidx.core.widget.doAfterTextChanged
 import com.apkakisan.myapplication.User
-import com.apkakisan.myapplication.helpers.USER
+import com.apkakisan.myapplication.databinding.ActivityLoginBinding
+import com.apkakisan.myapplication.helpers.*
 import com.apkakisan.myapplication.utils.BuildTypeUtil
-import com.apkakisan.myapplication.helpers.hideKeyboard
-import com.google.android.material.textfield.TextInputEditText
+import com.apkakisan.myapplication.utils.PhoneNoUtil
+import org.koin.android.ext.android.get
 
 class LoginActivity : AppCompatActivity() {
 
@@ -28,12 +30,14 @@ class LoginActivity : AppCompatActivity() {
     private lateinit var image: ImageView
     private lateinit var welcomeText: TextView
     private lateinit var sloganText: TextView
-    private lateinit var etPhoneNo: TextInputLayout
     private lateinit var progressBar: ProgressBar
+
+    private lateinit var binding: ActivityLoginBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_login)
+        binding = ActivityLoginBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
         //This Line will hide the status bar from the screen
         window.setFlags(
@@ -46,31 +50,39 @@ class LoginActivity : AppCompatActivity() {
         image = findViewById(R.id.logo_image)
         welcomeText = findViewById(R.id.welcome_text)
         sloganText = findViewById(R.id.slogan_name)
-        etPhoneNo = findViewById(R.id.login_phoneNo)
-        val etPhoneNoNew = findViewById<TextInputEditText>(R.id.etPhoneNo)
+
+        if (BuildTypeUtil.isDebug() || BuildTypeUtil.isDebugWithRegistration())
+            binding.layoutPhone.tvCountryCode.text = CountryCode.PAKISTAN.countryCode
+
         if (BuildTypeUtil.isDebugWithRegistration())
-            etPhoneNoNew.setText("3234364949")
+            binding.layoutPhone.etPhoneNo.setText(PhoneNoUtil.format10DigitToUS(PHONE_PK))
+
+        binding.layoutPhone.etPhoneNo.addTextChangedListener(
+            PhoneNumberFormattingTextWatcher(
+                PHONE_COUNTRY_CODE_FORMAT
+            )
+        )
+        binding.layoutPhone.etPhoneNo.doAfterTextChanged {
+            binding.tvPhoneError.visibility = View.GONE
+        }
+
         loginBtn = findViewById(R.id.login_btn)
     }
 
     private fun validatePhoneNo(): Boolean {
-        val phoneNo = etPhoneNo.editText?.text.toString()
-        return if (phoneNo.isNotEmpty()) {
-            when {
-                phoneNo.length != 10 -> {
-                    etPhoneNo.error = "Please provide a valid phone number"
-                    false
-                }
-                else -> {
-                    etPhoneNo.error = null
-                    etPhoneNo.isErrorEnabled = false
-                    true
-                }
-            }
-        } else {
-            etPhoneNo.error = "Field cannot be empty"
-            false
+        val usFormattedPhoneNo = binding.layoutPhone.etPhoneNo.text.toString()
+        val phoneNo = PhoneNoUtil.formatUSTo10Digit(usFormattedPhoneNo)
+        if (phoneNo.isEmpty()) {
+            binding.tvPhoneError.visibility = View.VISIBLE
+            binding.tvPhoneError.text = getString(R.string.empty_phone)
+            return false
         }
+        if (phoneNo.length < 10) {
+            binding.tvPhoneError.visibility = View.VISIBLE
+            binding.tvPhoneError.text = getString(R.string.invalid_phone)
+            return false
+        }
+        return true
     }
 
     fun loginUser(view: View?) {
@@ -82,10 +94,8 @@ class LoginActivity : AppCompatActivity() {
 
     private fun isUser() {
         progressBar.visibility = View.VISIBLE
-        val userEnteredPhoneNumber = if (BuildTypeUtil.isDebugWithRegistration())
-            "+92${etPhoneNo.editText?.text.toString().trim()}"
-        else
-            "+91${etPhoneNo.editText?.text.toString().trim()}"
+        val userEnteredPhoneNumber =
+            PhoneNoUtil.formatForServer(binding.layoutPhone.etPhoneNo.text.toString())
 
         val reference = FirebaseDatabase.getInstance().getReference("User")
         val checkUser = reference.orderByChild("phoneNumber").equalTo(userEnteredPhoneNumber)
@@ -93,9 +103,6 @@ class LoginActivity : AppCompatActivity() {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
                 progressBar.visibility = View.GONE
                 if (dataSnapshot.exists()) {
-                    etPhoneNo.error = null
-                    etPhoneNo.isErrorEnabled = false
-
                     var user: User? = null
                     for (userSnapshot in dataSnapshot.children)
                         user = userSnapshot.getValue(User::class.java)
@@ -104,8 +111,8 @@ class LoginActivity : AppCompatActivity() {
                     intent.putExtra(USER, user)
                     startActivity(intent)
                 } else {
-                    etPhoneNo.error = "No such user exist. Please Sign up for a new account"
-                    etPhoneNo.requestFocus()
+                    binding.layoutPhone.etPhoneNo.error = getString(R.string.user_not_found)
+                    binding.layoutPhone.etPhoneNo.requestFocus()
                 }
             }
 
@@ -122,7 +129,7 @@ class LoginActivity : AppCompatActivity() {
         pairs[0] = Pair<View, String>(image, "logo_image")
         pairs[1] = Pair<View, String>(welcomeText, "logo_text")
         pairs[2] = Pair<View, String>(sloganText, "logo_desc")
-        pairs[3] = Pair<View, String>(etPhoneNo, "username_tran")
+        pairs[3] = Pair<View, String>(binding.layoutPhone.etPhoneNo, "username_tran")
         pairs[4] = Pair<View, String>(loginBtn, "button_tran")
         pairs[5] = Pair<View, String>(callSignUp, "login_signup_tran")
 
@@ -131,5 +138,9 @@ class LoginActivity : AppCompatActivity() {
             val options = ActivityOptions.makeSceneTransitionAnimation(this@LoginActivity, *pairs)
             startActivity(intent, options.toBundle())
         }
+    }
+
+    companion object {
+        private const val TAG = "LoginActivity"
     }
 }

@@ -15,7 +15,7 @@ class NotificationViewModel(private val repository: NotificationRepository) : Vi
 
     fun getNotifications() {
         viewModelScope.launch {
-            _notificationList.postValue(repository.getNotifications(LocalStore.user?.userId!!))
+            _notificationList.postValue(repository.getNotifications(LocalStore.getUser()?.userId!!))
         }
     }
 }

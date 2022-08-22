@@ -1,5 +1,6 @@
 package com.apkakisan.myapplication.profile
 
+import android.content.Intent
 import com.apkakisan.myapplication.BaseActivity
 import android.os.Bundle
 import com.apkakisan.myapplication.R
@@ -20,5 +21,16 @@ class ProfileActivity : BaseActivity() {
             false,
             ProfileFragment.TAG
         )
+    }
+
+    fun restartHomeActivity() {
+
+        finish()
+
+        val newIntent = intent
+        newIntent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
+        startActivity(newIntent)
+
+//        overridePendingTransition(0, 0);
     }
 }

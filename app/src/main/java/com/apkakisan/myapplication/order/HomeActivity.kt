@@ -1,26 +1,24 @@
 package com.apkakisan.myapplication.order
 
-import androidx.recyclerview.widget.RecyclerView
-import android.widget.ProgressBar
-import androidx.recyclerview.widget.LinearLayoutManager
-import com.apkakisan.myapplication.network.responses.Commodity
-import android.os.Bundle
-import com.apkakisan.myapplication.R
-import com.google.android.material.bottomnavigation.BottomNavigationView
-import com.google.android.material.navigation.NavigationBarView
 import android.content.Intent
+import android.os.Bundle
 import android.view.View
-import com.apkakisan.myapplication.profile.ProfileActivity
-import com.apkakisan.myapplication.network.RetrofitClient
+import android.widget.ProgressBar
+import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.widget.SearchView
+import androidx.core.content.res.ResourcesCompat
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.apkakisan.myapplication.BaseActivity
+import com.apkakisan.myapplication.R
 import com.apkakisan.myapplication.helpers.DefaultItemDecorator
-import com.apkakisan.myapplication.notifications.NotificationActivity
+import com.apkakisan.myapplication.network.RetrofitClient
+import com.apkakisan.myapplication.network.responses.Commodity
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import java.util.ArrayList
+
 
 class HomeActivity : BaseActivity() {
     private lateinit var recyclerView: RecyclerView
@@ -38,7 +36,7 @@ class HomeActivity : BaseActivity() {
         progressBar = findViewById(R.id.progressBar)
 
         val searchView = findViewById<SearchView>(R.id.searchView)
-
+        
         bottomNavigation = findViewById(R.id.layoutBottom)
         bottomNavigation.selectedItemId = R.id.home
         setupBottomNavigation()

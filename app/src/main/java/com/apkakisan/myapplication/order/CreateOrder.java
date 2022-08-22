@@ -65,10 +65,9 @@ public class CreateOrder extends AppCompatActivity {
         addressStreet = findViewById(R.id.address_street);
         addressPincode = findViewById(R.id.address_pincode);
         //commodityDetail = findViewById(R.id.commodity_detail);
-        orderCheckBox = findViewById(R.id.order_check_box);
+        orderCheckBox = findViewById(R.id.checkBox);
         orderUPIPhoneNo = findViewById(R.id.upi_phone_number);
         totalEarningText = findViewById(R.id.earning_price);
-
 
         quantityKgInput = tiQuantity.getEditText().getText().toString();
 

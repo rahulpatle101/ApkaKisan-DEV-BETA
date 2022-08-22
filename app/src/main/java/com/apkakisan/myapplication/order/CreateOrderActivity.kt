@@ -17,6 +17,7 @@ import android.text.TextWatcher
 import android.widget.*
 import com.apkakisan.myapplication.BaseActivity
 import com.apkakisan.myapplication.common.AppDialogFragment
+import com.apkakisan.myapplication.domainlayer.TermsAndPrivacyManager
 import com.apkakisan.myapplication.helpers.LocalStore
 import com.apkakisan.myapplication.helpers.popFragment
 import com.apkakisan.myapplication.network.responses.Notification
@@ -93,7 +94,10 @@ class CreateOrderActivity : BaseActivity() {
         tvHarvestPrice = findViewById(R.id.harvest_price)
         tvTotalEarning = findViewById(R.id.earning_price)
         orderUPIPhoneNo = findViewById(R.id.upi_phone_number)
-        orderCheckBox = findViewById(R.id.order_check_box)
+        orderCheckBox = findViewById(R.id.checkBox)
+
+        val tvTermsPrivacy = findViewById<TextView>(R.id.tvTermsPrivacy)
+        TermsAndPrivacyManager().formatTermsAndPolicyString(this, tvTermsPrivacy)
 
         sellOrderBtn = findViewById(R.id.sell_order_btn)
         sellOrderBtn.setOnClickListener {
@@ -119,7 +123,8 @@ class CreateOrderActivity : BaseActivity() {
                 quantity = tiQuantity.editText?.text.toString().trim().toInt()
                 apkakisanRate = apkaKisanPriceArg
                 mandiRate = mandiPriceArg
-                orderStatus = "Received"
+                orderStatusEn = "Received"
+                orderStatusHi = "प्राप्त हुआ"
                 totalSellPrice = totalEarning
                 inspectionDateTime = pickupDateTimeInput.text.toString().trim()
                 detail = etCommoditydetail.editText?.text.toString().trim()
@@ -129,7 +134,7 @@ class CreateOrderActivity : BaseActivity() {
                 street = addressStreet.editText?.text.toString().trim()
                 orderReceivedDateTime = currentDateAndTime
                 pincode = etPinCode.editText?.text.toString().trim()
-                userId = LocalStore.user?.userId!!
+                userId = LocalStore.getUser()?.userId!!
             }.also { order ->
                 val orderReference = FirebaseDatabase.getInstance().getReference("Orders")
                 orderReference.child(generateUUID).setValue(order)
@@ -137,11 +142,14 @@ class CreateOrderActivity : BaseActivity() {
                 val notificationId = UUID.randomUUID().toString()
                 Notification().apply {
                     id = notificationId
-                    type = "In App Notification"
-                    title = "Order Received!"
-                    description = "You order has received. Thanks."
+                    typeEn = "In App Notification"
+                    typeHi = "ऐप अधिसूचना में"
+                    titleEn = "Order Received!"
+                    titleHi = "आदेश प्राप्त!"
+                    descriptionEn = "You order has received. Thanks."
+                    descriptionHi = "आपको आदेश प्राप्त हुआ है। धन्यवाद।"
                     createdDate = currentDateAndTime
-                    userId = LocalStore.user?.userId!!
+                    userId = LocalStore.getUser()?.userId!!
                     orderId = order.orderId
                 }.also { notification ->
                     val reference = FirebaseDatabase.getInstance().getReference("Notification")

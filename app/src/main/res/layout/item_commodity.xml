@@ -37,7 +37,6 @@
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="16sp"
                     android:fontFamily="@font/poppins_semibold"
-                    android:text="Long Carrot Listing Name"
                     android:textColor="@color/colorTextBlack"
                     android:textSize="16sp" />
 
@@ -56,7 +55,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/nunito_regular"
-                            android:text="Mandi"
+                            android:text="@string/mandi"
                             android:textColor="@color/colorGrey"
                             android:textSize="14sp" />
 
@@ -65,7 +64,6 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/poppins_semibold"
-                            android:text="Rs. 40.99/kg"
                             android:textColor="@color/colorTextBlack"
                             android:textSize="16sp" />
                     </androidx.appcompat.widget.LinearLayoutCompat>
@@ -80,7 +78,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/nunito_regular"
-                            android:text="ApkaKisan"
+                            android:text="@string/apkakisan"
                             android:textColor="@color/colorGrey"
                             android:textSize="14sp" />
 
@@ -89,7 +87,6 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/poppins_semibold"
-                            android:text="Rs. 45.99/kg"
                             android:textColor="@color/colorPrimary"
                             android:textSize="16sp" />
                     </androidx.appcompat.widget.LinearLayoutCompat>
@@ -104,9 +101,8 @@
             android:fontFamily="@font/poppins_regular"
             android:gravity="center"
             android:paddingTop="10sp"
-
             android:paddingBottom="10sp"
-            android:text="+ Sell to ApkaKisan"
+            android:text="@string/sell_to_apkakisan"
             android:textSize="18sp" />
 
     </androidx.appcompat.widget.LinearLayoutCompat>

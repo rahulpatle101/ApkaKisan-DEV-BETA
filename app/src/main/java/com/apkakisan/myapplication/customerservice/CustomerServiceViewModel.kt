@@ -18,7 +18,7 @@ class CustomerServiceViewModel(
     private var _uiState = MutableSharedFlow<CustomerServiceUiState>()
     val uiState: SharedFlow<CustomerServiceUiState> = _uiState
 
-    val user = LocalStore.user
+    val user = LocalStore.getUser()
 
     var nameValue = ""
     var phoneValue = ""

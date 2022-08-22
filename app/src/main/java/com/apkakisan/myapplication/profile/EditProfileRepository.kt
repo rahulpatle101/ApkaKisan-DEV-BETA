@@ -17,7 +17,7 @@ class EditProfileRepository(
         var isPhotoUpdated = false
         if (photoUrl.isNotEmpty()) {
             isPhotoUpdated = firebaseDataSource.updateUserPhoto(userId, photoUrl)
-            if (isPhotoUpdated) LocalStore.user?.photo = photoUrl
+            if (isPhotoUpdated) LocalStore.getUser()?.photo = photoUrl
         }
         return isPhotoUpdated
     }
@@ -30,7 +30,7 @@ class EditProfileRepository(
     ): Boolean {
         val isUpdated = firebaseDataSource.updateUser(userId, name, phoneNo, address)
         if (isUpdated)
-            LocalStore.user?.let {
+            LocalStore.getUser()?.let {
                 it.fullName = name
                 it.phoneNumber = phoneNo
                 it.location = address

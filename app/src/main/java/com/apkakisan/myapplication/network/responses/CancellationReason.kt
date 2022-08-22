@@ -1,10 +1,16 @@
 package com.apkakisan.myapplication.network.responses
 
+import com.apkakisan.myapplication.utils.LanguageUtil
 import com.google.gson.annotations.SerializedName
 
-class CancellationReason {
-    @SerializedName("cancellation_reason")
-    val cancellationReason: String = ""
+data class CancellationReason(
+    @SerializedName("cancellation_reason_en")
+    val cancellationReasonEn: String = "",
 
-    var isSelected = false
+    @SerializedName("cancellation_reason_hi")
+    val cancellationReasonHi: String = "",
+
+    var isSelected: Boolean = false
+){
+    val cancellationReason: String get() = if (LanguageUtil.isEnglish()) cancellationReasonEn else cancellationReasonHi
 }

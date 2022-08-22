@@ -25,7 +25,7 @@ class FirebaseDataSource {
                 notificationList.add(notification!!)
             }
             notificationList.filter {
-                it.type == "In App Notification"
+                it.typeEn == "In App Notification"
             }
         } catch (ex: Exception) {
             null
@@ -80,20 +80,32 @@ class FirebaseDataSource {
         }
     }
 
+    /**
+     * checks the following
+     * if user enters phone no that already exists but with different username return false
+     * if user enters phone no that already exists but with same username return true
+     * other update user details
+     */
     suspend fun updateUser(
         userId: String,
         name: String,
         phoneNo: String,
         address: String
     ): Boolean {
-        return try {
+        try {
             val reference = FirebaseDatabase.getInstance().getReference("User")
+            val userSnapshot = reference.orderByChild("phoneNumber").equalTo(phoneNo).get().await()
+            if (userSnapshot.exists()) {
+                var user: User? = null
+                for (snapshot in userSnapshot.children) user = snapshot.getValue(User::class.java)
+                if (user?.userId != userId) return false
+            }
             reference.child(userId).child("fullName").setValue(name).await()
             reference.child(userId).child("phoneNumber").setValue(phoneNo).await()
             reference.child(userId).child("location").setValue(address).await()
-            true
+            return true
         } catch (ex: Exception) {
-            false
+            return false
         }
     }
 
