@@ -6,11 +6,17 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">#d9b948</item>
         <item name="colorAccent">@color/colorAccent</item>
-        <item name="android:windowLightStatusBar" tools:targetApi="m">true</item>
+        <item name="android:windowLightStatusBar">true</item>
     </style>
 
     <style name="Widget.BottomNavigationView" parent="Widget.Design.BottomNavigationView">
         <item name="fontFamily">@font/poppins_regular</item>
+    </style>
+
+    <!--    home search view-->
+    <style name="HomeSearchView" parent="Widget.AppCompat.Light.SearchView">
+        <item name="android:textSize">@dimen/_16sp</item>
+        <item name="android:fontFamily">@font/poppins_regular</item>
     </style>
 
     <!--    constraint layout styles-->

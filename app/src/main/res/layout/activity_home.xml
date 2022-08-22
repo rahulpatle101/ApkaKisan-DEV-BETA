@@ -21,10 +21,10 @@
             android:layout_marginTop="16dp"
             android:layout_marginEnd="16dp"
             android:background="@drawable/rounded_searchbar_outline"
-            android:fontFamily="@font/poppins_regular"
             app:iconifiedByDefault="false"
             app:queryBackground="@null"
-            app:queryHint="@string/search_mandi_commodities" />
+            app:queryHint="@string/search_mandi_commodities"
+            app:theme="@style/HomeSearchView" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:layout_width="match_parent"
