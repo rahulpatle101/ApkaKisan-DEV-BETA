@@ -3,8 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".profile.ProfileActivity">
+    android:layout_height="match_parent">
 
     <include
         android:id="@+id/toolbar"
@@ -36,7 +35,6 @@
                 android:layout_marginTop="10dp"
                 android:fontFamily="@font/poppins_regular"
                 android:gravity="center"
-                android:hint="Name"
                 android:textColor="@color/colorTextBlack"
                 android:textSize="18sp" />
 
@@ -47,7 +45,6 @@
                 android:layout_gravity="center_horizontal"
                 android:fontFamily="@font/poppins_regular"
                 android:gravity="center"
-                android:hint="Name"
                 android:textColor="@color/colorGrey"
                 android:textSize="18sp" />
 
@@ -132,6 +129,34 @@
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
+            <RadioGroup
+                android:id="@+id/rgLanguage"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_16dp"
+                android:layout_marginTop="@dimen/_10dp"
+                android:layout_marginEnd="@dimen/_16dp"
+                android:orientation="horizontal">
+
+                <androidx.appcompat.widget.AppCompatRadioButton
+                    android:id="@+id/rbEnglish"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:buttonTint="@color/green"
+                    android:fontFamily="@font/poppins_regular"
+                    android:text="@string/english" />
+
+                <androidx.appcompat.widget.AppCompatRadioButton
+                    android:id="@+id/rbHindi"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:buttonTint="@color/green"
+                    android:fontFamily="@font/poppins_regular"
+                    android:text="@string/hindi" />
+            </RadioGroup>
+
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/btnEnglish"
                 android:layout_width="match_parent"
@@ -142,7 +167,8 @@
                 android:background="@drawable/shape_bg_btn_green"
                 android:fontFamily="@font/poppins_regular"
                 android:text="@string/english"
-                android:textColor="@color/white" />
+                android:textColor="@color/white"
+                android:visibility="gone" />
 
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/btnHindi"
@@ -154,7 +180,8 @@
                 android:background="@drawable/shape_bg_btn_green"
                 android:fontFamily="@font/poppins_regular"
                 android:text="@string/hindi"
-                android:textColor="@color/white" />
+                android:textColor="@color/white"
+                android:visibility="gone" />
 
         </androidx.appcompat.widget.LinearLayoutCompat>
 

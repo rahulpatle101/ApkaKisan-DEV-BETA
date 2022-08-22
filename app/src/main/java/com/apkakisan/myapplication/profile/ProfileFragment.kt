@@ -6,11 +6,14 @@ import com.apkakisan.myapplication.R
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.CompoundButton
+import android.widget.RadioButton
+import android.widget.RadioGroup
+import androidx.core.view.get
 import com.apkakisan.myapplication.BaseFragment
 import com.apkakisan.myapplication.customerservice.CustomerServiceFragment
 import com.apkakisan.myapplication.databinding.FragmentProfileBinding
 import com.apkakisan.myapplication.helpers.*
-import com.apkakisan.myapplication.order.HomeActivity
 import com.apkakisan.myapplication.registration.LoginActivity
 import com.apkakisan.myapplication.utils.LanguageUtil
 import com.bumptech.glide.Glide
@@ -67,6 +70,29 @@ class ProfileFragment : BaseFragment() {
             startActivity(intent)
         }
 
+        binding.rgLanguage.setOnCheckedChangeListener { group, checkedId ->
+            when (checkedId) {
+                R.id.rbEnglish ->
+                    if ((group[0] as RadioButton).isChecked) {
+                        if (LanguageUtil.isHindi()) {
+                            // (activity as HomeActivity).updateLocale(Locale("ar"))
+                            LocaleHelper.setLocale(requireContext(), Locale("en"))
+                            // LocalStore.isLanguageChanged = true
+                            (activity as ProfileActivity).restartHomeActivity()
+                        }
+                    }
+                R.id.rbHindi ->
+                    if ((group[1] as RadioButton).isChecked) {
+                        if (LanguageUtil.isEnglish()) {
+                            // (activity as HomeActivity).updateLocale(Locale("en"))
+                            LocaleHelper.setLocale(requireContext(), Locale("hi"))
+                            // LocalStore.isLanguageChanged = true
+                            (activity as ProfileActivity).restartHomeActivity()
+                        }
+                    }
+            }
+        }
+
         binding.btnEnglish.setOnClickListener {
             if (LanguageUtil.isHindi()) {
                 // (activity as HomeActivity).updateLocale(Locale("ar"))
@@ -103,6 +129,14 @@ class ProfileFragment : BaseFragment() {
                     .into(binding.ivPhoto)
                 binding.tvName.text = profileViewModel.user.fullName
                 binding.tvPhone.text = profileViewModel.getFormattedPhone()
+
+                if (LanguageUtil.isEnglish()) {
+                    binding.rbEnglish.isChecked = true
+                    binding.rbHindi.isChecked = false
+                } else {
+                    binding.rbHindi.isChecked = true
+                    binding.rbEnglish.isChecked = false
+                }
             }
         }
     }
