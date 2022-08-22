@@ -7,11 +7,12 @@ import android.text.Spanned
 import android.text.TextPaint
 import android.text.method.LinkMovementMethod
 import android.text.style.ClickableSpan
-import android.text.style.ForegroundColorSpan
 import android.view.View
 import android.widget.TextView
 import com.apkakisan.myapplication.R
+import com.apkakisan.myapplication.common.ContentType
 import com.apkakisan.myapplication.common.TermsPrivacyActivity
+import com.apkakisan.myapplication.common.TermsPrivacyActivity.Companion.CONTENT_TYPE
 import com.apkakisan.myapplication.utils.StringUtil
 
 class TermsAndPrivacyManager {
@@ -46,7 +47,11 @@ class TermsAndPrivacyManager {
         spannableString.setSpan(object : ClickableSpan() {
             override fun onClick(widget: View) {
                 widget.invalidate()
-                context.startActivity(Intent(context, TermsPrivacyActivity::class.java))
+                Intent(context, TermsPrivacyActivity::class.java).apply {
+                    putExtra(CONTENT_TYPE, ContentType.TERMS_OF_USE)
+                }.also {
+                    context.startActivity(it)
+                }
             }
 
             override fun updateDrawState(ds: TextPaint) {
@@ -72,7 +77,11 @@ class TermsAndPrivacyManager {
         spannableString.setSpan(object : ClickableSpan() {
             override fun onClick(widget: View) {
                 widget.invalidate()
-                context.startActivity(Intent(context, TermsPrivacyActivity::class.java))
+                Intent(context, TermsPrivacyActivity::class.java).apply {
+                    putExtra(CONTENT_TYPE, ContentType.PRIVACY_POLICY)
+                }.also {
+                    context.startActivity(it)
+                }
             }
 
             override fun updateDrawState(ds: TextPaint) {

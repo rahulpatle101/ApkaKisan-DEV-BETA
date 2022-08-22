@@ -29,6 +29,7 @@
         <entry key="..\:/Android/Fiverr/ApkaKisan/ApkaKisan/app/src/main/res/layout/layout_loader.xml" value="0.20416666666666666" />
         <entry key="..\:/Android/Fiverr/ApkaKisan/ApkaKisan/app/src/main/res/layout/layout_tab_my_orders.xml" value="0.203125" />
         <entry key="..\:/Android/Fiverr/ApkaKisan/ApkaKisan/app/src/main/res/menu/menu_navigation.xml" value="0.20416666666666666" />
+        <entry key="..\:/Fiverr/ApkaKisan/ApkaKisan/app/src/main/res/drawable/navigation_tab_rounded.xml" value="0.286" />
         <entry key="..\:/Fiverr/ApkaKisan/ApkaKisan/app/src/main/res/drawable/rounded_searchbar_outline.xml" value="0.223" />
         <entry key="..\:/Fiverr/ApkaKisan/ApkaKisan/app/src/main/res/drawable/shape_bg_btn_green.xml" value="0.2025" />
         <entry key="..\:/Fiverr/ApkaKisan/ApkaKisan/app/src/main/res/drawable/shape_bg_btn_red.xml" value="0.2025" />
@@ -73,7 +74,9 @@
         <entry key="..\:/Fiverr/ApkaKisan/ApkaKisan/app/src/main/res/layout/layout_phone.xml" value="0.32533197139938713" />
         <entry key="..\:/Fiverr/ApkaKisan/ApkaKisan/app/src/main/res/layout/layout_profile.xml" value="0.33177083333333335" />
         <entry key="..\:/Fiverr/ApkaKisan/ApkaKisan/app/src/main/res/layout/layout_tab_my_orders.xml" value="0.20416666666666666" />
+        <entry key="..\:/Fiverr/ApkaKisan/ApkaKisan/app/src/main/res/layout/layout_tablayout_home.xml" value="0.33177083333333335" />
         <entry key="..\:/Fiverr/ApkaKisan/ApkaKisan/app/src/main/res/layout/layout_toolbar.xml" value="0.21927083333333333" />
+        <entry key="..\:/Fiverr/ApkaKisan/ApkaKisan/app/src/main/res/layout/my_search_view.xml" value="0.3307291666666667" />
         <entry key="..\:/Fiverr/ApkaKisan/ApkaKisan/app/src/main/res/menu/menu_navigation.xml" value="0.22" />
         <entry key="app/src/main/res/drawable/button_shape_oval.xml" value="0.259" />
         <entry key="app/src/main/res/drawable/gradient_one.xml" value="0.218" />
