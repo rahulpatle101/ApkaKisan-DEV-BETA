@@ -15,6 +15,7 @@ import android.telephony.PhoneNumberFormattingTextWatcher
 import android.util.Pair
 import android.view.View
 import android.widget.*
+import androidx.core.content.ContextCompat
 import androidx.core.widget.doAfterTextChanged
 import com.apkakisan.myapplication.User
 import com.apkakisan.myapplication.databinding.ActivityLoginBinding
@@ -36,14 +37,12 @@ class LoginActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
+        window?.statusBarColor = ContextCompat.getColor(this, R.color.white)
         binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        //This Line will hide the status bar from the screen
-        window.setFlags(
-            WindowManager.LayoutParams.FLAG_FULLSCREEN,
-            WindowManager.LayoutParams.FLAG_FULLSCREEN
-        )
+        binding.layoutPhone.etPhoneNo.hint = getString(R.string.phone_no)
 
         progressBar = findViewById(R.id.progressBar)
         callSignUp = findViewById(R.id.signup_screen)

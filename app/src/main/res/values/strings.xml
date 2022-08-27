@@ -20,7 +20,7 @@
     <string name="register_an_account">Welcome to ApkaKisan. Please fill in the fields below to register an account.</string>
     <string name="full_name">Full Name</string>
     <string name="phone_no">Phone Number</string>
-    <string name="confirm_phone_no">Confirm Phone Number</string>
+    <string name="confirm_phone_no">Phone Number Confirmation</string>
     <string name="pin_code">Pin Code</string>
     <string name="location">Location</string>
     <string name="terms_privacy">I accept the Terms of Use and Privacy Policy</string>

@@ -10,10 +10,12 @@
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_marginStart="@dimen/_16dp"
+        android:fontFamily="@font/poppins_regular"
         android:gravity="center"
         android:text="+91"
         android:textColor="@color/colorTextBlack"
-        android:textSize="@dimen/_18sp"
+        android:textColorHint="@color/colorGrey"
+        android:textSize="@dimen/_16sp"
         app:layout_constraintStart_toStartOf="parent" />
 
     <View
@@ -31,9 +33,12 @@
         android:layout_marginStart="@dimen/_16dp"
         android:layout_marginEnd="@dimen/_16dp"
         android:background="@null"
+        android:fontFamily="@font/poppins_regular"
         android:inputType="phone"
         android:maxLength="14"
-        android:textSize="@dimen/_18sp"
+        android:textColor="@color/colorTextBlack"
+        android:textColorHint="@color/colorGrey"
+        android:textSize="@dimen/_16sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/separator" />
 </androidx.constraintlayout.widget.ConstraintLayout>

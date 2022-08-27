@@ -16,28 +16,24 @@ import com.google.firebase.FirebaseException
 import android.content.Intent
 import android.view.View
 import android.widget.Button
+import androidx.core.content.ContextCompat
 import androidx.lifecycle.lifecycleScope
 import com.apkakisan.myapplication.order.HomeActivity
 import com.apkakisan.myapplication.User
 import com.apkakisan.myapplication.databinding.ActivityVerifyPhoneNoBinding
-import com.apkakisan.myapplication.helpers.LocalStore
 import com.apkakisan.myapplication.helpers.USER
 import com.apkakisan.myapplication.helpers.showShortToast
 import com.apkakisan.myapplication.utils.BuildTypeUtil
 import com.apkakisan.myapplication.utils.DialogUtil
 import com.apkakisan.myapplication.utils.TimerUtil
-import com.google.android.material.textfield.TextInputEditText
 import kotlinx.coroutines.flow.onCompletion
 import kotlinx.coroutines.launch
 import java.util.concurrent.TimeUnit
 
 class VerifyPhoneNoActivity : AppCompatActivity() {
 
-    private lateinit var verificationCodeEntered: TextInputEditText
-
     private lateinit var binding: ActivityVerifyPhoneNoBinding
 
-    //private val verifyPhoneNoViewModel: VerifyPhoneNoViewModel by viewModel()
     private lateinit var user: User
     private lateinit var progressBar: ProgressBar
 
@@ -45,6 +41,8 @@ class VerifyPhoneNoActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
+        window?.statusBarColor = ContextCompat.getColor(this, R.color.white)
         binding = ActivityVerifyPhoneNoBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
@@ -54,9 +52,8 @@ class VerifyPhoneNoActivity : AppCompatActivity() {
         tvPhoneNoEnteredByTheUser.text = user.phoneNumber
 
         progressBar = findViewById(R.id.progress_bar)
-        verificationCodeEntered = findViewById(R.id.etOtp)
         if (BuildTypeUtil.isDebug() || BuildTypeUtil.isDebugWithRegistration())
-            verificationCodeEntered.setText("123456")
+            binding.etOtp.setText("123456")
 
         countDownProcess()
         binding.tvResendOtp.setOnClickListener {
@@ -66,10 +63,10 @@ class VerifyPhoneNoActivity : AppCompatActivity() {
 
         findViewById<Button>(R.id.verify_btn).setOnClickListener(View.OnClickListener
         {
-            val code = verificationCodeEntered.text.toString().trim()
+            val code = binding.etOtp.text.toString().trim()
             if (code.isEmpty() || code.length < 6) {
-                verificationCodeEntered.error = "Wrong OTP..."
-                verificationCodeEntered.requestFocus()
+                binding.etOtp.error = "Wrong OTP..."
+                binding.etOtp.requestFocus()
                 return@OnClickListener
             }
             verifyCode(code)
@@ -113,7 +110,7 @@ class VerifyPhoneNoActivity : AppCompatActivity() {
             override fun onVerificationCompleted(phoneAuthCredential: PhoneAuthCredential) {
                 val code = phoneAuthCredential.smsCode
                 if (code != null) {
-                    verificationCodeEntered.setText(code)
+                    binding.etOtp.setText(code)
                     progressBar.visibility = View.VISIBLE
                     verifyCode(code)
                 }
