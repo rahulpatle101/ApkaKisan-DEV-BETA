@@ -15,6 +15,7 @@ import android.telephony.PhoneNumberFormattingTextWatcher
 import android.util.TypedValue
 import android.view.View
 import android.widget.Button
+import androidx.core.content.ContextCompat
 import androidx.core.widget.doAfterTextChanged
 import com.apkakisan.myapplication.User
 import com.apkakisan.myapplication.databinding.ActivitySignUpBinding
@@ -29,9 +30,6 @@ import java.util.*
 
 class SignUpActivity : AppCompatActivity() {
 
-    private lateinit var regName: TextInputLayout
-    private lateinit var regPinCode: TextInputLayout
-    private lateinit var regLocation: TextInputLayout
     private lateinit var regBtn: Button
     private lateinit var checkBox: CheckBox
 
@@ -39,19 +37,15 @@ class SignUpActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
+        window?.statusBarColor = ContextCompat.getColor(this, R.color.white)
         binding = ActivitySignUpBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        //This Line will hide the status bar from the screen
-        window.setFlags(
-            WindowManager.LayoutParams.FLAG_FULLSCREEN,
-            WindowManager.LayoutParams.FLAG_FULLSCREEN
-        )
-
-        regName = findViewById(R.id.reg_name)
-        regPinCode = findViewById(R.id.reg_pincode)
-        regLocation = findViewById(R.id.reg_location)
         checkBox = findViewById(R.id.checkBox)
+
+        binding.layoutPhone.etPhoneNo.hint = getString(R.string.phone_no)
+        binding.layoutConfirmPhone.etPhoneNo.hint = getString(R.string.confirm_phone_no)
 
         if (BuildTypeUtil.isDebug() || BuildTypeUtil.isDebugWithRegistration()) {
             binding.layoutPhone.tvCountryCode.text = CountryCode.PAKISTAN.countryCode
@@ -59,11 +53,11 @@ class SignUpActivity : AppCompatActivity() {
         }
 
         if (BuildTypeUtil.isDebugWithRegistration()) {
-            regName.editText?.setText("Muhammad Omer Saleem")
+            binding.etName.setText("baaz")
             binding.layoutPhone.etPhoneNo.setText(PhoneNoUtil.format10DigitToUS(PHONE_PK))
             binding.layoutConfirmPhone.etPhoneNo.setText(PhoneNoUtil.format10DigitToUS(PHONE_PK))
-            regPinCode.editText?.setText("123456")
-            regLocation.editText?.setText("Lahore, Pakistan")
+            binding.etPincode.setText("123456")
+            binding.etLocation.setText("Lahore, Pakistan")
             checkBox.isChecked = true
         }
 
@@ -85,7 +79,11 @@ class SignUpActivity : AppCompatActivity() {
             binding.tvConfirmPhoneError.visibility = View.GONE
         }
 
-        TermsAndPrivacyManager().formatTermsAndPolicyString(this, binding.tvTermsPrivacy)
+        binding.tvTermsPrivacy.apply {
+            if (LanguageUtil.isHindi())
+                setTextSize(TypedValue.COMPLEX_UNIT_SP, 12f)
+            TermsAndPrivacyManager().formatTermsAndPolicyString(this@SignUpActivity, this)
+        }
 
         regBtn = findViewById(R.id.reg_btn)
         regBtn.setOnClickListener(View.OnClickListener {
@@ -113,9 +111,9 @@ class SignUpActivity : AppCompatActivity() {
                         binding.layoutPhone.etPhoneNo.error = getString(R.string.user_exists)
                         binding.layoutPhone.etPhoneNo.requestFocus()
                     } else {
-                        val fullNameValue = regName.editText?.text.toString()
-                        val pinCodeValue = regPinCode.editText?.text.toString()
-                        val locationValue = regLocation.editText?.text.toString()
+                        val fullNameValue = binding.etName.text.toString()
+                        val pinCodeValue = binding.etPincode.text.toString()
+                        val locationValue = binding.etLocation.text.toString()
 
                         val user = User().apply {
                             userId = UUID.randomUUID().toString()
@@ -142,7 +140,7 @@ class SignUpActivity : AppCompatActivity() {
 
         findViewById<Button>(R.id.reg_login_btn).apply {
             if (LanguageUtil.isHindi())
-                setTextSize(TypedValue.COMPLEX_UNIT_SP, 12f);
+                setTextSize(TypedValue.COMPLEX_UNIT_SP, 12f)
             setOnClickListener {
                 hideKeyboard()
                 finish()
@@ -151,42 +149,39 @@ class SignUpActivity : AppCompatActivity() {
     }
 
     private fun validateName(): Boolean {
-        val name = regName.editText?.text.toString()
+        val name = binding.etName.text.toString()
         return if (name.isEmpty()) {
-            regName.error = "Field cannot be empty"
+            binding.etName.error = "Field cannot be empty"
             false
         } else {
-            regName.error = null
-            regName.isErrorEnabled = false
+            binding.etName.error = null
             true
         }
     }
 
     private fun validatePinCode(): Boolean {
-        val temp = regPinCode.editText?.text.toString()
+        val temp = binding.etPincode.text.toString()
         return if (temp.isNotEmpty()) {
             if (temp.length == 6) {
-                regPinCode.error = null
-                regPinCode.isErrorEnabled = false
+                binding.etPincode.error = null
                 true
             } else {
-                regPinCode.error = getString(R.string.invalid_pincode)
+                binding.etPincode.error = getString(R.string.invalid_pincode)
                 false
             }
         } else {
-            regPinCode.error = getString(R.string.empty_field)
+            binding.etPincode.error = getString(R.string.empty_field)
             false
         }
     }
 
     private fun validateLocation(): Boolean {
-        val temp = regLocation.editText?.text.toString()
+        val temp = binding.etLocation.text.toString()
         return if (temp.isNotEmpty()) {
-            regLocation.error = null
-            regLocation.isErrorEnabled = false
+            binding.etLocation.error = null
             true
         } else {
-            regLocation.error = getString(R.string.empty_field)
+            binding.etLocation.error = getString(R.string.empty_field)
             false
         }
     }

@@ -136,7 +136,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
                 android:layout_marginBottom="10dp"
-                android:fontFamily="@font/nunito_regular"
+                android:fontFamily="@font/poppins_regular"
                 android:text="@string/earning_overview"
                 android:textColor="@color/colorTextBlack"
                 android:textSize="18sp" />
@@ -150,7 +150,7 @@
                     android:id="@+id/harvest_name_w_qty"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/nunito_regular"
+                    android:fontFamily="@font/poppins_regular"
                     android:text="@string/harvest_name_quantity_x_kg"
                     android:textColor="@color/colorGrey"
                     android:textSize="18sp" />
@@ -159,7 +159,7 @@
                     android:id="@+id/harvest_price"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/nunito_regular"
+                    android:fontFamily="@font/poppins_regular"
                     android:gravity="end"
                     android:text="Rs 0"
                     android:textColor="@color/colorGrey"
@@ -178,7 +178,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="20dp"
                     android:layout_marginBottom="10dp"
-                    android:fontFamily="@font/nunito_regular"
+                    android:fontFamily="@font/poppins_regular"
                     android:text="@string/total_earning"
                     android:textColor="@color/colorTextBlack"
                     android:textSize="18sp" />
@@ -189,7 +189,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="20dp"
                     android:layout_marginBottom="10dp"
-                    android:fontFamily="@font/nunito_regular"
+                    android:fontFamily="@font/poppins_regular"
                     android:gravity="end"
                     android:text="Rs. 0"
                     android:textColor="@color/colorTextBlack"
@@ -201,7 +201,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
-                android:fontFamily="@font/nunito_regular"
+                android:fontFamily="@font/poppins_regular"
                 android:text="@string/payment_method_info" />
 
             <com.google.android.material.textfield.TextInputLayout
@@ -229,21 +229,23 @@
                     android:id="@+id/checkBox"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="10sp"
                     android:buttonTint="#46AA42"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/tvTermsPrivacy"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:autoLink="web"
-                    android:fontFamily="@font/nunito_regular"
+                    android:fontFamily="@font/poppins_regular"
                     android:text="@string/terms_privacy"
                     android:textColor="@color/colorTextBlack"
                     android:textColorLink="@color/green"
+                    android:textSize="@dimen/_14sp"
+                    app:layout_constrainedWidth="true"
                     app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0"
                     app:layout_constraintStart_toEndOf="@+id/checkBox"
                     app:layout_constraintTop_toTopOf="parent" />
             </androidx.constraintlayout.widget.ConstraintLayout>
@@ -252,9 +254,7 @@
                 android:id="@+id/sell_order_btn"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="10dp"
                 android:layout_marginTop="10dp"
-                android:layout_marginEnd="10dp"
                 android:layout_marginBottom="5dp"
                 android:background="@drawable/shape_bg_btn_green"
                 android:fontFamily="@font/poppins_regular"

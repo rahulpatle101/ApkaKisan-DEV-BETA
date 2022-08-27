@@ -14,6 +14,7 @@ import android.graphics.Color
 import android.text.Editable
 import android.text.InputType
 import android.text.TextWatcher
+import android.util.TypedValue
 import android.widget.*
 import com.apkakisan.myapplication.BaseActivity
 import com.apkakisan.myapplication.common.AppDialogFragment
@@ -22,6 +23,7 @@ import com.apkakisan.myapplication.helpers.LocalStore
 import com.apkakisan.myapplication.helpers.popFragment
 import com.apkakisan.myapplication.network.responses.Notification
 import com.apkakisan.myapplication.network.responses.Order
+import com.apkakisan.myapplication.utils.LanguageUtil
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -97,6 +99,8 @@ class CreateOrderActivity : BaseActivity() {
         orderCheckBox = findViewById(R.id.checkBox)
 
         val tvTermsPrivacy = findViewById<TextView>(R.id.tvTermsPrivacy)
+        if (LanguageUtil.isHindi())
+            tvTermsPrivacy.setTextSize(TypedValue.COMPLEX_UNIT_SP, 12f)
         TermsAndPrivacyManager().formatTermsAndPolicyString(this, tvTermsPrivacy)
 
         sellOrderBtn = findViewById(R.id.sell_order_btn)
