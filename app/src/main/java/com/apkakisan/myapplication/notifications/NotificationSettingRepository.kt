@@ -9,7 +9,7 @@ import kotlinx.coroutines.withContext
 class NotificationSettingRepository(private val firebaseController: FirebaseDataSource) {
 
     suspend fun getNotificationType(userIdValue: String) = withContext(Dispatchers.IO) {
-        val notificationTypeListDeferred = async(Dispatchers.IO) {
+        val notificationTypeListDeferred = async {
             firebaseController.getNotificationType()
         }
 
